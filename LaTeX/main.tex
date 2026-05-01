@@ -22,22 +22,22 @@
   \thispagestyle{empty}
   \begin{tikzpicture}[remember picture, overlay]
     % Blue header bar
-    \node[anchor=north west, fill=UWABlue, minimum width=\paperwidth, minimum height=6.5cm] 
+    \node[anchor=north west, fill=UWABlue, minimum width=\paperwidth, minimum height=7.5cm] 
       (header) at (current page.north west) {};
     % Gold accent stripe
     \node[anchor=south west, fill=UWAGold, minimum width=\paperwidth, minimum height=0.55cm] 
       at (header.south west) {};
     % Main title
-    \node[anchor=west, text=white, font=\Huge\bfseries, text width=14cm, inner sep=0pt, align=left]
-      at ([xshift=2cm, yshift=-2.8cm]current page.north west) {\@title};
+    \node[anchor=west, text=white, font=\Huge\bfseries, text width=15cm, inner sep=0pt, align=left]
+      at ([xshift=2.5cm, yshift=-2.5cm]current page.north west) {\@title};
     % Author/Institution
-    \node[anchor=west, text=white, font=\Large, inner sep=0pt, align=left]
-      at ([xshift=2cm, yshift=-4.6cm]current page.north west) {\@author};
+    \node[anchor=west, text=white, font=\large, inner sep=0pt, align=left]
+      at ([xshift=2.5cm, yshift=-5.5cm]current page.north west) {\@author};
     % Date
     \node[anchor=west, text=white, font=\normalsize, inner sep=0pt, align=left]
-      at ([xshift=2cm, yshift=-5.5cm]current page.north west) {\@date};
+      at ([xshift=2.5cm, yshift=-6.5cm]current page.north west) {\@date};
   \end{tikzpicture}
-  \vspace{5.0cm}
+  \vspace*{8.5cm}
 }
 \makeatother
 

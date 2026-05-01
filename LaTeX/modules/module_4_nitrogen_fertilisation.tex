@@ -14,7 +14,7 @@ By the end of this module, you will:
 \begin{itemize}
   \item Understand N cycling in APSIM (soil N pools, uptake, plant demand)
   \item Generate N response curves (yield vs. N rate)
-  \item Calculate AEN (Agronomic Efficiency of Nitrogen)
+  \item Calculate NUE (Nitrogen Use Efficiency)
   \item Assess N stress effects on crop development and protein
   \item Optimize N rate based on cost-benefit analysis
 \end{itemize}
@@ -91,20 +91,20 @@ Four N rate variants:
   \item 240 kg/ha (high)
 \end{itemize}
 
-Run all four; compare yields, grain protein, and AEN.
+Run all four; compare yields, grain protein, and NUE.
 
-\section{Agronomic Efficiency of Nitrogen}
+\section{Nitrogen Use Efficiency}
 
 \[
-\text{AEN} = \frac{\text{Yield}_{N \text{ treatment}} - \text{Yield}_{0 \text{ N}}}{\text{N rate}} \quad [\text{kg grain / kg N}]
+\text{NUE} = \frac{\text{Yield}_{N \text{ treatment}} - \text{Yield}_{0 \text{ N}}}{\text{N rate}} \quad [\text{kg grain / kg N}]
 \]
 
 \begin{keyconceptbox}
 \textbf{Interpretation:}
 \begin{itemize}
-  \item AEN = 15 kg/kg: Every kg of N produces 15 kg of grain
-  \item AEN is typically highest at low N rates (diminishing returns)
-  \item AEN decreases as N rate increases (physiological limit)
+  \item NUE = 15 kg/kg: Every kg of N produces 15 kg of grain
+  \item NUE is typically highest at low N rates (diminishing returns)
+  \item NUE decreases as N rate increases (physiological limit)
 \end{itemize}
 \end{keyconceptbox}
 
@@ -198,7 +198,7 @@ The Red/Brown earth soil at Northam has moderate cation-exchange capacity, which
   \item Soil N exists in four pools: NO$_3^-$, NH$_4^+$, organic N, and urea; only NO$_3^-$ and NH$_4^+$ are immediately plant-available
   \item Daily N processes: mineralisation $\to$ nitrification $\to$ plant uptake $\to$ leaching
   \item N response curves follow diminishing returns: large yield gains at low N, small gains at high N
-  \item AEN = (Yield$_{N}$ $-$ Yield$_0$) / N rate; typical range 10--16 kg grain/kg N for dryland wheat
+  \item NUE = (Yield$_{N}$ $-$ Yield$_0$) / N rate; typical range 10--16 kg grain/kg N for dryland wheat
   \item N stress reduces LAI, biomass, grain number, and Harvest Index; raises grain protein
   \item Optimal N rate depends on grain price, fertiliser cost, and seasonal rainfall --- use cost-benefit analysis
 \end{enumerate}

@@ -181,6 +181,17 @@ Select the ESW column $\to$ Home $\to$ Conditional Formatting $\to$ Highlight Ce
 
 \section{Python Analysis}
 
+\begin{tipbox}
+\textbf{Interactive Notebook Available:} A complete Jupyter notebook with all Python analysis code is provided as \texttt{APSIM\_Analysis\_Notebook.ipynb}. Students can:
+\begin{itemize}
+  \item Open it directly in Google Colab (no installation required)
+  \item Upload APSIM CSV exports and run analysis interactively
+  \item Ask AI assistants (Gemini, ChatGPT, Claude) for help with code or interpretation
+  \item Modify code to suit their specific simulation scenarios
+\end{itemize}
+Access the notebook from the course LMS or GitHub repository.
+\end{tipbox}
+
 \subsection{Reading Data}
 
 \begin{lstlisting}[language=Python, caption=Read APSIM output in pandas]
@@ -235,7 +246,7 @@ APSIM reports \variable{[Wheat].GrainMass} in kg/ha at harvest. Use this value d
 \textbf{Note:} Some APSIM versions report grain mass in g/m$^2$. To convert to kg/ha: multiply by 10. Always check the Report variable description if yield values seem unexpectedly high or low.
 \end{tipbox}
 
-\subsection{Agronomic Efficiency of Nitrogen (AEN)}
+\subsection{Nitrogen Use Efficiency (NUE)}
 
 \[
 \text{AEN} = \frac{\text{Yield}_{N \text{ treatment}} - \text{Yield}_{\text{0 N}}}{\text{N rate}}

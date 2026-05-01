@@ -252,31 +252,28 @@ where $P$ = precipitation, $R_{\text{off}}$ = runoff, $D$ = drainage below the r
 \centering
 \begin{tikzpicture}[
   box/.style={rectangle, rounded corners=4pt, draw=UWABlue,
-    fill=UWABlue!10, minimum width=2.8cm, minimum height=0.85cm,
-    align=center, font=\small\bfseries},
+    fill=UWABlue!10, minimum width=3.5cm, minimum height=1.1cm,
+    align=center, font=\bfseries},
   soilbox/.style={rectangle, rounded corners=6pt, draw=UWABlue,
-    fill=UWABlue!18, minimum width=8cm, minimum height=1.6cm,
-    align=center, font=\bfseries\color{UWABlue}},
-  lossbox/.style={rectangle, rounded corners=4pt, draw=UWAGrey!70,
-    fill=UWAGrey!12, minimum width=2.8cm, minimum height=0.85cm,
-    align=center, font=\small},
-  arr/.style={-Stealth, thick, UWAGrey!80}
+    fill=UWABlue!18, minimum width=10cm, minimum height=2.2cm,
+    align=center, font=\Large\bfseries\color{UWABlue}},
+  lossbox/.style={rectangle, rounded corners=4pt, draw=WarningRed!70,
+    fill=WarningRed!8, minimum width=3.5cm, minimum height=1.1cm,
+    align=center, font=\bfseries\color{WarningRed!80!black}},
+  arr/.style={-Stealth, very thick, UWAGrey}
 ]
-  \node[box]     (rain)     at (0, 3.5)   {Rainfall ($P$)};
-  \node[lossbox] (runoff)   at (4.5, 3.5) {Runoff ($R_{\text{off}}$)};
-  \node[soilbox] (soil)     at (0, 1.5)   {Soil Profile --- ESW (mm)\\between Wheat LL and DUL};
-  \node[lossbox] (drainage) at (4.5, 1.5) {Drainage ($D$)};
-  \node[lossbox] (evap)     at (-3.8, 0)  {Soil Evaporation ($E_s$)};
-  \node[lossbox] (transp)   at (0, -0.4)  {Crop Transpiration ($T_c$)};
+  \node[box]     (rain)     at (0, 4.2)   {Rainfall ($P$)};
+  \node[lossbox] (runoff)   at (6, 4.2)   {Runoff ($R_{\text{off}}$)};
+  \node[soilbox] (soil)     at (0, 1.5)   {Soil Profile\\ESW (mm)\\between Wheat LL and DUL};
+  \node[lossbox] (drainage) at (6, 1.5)   {Drainage ($D$)};
+  \node[lossbox] (evap)     at (-5.2, 0)  {Soil Evap\\($E_s$)};
+  \node[lossbox] (transp)   at (0, -1.0)  {Crop Transp\\($T_c$)};
 
-  \draw[arr] (rain.south) -- node[left, font=\footnotesize]{infiltration} (soil.north -| rain);
-  \draw[arr, dashed, UWAGold!80!black, thick] (rain.east) -- (runoff.west);
-  \draw[arr] (soil.east) -- (drainage.west);
-  \draw[arr] (soil.west) -- (evap.east);
-  \draw[arr] (soil.south) -- (transp.north);
-
-  \node[font=\footnotesize, UWAGold!70!black] at (2.25, 3.9) {high CN, bare soil};
-  \node[font=\footnotesize, UWAGrey]          at (4.5, 0.9)  {SWCON controls rate};
+  \draw[arr, UWABlue!70] (rain.south) -- node[left, font=\small\bfseries]{infiltration} (soil.north -| rain);
+  \draw[arr, dashed, UWAGold, very thick] (rain.east) -- node[above, font=\small\bfseries\color{UWAGold!80!black}]{CN, bare soil} (runoff.west);
+  \draw[arr, WarningRed!70] (soil.east) -- node[below, font=\small\color{WarningRed!70!black}]{SWCON} (drainage.west);
+  \draw[arr, WarningRed!70] (soil.west) -- (evap.east);
+  \draw[arr, WarningRed!70] (soil.south) -- (transp.north);
 \end{tikzpicture}
 \caption{Soil water balance in APSIM. Rainfall either runs off (controlled by CN) or infiltrates into the soil profile. Stored ESW is depleted by drainage, soil evaporation, and crop transpiration.}
 \label{fig:waterbalance}
@@ -303,14 +300,11 @@ sum([Soil].SoilWater.ESW)      & mm       & Total extractable soil water (all la
 \end{tabularx}
 \end{table}
 
-\section{Key Resources}
+\section{Further Resources}
 
-\begin{itemize}
-  \item \texttt{ESW\_Extractable\_Soil\_Water} — Definition and role in sowing
-  \item \texttt{Water\_Balance} — Daily water accounting
-  \item \texttt{Soil} — Soil profile configuration
-  \item \texttt{Manager} — Sowing logic (for future reference)
-\end{itemize}
+\begin{tipbox}
+\textbf{Note:} Additional reference material on ESW (Extractable Soil Water), Water Balance, Soil profiles, and Manager logic is available in the APSIM Next Gen documentation. For sowing rules and advanced water balance concepts, refer to Appendices~A and B of this tutorial.
+\end{tipbox}
 
 \section{What's Next?}
 

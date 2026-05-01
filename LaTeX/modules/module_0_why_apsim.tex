@@ -218,28 +218,28 @@ Figure~\ref{fig:apsim_concept} summarises how information flows through an APSIM
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-  node distance=1.0cm and 1.8cm,
+  node distance=1.2cm and 2.2cm,
   inbox/.style={rectangle, rounded corners=4pt, draw=UWAGold!80!black,
-    fill=UWAGold!15, minimum width=3cm, minimum height=1cm,
+    fill=UWAGold!15, minimum width=3.5cm, minimum height=1.2cm,
     align=center, font=\small\bfseries},
   corebox/.style={rectangle, rounded corners=6pt, draw=UWABlue,
-    fill=UWABlue!12, minimum width=3.2cm, minimum height=3.5cm,
+    fill=UWABlue!12, minimum width=3.8cm, minimum height=4.0cm,
     align=center, font=\bfseries\color{UWABlue}},
   outbox/.style={rectangle, rounded corners=4pt, draw=APSIMGreen!80,
-    fill=APSIMGreen!10, minimum width=3cm, minimum height=1cm,
+    fill=APSIMGreen!10, minimum width=3.5cm, minimum height=1.2cm,
     align=center, font=\small\bfseries},
   arr/.style={-Stealth, thick, color=UWAGrey!80}
 ]
-  \node[inbox] (weather)  at (0, 1.5)  {Daily Weather\\(rain, temp,\\radiation)};
+  \node[inbox] (weather)  at (0, 1.8)  {Daily Weather\\(rain, temp,\\radiation)};
   \node[inbox] (soil)     at (0, 0)    {Soil Properties\\(layers, water,\\nitrogen)};
-  \node[inbox] (mgmt)     at (0,-1.5)  {Management\\Rules\\(sow, fertilise)};
+  \node[inbox] (mgmt)     at (0,-1.8)  {Management\\Rules\\(sow, fertilise)};
 
-  \node[corebox] (core)   at (3.8, 0)  {APSIM\\Engine\\(daily loop)};
+  \node[corebox] (core)   at (4.5, 0)  {APSIM\\Engine\\(daily loop)};
 
-  \node[outbox] (yield)   at (7.6, 1.8) {Grain Yield\\(kg/ha)};
-  \node[outbox] (water)   at (7.6, 0.6) {Soil Water\\Balance};
-  \node[outbox] (n)       at (7.6,-0.6) {N Cycling\\(NO\textsubscript{3}, NH\textsubscript{4})};
-  \node[outbox] (pheno)   at (7.6,-1.8) {Phenology\\(growth stages)};
+  \node[outbox] (yield)   at (9.0, 2.1) {Grain Yield\\(kg/ha)};
+  \node[outbox] (water)   at (9.0, 0.7) {Soil Water\\Balance};
+  \node[outbox] (n)       at (9.0,-0.7) {N Cycling\\(NO\textsubscript{3}, NH\textsubscript{4})};
+  \node[outbox] (pheno)   at (9.0,-2.1) {Phenology\\(growth stages)};
 
   \draw[arr] (weather.east) -- ([xshift=-0.1cm]core.west |- weather);
   \draw[arr] (soil.east)    -- ([xshift=-0.1cm]core.west);
@@ -250,8 +250,8 @@ Figure~\ref{fig:apsim_concept} summarises how information flows through an APSIM
   \draw[arr] ([xshift=0.1cm]core.east) |- (n.west);
   \draw[arr] ([xshift=0.1cm]core.east) |- (pheno.west);
 
-  \node[font=\small\bfseries\color{UWAGold!80!black}, anchor=north] at (0, 2.1) {INPUTS};
-  \node[font=\small\bfseries\color{APSIMGreen!80},    anchor=north] at (7.6, 2.4) {OUTPUTS};
+  \node[font=\small\bfseries\color{UWAGold!80!black}, anchor=north] at (0, 2.5) {INPUTS};
+  \node[font=\small\bfseries\color{APSIMGreen!80},    anchor=north] at (9.0, 2.8) {OUTPUTS};
 \end{tikzpicture}
 \caption{Conceptual overview of an APSIM simulation. Daily inputs drive a process-based calculation engine, generating outputs on crop yield, soil water, nitrogen cycling, and crop phenology.}
 \label{fig:apsim_concept}

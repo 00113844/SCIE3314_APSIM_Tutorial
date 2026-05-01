@@ -57,29 +57,32 @@ Figure~\ref{fig:phenology} illustrates the progression of wheat through key Zado
 \centering
 \begin{tikzpicture}[
   node distance=0pt,
-  every node/.style={font=\small},
-  stage/.style={rectangle, rounded corners=3pt, draw=UWABlue,
-    fill=UWABlue!10, minimum width=2.1cm, minimum height=0.95cm,
-    align=center, font=\small\bfseries},
-  criticalstage/.style={rectangle, rounded corners=3pt,
-    draw=UWAGold!80!black, fill=UWAGold!20,
-    minimum width=2.1cm, minimum height=0.95cm,
-    align=center, font=\small\bfseries},
-  arr/.style={-Stealth, thick, UWABlue}
+  every node/.style={font=\normalsize},
+  stage/.style={rectangle, rounded corners=4pt, draw=UWABlue,
+    fill=UWABlue!10, minimum width=2.8cm, minimum height=1.3cm,
+    align=center, font=\normalsize\bfseries},
+  criticalstage/.style={rectangle, rounded corners=4pt,
+    draw=UWAGold!80!black, fill=UWAGold!25, line width=1.2pt,
+    minimum width=2.8cm, minimum height=1.3cm,
+    align=center, font=\normalsize\bfseries},
+  arr/.style={-Stealth, thick, UWABlue!70}
 ]
-  \node[stage]         (s1) at (0, 0)    {Sowing\\Z = 0};
-  \node[stage]         (s2) at (2.5, 0)  {Emergence\\Z = 10};
-  \node[stage]         (s3) at (5.0, 0)  {Tillering\\Z = 20--29};
-  \node[stage]         (s4) at (7.5, 0)  {Stem\\Elongation\\Z = 30--39};
-  \node[criticalstage] (s5) at (3.75,-2) {Anthesis\\(Flowering)\\Z = 60--69};
-  \node[stage]         (s6) at (6.25,-2) {Grain Fill\\Z = 70--89};
-  \node[stage]         (s7) at (8.75,-2) {Maturity\\Z = 90+};
-  \node[stage]         (s8) at (1.25,-2) {Flag Leaf\\Z = 37--39};
+  % First row
+  \node[stage]         (s1) at (0, 0)     {Sowing\\Z = 0};
+  \node[stage]         (s2) at (3.2, 0)   {Emergence\\Z = 10};
+  \node[stage]         (s3) at (6.4, 0)   {Tillering\\Z = 20--29};
+  \node[stage]         (s4) at (9.6, 0)   {Stem\\Elongation\\Z = 30--39};
+  
+  % Second row
+  \node[stage]         (s8) at (1.6,-2.5) {Flag Leaf\\Z = 37--39};
+  \node[criticalstage] (s5) at (4.8,-2.5) {Anthesis\\(Flowering)\\Z = 60--69};
+  \node[stage]         (s6) at (8.0,-2.5) {Grain Fill\\Z = 70--89};
+  \node[stage]         (s7) at (11.2,-2.5) {Maturity\\Z = 90+};
 
   \draw[arr] (s1) -- (s2);
   \draw[arr] (s2) -- (s3);
   \draw[arr] (s3) -- (s4);
-  \draw[arr] (s4.south) to[out=-90,in=0] (s5.east);
+  \draw[arr] (s4.south) to[out=-90,in=45] (s5.north east);
   \draw[arr] (s5) -- (s6);
   \draw[arr] (s6) -- (s7);
   \draw[arr] (s3.south) to[out=-90,in=180] (s8.west);
@@ -87,11 +90,11 @@ Figure~\ref{fig:phenology} illustrates the progression of wheat through key Zado
 
   % Critical period annotation
   \node[draw=WarningRed, fill=WarningRed!8, rounded corners,
-    font=\footnotesize, align=center, text width=3.2cm,
-    inner sep=4pt] (crit) at (3.75,-3.5)
-    {Critical period:\\frost ($<{-2}\,^\circ$C) or\\
+    font=\normalsize, align=center, text width=4.0cm,
+    inner sep=6pt] (crit) at (4.8,-4.8)
+    {\textbf{Critical period:}\\frost ($<{-2}\,^\circ$C) or\\
      heat ($>34\,^\circ$C) stress\\reduces grain set};
-  \draw[->, WarningRed, dashed, thick] (crit.north) -- (s5.south);
+  \draw[->, WarningRed, dashed, very thick] (crit.north) -- (s5.south);
 \end{tikzpicture}
 \caption{Simplified wheat phenology on the Zadok scale. The anthesis period (Z60--69, shown in gold) is the most sensitive to temperature extremes. APSIM reports the decimal Zadok stage as \texttt{[Wheat].Phenology.Zadok.Stage}.}
 \label{fig:phenology}

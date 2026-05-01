@@ -27,22 +27,22 @@ APSIM organizes all simulation information in a nested hierarchy:
 
 \begin{figure}[H]
 \centering
-\resizebox{\textwidth}{!}{%
+\resizebox{0.95\textwidth}{!}{%
 \begin{forest}
   for tree={
     grow=south,
     draw=UWABlue!50,
     fill=UWABlue!7,
     rounded corners=3pt,
-    font=\footnotesize\ttfamily,
+    font=\small\ttfamily,
     edge={draw=UWAGrey!60, -stealth, thin},
-    l=8mm, s sep=1.2mm,
-    minimum height=5.5mm,
-    minimum width=1.9cm,
+    l=10mm, s sep=1.5mm,
+    minimum height=6.5mm,
+    minimum width=2.2cm,
     align=center,
-    inner ysep=2pt, inner xsep=3pt,
+    inner ysep=3pt, inner xsep=4pt,
   }
-  [Simulations, fill=UWABlue!22, font=\footnotesize\bfseries\ttfamily
+  [Simulations, fill=UWABlue!22, font=\small\bfseries\ttfamily
     [Simulation, fill=UWABlue!15
       [Clock]
       [Weather]
@@ -172,17 +172,17 @@ APSIM simulations are stored as JSON files (\filename{.apsimx}). Example structu
 \centering
 \caption{APSIM Components: Role and Typical Configuration}
 \label{tab:components}
-\begin{tabularx}{\textwidth}{p{2cm}|p{3cm}|p{5cm}|p{2cm}}
+\begin{tabularx}{\textwidth}{p{2.5cm}|p{2.5cm}|X}
 \toprule
-\textbf{Component} & \textbf{Type} & \textbf{Configuration} & \textbf{Ref} \\
+\textbf{Component} & \textbf{Type} & \textbf{Configuration} \\
 \midrule
-Clock & Input & Dates (start, end), timestep & \cref{sec:clock} \\
-Weather & Input & File path (\filename{.met}), variables & \cref{sec:weather} \\
-Soil & State & Layers, properties, initial water/N & \cref{sec:soil} \\
-Wheat & Process & Phenology, LAI, grain fill & \cref{sec:wheat} \\
-Manager & Control & Rules (JavaScript or C\#) & \cref{sec:manager} \\
-Report & Output & Variable list & \cref{sec:report} \\
-DataStore & Output & Database (auto-populated) & \cref{sec:datastore} \\
+Clock & Input & Dates (start, end), timestep \\
+Weather & Input & File path (\filename{.met}), variables \\
+Soil & State & Layers, properties, initial water/N \\
+Wheat & Process & Phenology, LAI, grain fill \\
+Manager & Control & Rules (JavaScript or C\#) \\
+Report & Output & Variable list \\
+DataStore & Output & Database (auto-populated) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -277,18 +277,13 @@ Report tracks 13 daily variables:
   \item APSIM GUI provides user-friendly interface for viewing and modifying simulations
 \end{itemize}
 
-\section{Key Resources}
+\section{Further Resources}
 
-See the LLM Wiki for detailed reference pages:
-\begin{itemize}
-  \item \texttt{Clock} — Simulation timing
-  \item \texttt{Weather} — Climate input
-  \item \texttt{Soil} — Soil profile setup
-  \item \texttt{Wheat} — Crop model
-  \item \texttt{Manager} — Management rules
-  \item \texttt{Report} — Output variables
-  \item \texttt{DataStore} — Results database
-\end{itemize}
+\begin{tipbox}
+\textbf{Note:} Detailed component reference pages are planned for the APSIM tutorial online knowledge base. For now, consult the official APSIM Next Gen documentation at:\\[0.3em]
+\url{https://apsimnextgeneration.netlify.app/} \\[0.3em]
+Key topics to explore: Clock (simulation timing), Weather (climate input), Soil (profile configuration), Wheat (crop model), Manager (management rules), Report (output variables), and DataStore (results database).
+\end{tipbox}
 
 \section{What's Next?}
 
