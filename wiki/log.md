@@ -61,6 +61,45 @@
 
 ---
 
+## [2026-05-01] ingest | wheat_example.apsimx Structure Analysis
+
+**Type**: Ingest (second source; technical reference)  
+**Source**: `Apsim_examples/wheat_example.apsimx` (1100 lines JSON)  
+**Processing Time**: ~20 min  
+
+**Approach**:
+- Read file in 200-line chunks to extract JSON structure
+- Document component hierarchy (Clock, Weather, Soil, Manager, Report, DataStore)
+- Extract Manager rules (3 parametrized rules: sow, fertilise, harvest)
+- Analyze soil profile (7-layer Vertosol, Norwin QLD, PAW=361mm)
+- Extract Report configuration (13 daily output variables)
+- Synthesize into design patterns for near-solved exercise files
+
+**Source Summary Created**:
+- [[wheat_example_Structure_Analysis]] — 700+ line technical reference
+  - File structure hierarchy with complete JSON breakdown
+  - Clock, Weather, Soil profile (7 layers with parameters)
+  - Manager rules with parameter explanations
+  - Report variables (LAI, Zadok stage, biomass, grain metrics, yield)
+  - Near-solved design principles (pre-configured vs. student-modifiable)
+  - Modification workflows for Exercises A–D (fallow, N response, sowing date, 20-year)
+
+**Index Updated**:
+- Sources section: Added wheat_example summary
+- Metadata: 2 sources ingested
+
+**Wikilinks**: Linked to [[Manager]], [[Soil]], [[Report]], [[DataStore]], [[Clock]], [[Weather]], [[ESW_Extractable_Soil_Water]], [[Nitrogen_Uptake]], [[Zadok_Scale]]
+
+**Pedagogic Outcome**: 
+- Tutorial developers now have concrete template for creating Exercise files
+- Know exactly how to parametrize Manager rules
+- Understand Report variable selection strategy
+- Can create near-solved variants (A–D) by cloning + modifying parameters
+
+**Status**: ✅ Ingest complete; wheat_example pattern now documented; ready for Exercise A–D file creation
+
+---
+
 ## Ingest Workflow Log
 
 ### Format: `## [YYYY-MM-DD] [type] | [source_title]`

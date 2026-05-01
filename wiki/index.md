@@ -57,6 +57,7 @@ Teaching and learning design principles.
 Summaries of ingested APSIM docs, research papers, pedagogic guides.
 
 - [[Guide_APSIM_Internal_Summary]] — APSIM Internal Reference Guide (3000+ lines; 11 entities extracted; architecture, components, troubleshooting)
+- [[wheat_example_Structure_Analysis]] — wheat_example.apsimx file structure (1100 lines; JSON analysis; design patterns for near-solved files, Manager rules, soil profile, report configuration)
 
 ---
 
