@@ -1,28 +1,40 @@
 # SCIE3314 APSIM Wiki — Index
 
-**Last Updated**: May 1, 2026  
-**Total Pages**: 28  
-**Total Sources Ingested**: 0  
-**Image Placeholders**: 0  
+**Last Updated**: May 1, 2026 (ingest 1 complete)  
+**Total Pages**: 40 (13 entities + 1 source + 7 concepts + 5 synthesis + 3 FAQ + 11 exercises)  
+**Total Sources Ingested**: 1 (APSIM_Internal_Guide)  
+**Image Placeholders**: 0 (system ready)  
 
 ---
 
 ## Entities (APSIM Components & Concepts)
 
-Core APSIM simulation components and key variables.
+Core APSIM simulation components and key variables. ✅ **13 of 12 created** (ingest 1 complete).
 
-- [[Wheat]] — Wheat crop model; phenology, growth, yield
+### Simulation Control & Input
+
+- [[Clock]] — Simulation timing (start/end dates, daily timestep)
+- [[Weather]] — Daily climate inputs (rainfall, T_max, T_min, radiation, PET)
+- [[Manager]] — Sowing, fertilizer, harvest logic (rules and decisions)
+
+### Soil & Water
+
+- [[Soil]] — Soil profile characteristics, N pools, transformations
+- [[Soil_Layers]] — Multi-layer structure; water/N properties by depth
+- [[Water_Balance]] — Daily rainfall, runoff, drainage, evaporation accounting
 - [[ESW_Extractable_Soil_Water]] — Plant-available water between DUL and LL
-- [[Manager_Component]] — Sowing, fertilizer, harvest logic
-- [[Soil_Layers]] — Soil profile structure and water characteristics
-- [[Thermal_Time]] — Growing degree days (GDD); phenological development
-- [[Zadok_Scale]] — Standardized phenology stage classification
-- [[Water_Balance]] — Daily rainfall, runoff, drainage, evaporation
-- [[Nitrogen_Uptake]] — Plant N demand; soil N availability
-- [[Clock_Component]] — Simulation timing (start/end dates)
-- [[Weather_Component]] — Daily climate inputs
-- [[Report_Component]] — Output variable specification
-- [[DataStore_Component]] — Simulation results database
+
+### Crop Growth & Development
+
+- [[Wheat]] — Wheat crop model; phenology, biomass, grain yield, stress responses
+- [[Thermal_Time]] — Growing degree days (GDD); phenological development driver
+- [[Zadok_Scale]] — Standardized phenology stage classification (0–90+)
+- [[Nitrogen_Uptake]] — Plant N demand and soil N supply interaction
+
+### Output & Analysis
+
+- [[Report]] — Output variable specification and filtering
+- [[DataStore]] — Simulation results database (Excel/CSV export)
 
 ---
 
@@ -44,7 +56,7 @@ Teaching and learning design principles.
 
 Summaries of ingested APSIM docs, research papers, pedagogic guides.
 
-*[To be populated as sources are added]*
+- [[Guide_APSIM_Internal_Summary]] — APSIM Internal Reference Guide (3000+ lines; 11 entities extracted; architecture, components, troubleshooting)
 
 ---
 

@@ -24,6 +24,43 @@
 
 ---
 
+## [2026-05-01] ingest | APSIM_Internal_Guide
+
+**Type**: Ingest (first source)  
+**Source**: `REFERENCE_DOCS/APSIM_Internal_Guide.md` (3000+ lines)  
+**Processing Time**: ~30 min  
+
+**Entities Created**: 11 new pages
+- [[Clock]] — Simulation timing and sequencing
+- [[Weather]] — Climate input data and PET
+- [[Soil]] — Soil profile and state tracking
+- [[Soil_Layers]] — Multi-layer structure and properties
+- [[Manager]] — Sowing, fertilizer, harvest rules
+- [[Report]] — Output variable specification
+- [[DataStore]] — Simulation results database
+- [[Nitrogen_Uptake]] — Plant N demand and soil supply
+- [[Zadok_Scale]] — Phenological stage classification
+
+**Entities Updated**: 4 bootstrap pages enriched
+- [[Wheat]] — Added cross-references to Manager, Report, Nitrogen_Uptake
+- [[Thermal_Time]] — Linked to Zadok_Scale, Weather
+- [[Water_Balance]] — Linked to Soil, ESW, Weather
+- [[ESW_Extractable_Soil_Water]] — Linked to Manager sowing rules, Soil
+
+**Source Summary Created**: 
+- [[Guide_APSIM_Internal_Summary]] — 400-line reference page
+
+**Index Updated**:
+- Entities section reorganized (3 categories: Control/Input, Soil/Water, Crop, Output)
+- Sources section populated with APSIM guide summary
+- Metadata: 1 source ingested, 13 entities created/updated
+
+**Wikilinks**: ~80 cross-references established (entities → related concepts/exercises)
+
+**Status**: ✅ Ingest complete; ready for next source or concept page creation
+
+---
+
 ## Ingest Workflow Log
 
 ### Format: `## [YYYY-MM-DD] [type] | [source_title]`
