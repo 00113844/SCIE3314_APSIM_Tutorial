@@ -1,29 +1,29 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {1.1}{\ignorespaces Comparison of Crop Modelling Platforms}}{4}{table.caption.3}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces APSIM Components: Role and Typical Configuration}}{11}{table.caption.6}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces APSIM Components: Role and Typical Configuration}}{12}{table.caption.6}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Output Variables in Exercise A}}{17}{table.caption.7}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Soil water-content thresholds used in APSIM.}}{20}{table.caption.8}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Key APSIM report variables for soil water balance analysis.}}{21}{table.caption.10}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Zadok Stage Groups and Thermal Time (wheat, subtropical conditions)}}{37}{table.caption.16}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Output Variables in Exercise A}}{19}{table.caption.7}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Soil water-content thresholds used in APSIM.}}{21}{table.caption.8}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Key APSIM report variables for soil water balance analysis.}}{23}{table.caption.10}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Exercise A Simulation Parameters}}{55}{table.caption.23}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Zadok Stage Groups and Thermal Time (wheat, subtropical conditions)}}{41}{table.caption.16}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Exercise B Simulation Parameters}}{61}{table.caption.25}%
-\contentsline {table}{\numberline {B.2}{\ignorespaces Expected N Response Pattern}}{62}{table.caption.26}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Expected outcomes by sowing date (indicative)}}{69}{table.caption.29}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {D.1}{\ignorespaces Exercise D Simulation Parameters}}{72}{table.caption.31}%
-\contentsline {table}{\numberline {D.2}{\ignorespaces Annual Yield Summary (Illustrative)}}{73}{table.caption.32}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Exercise A Simulation Parameters}}{60}{table.caption.23}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {E.1}{\ignorespaces Commonly used APSIM Report variables for wheat simulations.}}{80}{table.caption.33}%
+\contentsline {table}{\numberline {B.1}{\ignorespaces Exercise B Simulation Parameters}}{67}{table.caption.25}%
+\contentsline {table}{\numberline {B.2}{\ignorespaces Expected N Response Pattern}}{68}{table.caption.26}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Expected outcomes by sowing date (indicative)}}{75}{table.caption.29}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Exercise D Simulation Parameters}}{79}{table.caption.31}%
+\contentsline {table}{\numberline {D.2}{\ignorespaces Annual Yield Summary (Illustrative)}}{80}{table.caption.32}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {E.1}{\ignorespaces Commonly used APSIM Report variables for wheat simulations.}}{87}{table.caption.33}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

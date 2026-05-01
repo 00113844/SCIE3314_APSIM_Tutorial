@@ -151,26 +151,30 @@
 % ============================================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\textit{SCIE3314 APSIM Tutorial}}
-\fancyhead[R]{\textit{\nouppercase{\leftmark}}}
-\fancyfoot[C]{\thepage}
+\fancyhead[L]{\textcolor{UWAGrey}{\small\textbf{The University of Western Australia}}}
+\fancyhead[R]{\textcolor{UWABlue}{\small\textbf{SCIE3314 | APSIM Tutorial}}}
+\fancyfoot[C]{\textcolor{UWAGrey}{\thepage}}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{UWAGold}\leaders\hrule height \headrulewidth\hfill}}
 \renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{UWAGold}\leaders\hrule height \footrulewidth\hfill}}
 
 % ============================================================================
 % CHAPTER & SECTION FORMATTING
 % ============================================================================
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\LARGE\bfseries\color{darkblue}}
+  {\normalfont\LARGE\bfseries\color{UWABlue}}
   {\chaptertitlename\ \thechapter}{20pt}{\LARGE}
+  [{\vspace*{-0.3em}\textcolor{UWAGold}{\rule{\linewidth}{1.5pt}}}]
 
 \titleformat{\section}
-  {\normalfont\Large\bfseries\color{darkblue}}
+  {\normalfont\Large\bfseries\color{UWABlue}}
   {\thesection}{1em}{}
+  [{\vspace*{-0.3em}\textcolor{UWAGold}{\rule{\linewidth}{1pt}}}]
 
 \titleformat{\subsection}
-  {\normalfont\large\bfseries}
+  {\normalfont\large\bfseries\color{UWABlue}}
   {\thesubsection}{1em}{}
 
 \titlespacing*{\chapter}{0pt}{-50pt}{30pt}

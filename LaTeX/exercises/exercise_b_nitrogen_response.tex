@@ -2,7 +2,7 @@
 % EXERCISE B: NITROGEN RESPONSE FACTORIAL
 % ============================================================================
 % Duration: 90 minutes (hands-on; Module 4 support)
-% Learning Goals: N response curves; AEN calculation; cost-benefit analysis
+% Learning Goals: N response curves; NUE calculation; cost-benefit analysis
 % Prerequisites: Module 3, Module 4
 
 \chapter{Exercise B: Nitrogen Response Factorial}
@@ -22,7 +22,7 @@
 
 \textbf{Time:} 90 minutes (run all 4 simulations; ~10 min per run)
 
-\textbf{Deliverable:} Excel workbook with N response curve, AEN calculations, cost-benefit analysis.
+\textbf{Deliverable:} Excel workbook with N response curve, NUE calculations, cost-benefit analysis.
 
 \section{Simulation Setup}
 
@@ -36,9 +36,9 @@
 \toprule
 \textbf{Parameter} & \textbf{Value} \\
 \midrule
-Location & Dalby, Queensland \\
+Location & Northam, Western Australia \\
 Climate & 1949--1950 (single growing season) \\
-Weather file & AU\_Dalby.met \\
+Weather file & AU\_Northam.met \\
 Soil & Norwin Vertosol \\
 Crop & Wheat (Hartog cultivar) \\
 Sowing date & May 15 (variable rule: ESW $>$ 100 mm + rain threshold) \\
@@ -76,7 +76,7 @@ Reported variables & Clock.Today, Wheat.LAI, Wheat.Phenology.Zadok.Stage, Wheat.
 \label{tab:n-response}
 \begin{tabularx}{\textwidth}{r|r|r}
 \toprule
-\textbf{N Rate (kg/ha)} & \textbf{Yield (kg/ha)} & \textbf{AEN (kg/kg)} \\
+\textbf{N Rate (kg/ha)} & \textbf{Yield (kg/ha)} & \textbf{NUE (kg/kg)} \\
 \midrule
 0 & 2000 & -- \\
 80 & 3500 & (3500--2000)/80 = 18.75 \\
@@ -88,24 +88,24 @@ Reported variables & Clock.Today, Wheat.LAI, Wheat.Phenology.Zadok.Stage, Wheat.
 
 \textit{(Exact numbers will vary; this is illustrative)}
 
-\section{Task 3: Calculate Agronomic Efficiency of N (AEN)}
+\section{Task 3: Calculate Nitrogen Use Efficiency (NUE)}
 
 \[
-\text{AEN}_{i} = \frac{\text{Yield}_{i} - \text{Yield}_{0 \text{ kg/ha}}}{N \text{ rate}_{i}} \quad [\text{kg grain / kg N}]
+\text{NUE}_{i} = \frac{\text{Yield}_{i} - \text{Yield}_{0 \text{ kg/ha}}}{N \text{ rate}_{i}} \quad [\text{kg grain / kg N}]
 \]
 
 Example calculation:
 \begin{itemize}
   \item Yield(N=0) = 2000 kg/ha
   \item Yield(N=80) = 3500 kg/ha
-  \item AEN(80) = (3500 -- 2000) / 80 = 18.75 kg grain / kg N
+  \item NUE(80) = (3500 -- 2000) / 80 = 18.75 kg grain / kg N
 \end{itemize}
 
 \textbf{Observations:}
 \begin{itemize}
-  \item AEN is highest at low N rates (diminishing returns)
-  \item AEN decreases as N rate increases (approaching physiological limit)
-  \item AEN reflects N use efficiency; typical wheat: 10--20 kg/kg
+  \item NUE is highest at low N rates (diminishing returns)
+  \item NUE decreases as N rate increases (approaching physiological limit)
+  \item NUE reflects N use efficiency; typical wheat: 10--20 kg/kg
 \end{itemize}
 
 \section{Task 4: Plot N Response Curve}
@@ -166,7 +166,7 @@ For N = 160 kg/ha:
 \begin{enumerate}
   \item What is the yield response to N? (How much yield increases per kg N?)
   
-  \item At what N rate does AEN drop to 10 kg/kg? (Where do diminishing returns become pronounced?)
+  \item At what N rate does NUE drop to 10 kg/kg? (Where do diminishing returns become pronounced?)
   
   \item What is the profit-maximizing N rate (assuming prices: \$400/tonne grain, \$1.50/kg N)?
   
@@ -193,7 +193,7 @@ Submit \filename{Exercise\_B\_Report.xlsx} or \filename{Exercise\_B\_Report.docx
 
 \begin{itemize}
   \item $\checkmark$ Yield summary table (N rate vs. Yield)
-  \item $\checkmark$ AEN calculations (table with AEN for each N rate)
+  \item $\checkmark$ NUE calculations (table with NUE for each N rate)
   \item $\checkmark$ N response curve plot
   \item $\checkmark$ Profit analysis table + chart
   \item $\checkmark$ Protein vs. N rate plot

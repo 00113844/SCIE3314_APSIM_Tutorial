@@ -1,29 +1,29 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Conceptual overview of an APSIM simulation. Daily inputs drive a process-based calculation engine, generating outputs on crop yield, soil water, nitrogen cycling, and crop phenology.}}{6}{figure.caption.4}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Conceptual overview of an APSIM simulation. Daily inputs drive a process-based calculation engine, generating outputs on crop yield, soil water, nitrogen cycling, and crop phenology.}}{7}{figure.caption.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Component hierarchy of a typical APSIM wheat simulation. Each indented node is a child of the one above it --- mirroring what you see in the APSIM left panel.}}{8}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Component hierarchy of a typical APSIM wheat simulation. Each indented node is a child of the one above it --- mirroring what you see in the APSIM left panel.}}{9}{figure.caption.5}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Soil water balance in APSIM. Rainfall either runs off (controlled by CN) or infiltrates into the soil profile. Stored ESW is depleted by drainage, soil evaporation, and crop transpiration.}}{21}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Soil water balance in APSIM. Rainfall either runs off (controlled by CN) or infiltrates into the soil profile. Stored ESW is depleted by drainage, soil evaporation, and crop transpiration.}}{22}{figure.caption.9}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Exporting simulation output from the APSIM DataStore. Select the Results tab, right-click the table, and choose Export.}}{23}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Excel PivotTable for monthly average ESW. Group the Date field by Month and Year to produce seasonal summaries without writing formulas.}}{25}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Typical wheat crop growth curve from APSIM. Biomass grows continuously until maturity; LAI peaks around anthesis then declines as leaves senesce.}}{28}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Exporting simulation output from the APSIM DataStore. Select the Results tab, right-click the table, and choose Export.}}{26}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Excel PivotTable for monthly average ESW. Group the Date field by Month and Year to produce seasonal summaries without writing formulas.}}{28}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Typical wheat crop growth curve from APSIM. Biomass grows continuously until maturity; LAI peaks around anthesis then declines as leaves senesce.}}{31}{figure.caption.13}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Typical wheat N response curve showing diminishing returns at high N rates. The optimal N rate depends on grain price and fertiliser cost.}}{31}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Typical wheat N response curve showing diminishing returns at high N rates. The optimal N rate depends on grain price and fertiliser cost.}}{34}{figure.caption.14}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Simplified wheat phenology on the Zadok scale. The anthesis period (Z60--69, shown in gold) is the most sensitive to temperature extremes. APSIM reports the decimal Zadok stage as \texttt {[Wheat].Phenology.Zadok.Stage}.}}{36}{figure.caption.15}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Relative sensitivity of wheat yield to water stress at different Zadok stages. Anthesis and early grain fill are the highest-risk periods.}}{38}{figure.caption.17}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Effect of sowing date on crop calendar and risk windows. Shifting sowing by 4 weeks moves anthesis into a different temperature regime.}}{39}{figure.caption.18}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Simplified wheat phenology on the Zadok scale. The anthesis period (Z60--69, shown in gold) is the most sensitive to temperature extremes. APSIM reports the decimal Zadok stage as \texttt {[Wheat].Phenology.Zadok.Stage}.}}{40}{figure.caption.15}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Relative sensitivity of wheat yield to water stress at different Zadok stages. Anthesis and early grain fill are the highest-risk periods.}}{42}{figure.caption.17}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Effect of sowing date on crop calendar and risk windows. Shifting sowing by 4 weeks moves anthesis into a different temperature regime.}}{43}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Annual rainfall variability at Dalby, 1950--1969 (from Exercise D weather data). Note the high year-to-year variation.}}{43}{figure.caption.19}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Annual wheat yield variability from the 20-year simulation (Exercise D). The dashed line shows the mean yield.}}{44}{figure.caption.20}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Annual rainfall variability at Northam (WA Wheatbelt), 1950--1969 (from Exercise D weather data). Note the high year-to-year variation and lower overall rainfall compared to eastern Australia.}}{47}{figure.caption.19}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Annual wheat yield variability from the 20-year simulation (Exercise D). The dashed line shows the mean yield.}}{48}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Comparison of simulated wheat yields under historical baseline and a +1.5\textdegree C warming scenario. Increased temperature accelerates development and shortens grain fill duration.}}{50}{figure.caption.21}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Comparison of simulated wheat yields under historical baseline and a +1.5\textdegree C warming scenario. Increased temperature accelerates development and shortens grain fill duration.}}{55}{figure.caption.21}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Manager component in Exercise C showing the sowing window parameters. Only StartDate and EndDate differ between the three files.}}{66}{figure.caption.28}%
-\contentsline {figure}{\numberline {C.2}{\ignorespaces Example student output: Zadok stage trajectory for three sowing dates. The frost and heat risk windows highlight the trade-off between early and late sowing.}}{70}{figure.caption.30}%
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Manager component in Exercise C showing the sowing window parameters. Only StartDate and EndDate differ between the three files.}}{72}{figure.caption.28}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces Example student output: Zadok stage trajectory for three sowing dates. The frost and heat risk windows highlight the trade-off between early and late sowing.}}{77}{figure.caption.30}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
