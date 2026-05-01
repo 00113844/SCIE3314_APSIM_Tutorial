@@ -147,13 +147,13 @@ Soil.SoilWater.Drainage & mm & Water percolating below root zone \\
 \end{warningbox}
 
 \begin{warningbox}
-\textbf{Error 2: ``Soil profile empty'' or ``missing layers''
+\textbf{Error 2: ``Soil profile empty'' or ``missing layers''}
 
 \textit{Solution:} Ensure Soil component has Physical, SoilWater, and Nutrient sub-components. These are auto-created if you load a predefined soil from APSOIL database. If manually editing \filename{.apsimx}, verify JSON structure is correct.
 \end{warningbox}
 
 \begin{warningbox}
-\textbf{Error 3: ``Report variables not found''
+\textbf{Error 3: ``Report variables not found''}
 
 \textit{Solution:} Verify variable names match APSIM's internal paths. Example: \texttt{[Soil].ESW} not \texttt{Soil.ESW}; \texttt{[Weather].Rainfall} not \texttt{Weather.Rain}. Consult APSIM GUI (right-click Report) to auto-generate valid variable names.
 \end{warningbox}
@@ -205,13 +205,111 @@ Calculate for all 7 years:
   \item Comparing soil types and weather regions reveals biophysical constraints
 \end{itemize}
 
+\section{Soil Water Reference}
+
+\subsection{Soil Water Thresholds}
+
+APSIM defines five key water-content thresholds for each soil layer (Table~\ref{tab:waterlimits}).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Soil water-content thresholds used in APSIM.}
+\label{tab:waterlimits}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{l >{\ttfamily}l X}
+\toprule
+\textbf{Full name}      & \normalfont\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+Air Dry          & AirDry  & Minimum water content (oven-dry equivalent). \\
+Wilting Point    & LL15    & Water content at 1500 kPa; plants cannot extract water below this threshold. \\
+Field Capacity   & DUL     & Drained Upper Limit; water content after free drainage has ceased ($\approx$10 kPa). \\
+Saturation       & SAT     & Maximum water content; all pores filled. \\
+Crop Lower Limit & Wheat LL & Minimum water extractable by wheat roots; may differ from LL15 in subsoil layers. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{keyconceptbox}
+\textbf{Extractable Soil Water (ESW):}
+For each layer:
+\[
+  \text{ESW (mm)} = (\text{SW} - \text{Wheat LL}) \times \text{layer thickness (mm)}
+\]
+where SW is the current volumetric water content. Summed across all layers, \texttt{sum([Soil].SoilWater.ESW)} gives the total plant-available water in the profile (mm). This is a key indicator of crop water supply and the trigger variable for sowing decisions.
+\end{keyconceptbox}
+
+\subsection{Soil Water Balance}
+
+The daily water balance equation describes how water enters, moves through, and leaves the soil profile (Figure~\ref{fig:waterbalance}):
+\begin{equation}
+  \Delta\,\text{ESW} = P - R_{\text{off}} - D - E_s - T_c
+  \label{eq:waterbalance}
+\end{equation}
+where $P$ = precipitation, $R_{\text{off}}$ = runoff, $D$ = drainage below the root zone, $E_s$ = soil evaporation, and $T_c$ = crop transpiration.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=4pt, draw=UWABlue,
+    fill=UWABlue!10, minimum width=2.8cm, minimum height=0.85cm,
+    align=center, font=\small\bfseries},
+  soilbox/.style={rectangle, rounded corners=6pt, draw=UWABlue,
+    fill=UWABlue!18, minimum width=8cm, minimum height=1.6cm,
+    align=center, font=\bfseries\color{UWABlue}},
+  lossbox/.style={rectangle, rounded corners=4pt, draw=UWAGrey!70,
+    fill=UWAGrey!12, minimum width=2.8cm, minimum height=0.85cm,
+    align=center, font=\small},
+  arr/.style={-Stealth, thick, UWAGrey!80}
+]
+  \node[box]     (rain)     at (0, 3.5)   {Rainfall ($P$)};
+  \node[lossbox] (runoff)   at (4.5, 3.5) {Runoff ($R_{\text{off}}$)};
+  \node[soilbox] (soil)     at (0, 1.5)   {Soil Profile --- ESW (mm)\\between Wheat LL and DUL};
+  \node[lossbox] (drainage) at (4.5, 1.5) {Drainage ($D$)};
+  \node[lossbox] (evap)     at (-3.8, 0)  {Soil Evaporation ($E_s$)};
+  \node[lossbox] (transp)   at (0, -0.4)  {Crop Transpiration ($T_c$)};
+
+  \draw[arr] (rain.south) -- node[left, font=\footnotesize]{infiltration} (soil.north -| rain);
+  \draw[arr, dashed, UWAGold!80!black, thick] (rain.east) -- (runoff.west);
+  \draw[arr] (soil.east) -- (drainage.west);
+  \draw[arr] (soil.west) -- (evap.east);
+  \draw[arr] (soil.south) -- (transp.north);
+
+  \node[font=\footnotesize, UWAGold!70!black] at (2.25, 3.9) {high CN, bare soil};
+  \node[font=\footnotesize, UWAGrey]          at (4.5, 0.9)  {SWCON controls rate};
+\end{tikzpicture}
+\caption{Soil water balance in APSIM. Rainfall either runs off (controlled by CN) or infiltrates into the soil profile. Stored ESW is depleted by drainage, soil evaporation, and crop transpiration.}
+\label{fig:waterbalance}
+\end{figure}
+
+\subsection{Water Balance Report Variables}
+
+\begin{table}[H]
+\centering
+\caption{Key APSIM report variables for soil water balance analysis.}
+\label{tab:watervars}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\ttfamily\small}p{5.5cm} >{\centering\arraybackslash}p{1.8cm} X}
+\toprule
+\normalfont\textbf{Variable} & \textbf{Units} & \textbf{Description} \\
+\midrule
+sum([Soil].SoilWater.ESW)      & mm       & Total extractable soil water (all layers). \\
+{[Soil].SoilWater.Runoff}      & mm/day   & Surface runoff leaving the paddock. \\
+{[Soil].SoilWater.Drainage}    & mm/day   & Water draining below the root zone. \\
+{[Soil].SoilWater.Es}          & mm/day   & Soil surface evaporation. \\
+{[Wheat].WaterUptake}          & mm/day   & Crop water uptake (transpiration). \\
+{[Weather].Rain}               & mm/day   & Daily rainfall. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \section{Key Resources}
 
 \begin{itemize}
-  \item [[ESW\_Extractable\_Soil\_Water]] — Definition and role in sowing
-  \item [[Water\_Balance]] — Daily water accounting
-  \item [[Soil]] — Soil profile configuration
-  \item [[Manager]] — Sowing logic (for future reference)
+  \item \texttt{ESW\_Extractable\_Soil\_Water} — Definition and role in sowing
+  \item \texttt{Water\_Balance} — Daily water accounting
+  \item \texttt{Soil} — Soil profile configuration
+  \item \texttt{Manager} — Sowing logic (for future reference)
 \end{itemize}
 
 \section{What's Next?}

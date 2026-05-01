@@ -8,7 +8,7 @@
 % ============================================================================
 % CORE PACKAGES
 % ============================================================================
-\usepackage[utf-8]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[margin=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{fancyhdr}
@@ -22,6 +22,8 @@
 \usepackage{listings}
 \usepackage{courier}
 \usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{helvet}
 
 % Color definitions
 \definecolor{darkblue}{rgb}{0.0, 0.0, 0.5}
@@ -30,13 +32,21 @@
 \definecolor{codegray}{rgb}{0.5, 0.5, 0.5}
 \definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
 
+% UWA Brand Colours
+\definecolor{UWABlue}{RGB}{33, 64, 154}
+\definecolor{UWAGold}{RGB}{221, 177, 10}
+\definecolor{UWAGrey}{RGB}{77, 77, 79}
+\definecolor{UWALightBlue}{RGB}{228, 234, 249}
+\definecolor{UWALightGold}{RGB}{253, 247, 215}
+\definecolor{APSIMGreen}{RGB}{0, 120, 60}
+\definecolor{WarningRed}{RGB}{180, 30, 30}
+
 % ============================================================================
 % MATHEMATICS & SCIENCE
 % ============================================================================
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{siunitx}
-\usepackage{physics}
 
 % ============================================================================
 % FIGURES & TABLES
@@ -48,6 +58,11 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds}
+\usepackage{forest}
 
 % Figure placement
 \captionsetup{labelfont=bf, textfont=normalfont}
@@ -64,7 +79,6 @@
 % CODE LISTINGS (for APSIM JSON, JavaScript, etc.)
 % ============================================================================
 \lstset{
-  language=json,
   basicstyle=\ttfamily\small,
   breaklines=true,
   showstringspaces=false,
@@ -172,8 +186,9 @@
 % ============================================================================
 % BIBLIOGRAPHY & REFERENCES
 % ============================================================================
-\usepackage[style=authoryear, backend=bibtex]{biblatex}
-\addbibresource{references.bib}
+% Bibliography: use basic bibtex (thebibliography env in main.tex)
+% \usepackage[style=authoryear, backend=bibtex]{biblatex}
+% \addbibresource{references.bib}
 
 % ============================================================================
 % MISCELLANEOUS

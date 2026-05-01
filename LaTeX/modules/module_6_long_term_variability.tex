@@ -56,6 +56,21 @@ The solution is \emph{risk-aware} management: choose strategies that are profita
 
 \section{Yield Variability}
 
+\subsection{The APSIM Experiment Node}
+
+APSIM's \textbf{Experiment} node allows you to run multiple treatment combinations automatically. Inside an Experiment, a \textbf{Factors} node contains one or more \textbf{Factor} nodes that specify which parameter to vary and what values to test.
+
+The Factor specification syntax is:
+\begin{verbatim}
+[ComponentName].Script.ParameterName = value1, value2, value3
+\end{verbatim}
+or as a range:
+\begin{verbatim}
+[ComponentName].Script.ParameterName = start to end step increment
+\end{verbatim}
+
+APSIM automatically generates a separate simulation for each combination. For multi-factor experiments, all combinations are created (e.g., 3 sowing dates $\times$ 4 N rates = 12 simulations).
+
 \subsection{Exercise D: 20-Year Variability Analysis}
 
 Run simulation using 20 consecutive years from climate record (e.g., 1950--1969).

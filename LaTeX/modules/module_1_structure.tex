@@ -25,25 +25,54 @@ By the end of this module, you will:
 
 APSIM organizes all simulation information in a nested hierarchy:
 
-\begin{center}
-\begin{verbatim}
-Simulations (root)
-  └─ Simulation 1
-      ├─ Global Components
-      │   ├─ Clock
-      │   ├─ Weather
-      │   ├─ SoilArbitrator
-      │   └─ MicroClimate
-      └─ Zone (Field)
-          ├─ Report
-          ├─ Fertiliser
-          └─ Soil (with layers)
-          ├─ Wheat (crop model)
-          ├─ Manager (rule 1: sow)
-          ├─ Manager (rule 2: fertilise)
-          └─ Manager (rule 3: harvest)
-\end{verbatim}
-\end{center}
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{forest}
+  for tree={
+    grow=south,
+    draw=UWABlue!50,
+    fill=UWABlue!7,
+    rounded corners=3pt,
+    font=\footnotesize\ttfamily,
+    edge={draw=UWAGrey!60, -stealth, thin},
+    l=8mm, s sep=1.2mm,
+    minimum height=5.5mm,
+    minimum width=1.9cm,
+    align=center,
+    inner ysep=2pt, inner xsep=3pt,
+  }
+  [Simulations, fill=UWABlue!22, font=\footnotesize\bfseries\ttfamily
+    [Simulation, fill=UWABlue!15
+      [Clock]
+      [Weather]
+      [{Soil\\Arbitrator}, align=center]
+      [{Micro\\Climate}, align=center]
+      [{Zone (Field)}, fill=UWABlue!15
+        [Report]
+        [Fertiliser]
+        [Soil, fill=UWABlue!15
+          [Physical]
+          [SoilWater]
+          [Organic]
+          [{Nutrient\\NO3{,}NH4}, align=center]
+          [Water]
+        ]
+        [{Surface\\OrgMatter}, align=center]
+        [Wheat]
+        [{Sow using\\var. rule}, align=center]
+        [{Fertilise\\at sowing}, align=center]
+        [Harvest]
+      ]
+      [{Graph\\$>$Series}, align=center]
+    ]
+    [DataStore]
+  ]
+\end{forest}%
+}
+\caption{Component hierarchy of a typical APSIM wheat simulation. Each indented node is a child of the one above it --- mirroring what you see in the APSIM left panel.}
+\label{fig:module1-tree}
+\end{figure}
 
 \begin{keyconceptbox}
 \textbf{Key Principle:} Components are pluggable. You can swap components (different crop model, different soil model) without changing the overall structure.
@@ -102,7 +131,7 @@ Each day, APSIM follows a strict sequence:
 
 APSIM simulations are stored as JSON files (\filename{.apsimx}). Example structure:
 
-\begin{lstlisting}[language=json, caption=Simplified .apsimx structure]
+\begin{lstlisting}[caption=Simplified .apsimx structure]
 {
   "$type": "Models.Core.Simulations",
   "Name": "Simulations",
@@ -252,13 +281,13 @@ Report tracks 13 daily variables:
 
 See the LLM Wiki for detailed reference pages:
 \begin{itemize}
-  \item [[Clock]] — Simulation timing
-  \item [[Weather]] — Climate input
-  \item [[Soil]] — Soil profile setup
-  \item [[Wheat]] — Crop model
-  \item [[Manager]] — Management rules
-  \item [[Report]] — Output variables
-  \item [[DataStore]] — Results database
+  \item \texttt{Clock} — Simulation timing
+  \item \texttt{Weather} — Climate input
+  \item \texttt{Soil} — Soil profile setup
+  \item \texttt{Wheat} — Crop model
+  \item \texttt{Manager} — Management rules
+  \item \texttt{Report} — Output variables
+  \item \texttt{DataStore} — Results database
 \end{itemize}
 
 \section{What's Next?}

@@ -94,7 +94,7 @@ An extension officer works with 50 wheat farmers in a district. Question: \texti
   \item Map farmer soils; input into APSIM
   \item Run 5 N rates (0, 50, 100, 150, 200 kg/ha) × 20 years of regional weather
   \item Calculate yield response and AEN (Agronomic Efficiency of N)
-  \item Assess profit = Yield × Grain Price − N Cost
+  \item Assess profit = Yield $\times$ Grain Price $-$ N Cost
   \item Recommend N rate based on soil, season outlook, grain price
 \end{enumerate}
 
@@ -206,6 +206,56 @@ Plus four hands-on exercises:
   \item \textbf{Exercise C}: Sowing date factorial (3 scenarios)
   \item \textbf{Exercise D}: 20-year variability analysis
 \end{itemize}
+
+\section{How APSIM Works: The Information Flow}
+
+\begin{keyconceptbox}
+\textbf{Process-Based Modelling:} A process-based model simulates the underlying biological and physical mechanisms (e.g., soil water flow, photosynthesis, nitrogen mineralisation). This contrasts with empirical models that fit statistical equations to observed data. Because APSIM represents mechanisms, it can be applied to conditions not included in its original calibration --- making it suitable for evaluating novel management strategies or future climate scenarios.
+\end{keyconceptbox}
+
+Figure~\ref{fig:apsim_concept} summarises how information flows through an APSIM simulation each day.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=1.0cm and 1.8cm,
+  inbox/.style={rectangle, rounded corners=4pt, draw=UWAGold!80!black,
+    fill=UWAGold!15, minimum width=3cm, minimum height=1cm,
+    align=center, font=\small\bfseries},
+  corebox/.style={rectangle, rounded corners=6pt, draw=UWABlue,
+    fill=UWABlue!12, minimum width=3.2cm, minimum height=3.5cm,
+    align=center, font=\bfseries\color{UWABlue}},
+  outbox/.style={rectangle, rounded corners=4pt, draw=APSIMGreen!80,
+    fill=APSIMGreen!10, minimum width=3cm, minimum height=1cm,
+    align=center, font=\small\bfseries},
+  arr/.style={-Stealth, thick, color=UWAGrey!80}
+]
+  \node[inbox] (weather)  at (0, 1.5)  {Daily Weather\\(rain, temp,\\radiation)};
+  \node[inbox] (soil)     at (0, 0)    {Soil Properties\\(layers, water,\\nitrogen)};
+  \node[inbox] (mgmt)     at (0,-1.5)  {Management\\Rules\\(sow, fertilise)};
+
+  \node[corebox] (core)   at (3.8, 0)  {APSIM\\Engine\\(daily loop)};
+
+  \node[outbox] (yield)   at (7.6, 1.8) {Grain Yield\\(kg/ha)};
+  \node[outbox] (water)   at (7.6, 0.6) {Soil Water\\Balance};
+  \node[outbox] (n)       at (7.6,-0.6) {N Cycling\\(NO\textsubscript{3}, NH\textsubscript{4})};
+  \node[outbox] (pheno)   at (7.6,-1.8) {Phenology\\(growth stages)};
+
+  \draw[arr] (weather.east) -- ([xshift=-0.1cm]core.west |- weather);
+  \draw[arr] (soil.east)    -- ([xshift=-0.1cm]core.west);
+  \draw[arr] (mgmt.east)    -- ([xshift=-0.1cm]core.west |- mgmt);
+
+  \draw[arr] ([xshift=0.1cm]core.east) |- (yield.west);
+  \draw[arr] ([xshift=0.1cm]core.east) |- (water.west);
+  \draw[arr] ([xshift=0.1cm]core.east) |- (n.west);
+  \draw[arr] ([xshift=0.1cm]core.east) |- (pheno.west);
+
+  \node[font=\small\bfseries\color{UWAGold!80!black}, anchor=north] at (0, 2.1) {INPUTS};
+  \node[font=\small\bfseries\color{APSIMGreen!80},    anchor=north] at (7.6, 2.4) {OUTPUTS};
+\end{tikzpicture}
+\caption{Conceptual overview of an APSIM simulation. Daily inputs drive a process-based calculation engine, generating outputs on crop yield, soil water, nitrogen cycling, and crop phenology.}
+\label{fig:apsim_concept}
+\end{figure}
 
 \section{Summary}
 

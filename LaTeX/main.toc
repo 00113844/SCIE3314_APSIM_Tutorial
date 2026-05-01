@@ -1,0 +1,283 @@
+\contentsline {chapter}{\numberline {1}Module 0: Why APSIM?}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Learning Objectives}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}What is Crop Modelling?}{1}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Why Not Just Experiment?}{1}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}What Can Models Do?}{2}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}APSIM: Overview}{2}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Key Features}{2}{subsection.1.3.1}%
+\contentsline {section}{\numberline {1.4}APSIM in Action: Real-World Applications}{3}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Research Example: Climate Change Impact on Wheat Yield}{3}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Extension Example: Nitrogen Rate Optimization}{3}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Operational Example: Sowing Decision Support}{3}{subsection.1.4.3}%
+\contentsline {section}{\numberline {1.5}APSIM Compared to Other Tools}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Key Concepts in APSIM}{4}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Daily Simulation Loop}{4}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Three-Layer Problem Representation}{4}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}Career Relevance}{5}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Roadmap for This Tutorial}{5}{section.1.8}%
+\contentsline {section}{\numberline {1.9}How APSIM Works: The Information Flow}{6}{section.1.9}%
+\contentsline {section}{\numberline {1.10}Summary}{6}{section.1.10}%
+\contentsline {section}{\numberline {1.11}What's Next?}{7}{section.1.11}%
+\contentsline {chapter}{\numberline {2}Module 1: APSIM Structure}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Learning Objectives}{8}{section.2.1}%
+\contentsline {section}{\numberline {2.2}APSIM's Component Architecture}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Hierarchy}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Global Components}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Zone Components}{9}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Daily Execution Sequence}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}The .apsimx File Format}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Component Reference Table}{11}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Interpreting a Real Simulation: wheat\_example.apsimx}{11}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Key Configuration}{11}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Output Variables}{12}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Common Misconceptions}{12}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Navigating APSIM's GUI}{12}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Opening a Simulation}{12}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Viewing Components}{13}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}Running a Simulation}{13}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Exporting Results}{13}{subsection.2.8.4}%
+\contentsline {section}{\numberline {2.9}Summary}{13}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Key Resources}{13}{section.2.10}%
+\contentsline {section}{\numberline {2.11}What's Next?}{14}{section.2.11}%
+\contentsline {chapter}{\numberline {3}Module 2: First Simulation}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Learning Objectives}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Conceptual Framework: Fallow Water Balance}{15}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}What is a Fallow?}{15}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}When Are Soils Ready for Sowing?}{15}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Getting Started: Open Exercise A}{16}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}File Location}{16}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Simulation Setup}{16}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Running the Simulation}{16}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Step 1: Open APSIM}{16}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Step 2: View Structure}{16}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Step 3: Run Simulation}{16}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Step 4: View Results}{17}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Analyzing the Data}{17}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Key Columns}{17}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Analysis Prompts}{17}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Common Errors and Troubleshooting}{18}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Extending the Analysis}{18}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Comparison: Different Soils}{18}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Comparison: Different Weather}{18}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Multi-Year Statistics}{18}{subsection.3.7.3}%
+\contentsline {section}{\numberline {3.8}Conceptual Questions}{19}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Summary}{19}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Soil Water Reference}{19}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Soil Water Thresholds}{19}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Soil Water Balance}{20}{subsection.3.10.2}%
+\contentsline {subsection}{\numberline {3.10.3}Water Balance Report Variables}{21}{subsection.3.10.3}%
+\contentsline {section}{\numberline {3.11}Key Resources}{21}{section.3.11}%
+\contentsline {section}{\numberline {3.12}What's Next?}{21}{section.3.12}%
+\contentsline {chapter}{\numberline {4}Module 3: Output Analysis}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Learning Objectives}{22}{section.4.1}%
+\contentsline {section}{\numberline {4.2}APSIM Output Structure}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Variable Naming Convention}{22}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Exporting Data from APSIM}{23}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Step-by-Step: Export to Excel}{23}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4}Excel Analysis}{24}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Opening the Exported File}{24}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Summary Statistics with Excel Formulas}{24}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Monthly Averages Using a PivotTable}{24}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Visualisation in Excel}{25}{subsection.4.4.4}%
+\contentsline {subsubsection}{Time-Series Line Chart (ESW Over 7 Years)}{25}{subsection.4.4.4}%
+\contentsline {subsubsection}{Annual Rainfall Bar Chart}{26}{Item.84}%
+\contentsline {section}{\numberline {4.5}Python Analysis}{26}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Reading Data}{26}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Summary Statistics}{26}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Visualization}{26}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Agronomic Metrics}{27}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Yield}{27}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Agronomic Efficiency of Nitrogen (AEN)}{27}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Harvest Index}{27}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Interpreting Crop Growth Curves}{27}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Common Analysis Mistakes}{28}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Summary}{29}{section.4.9}%
+\contentsline {section}{\numberline {4.10}What's Next?}{29}{section.4.10}%
+\contentsline {chapter}{\numberline {5}Module 4: Nitrogen Fertilisation}{30}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Learning Objectives}{30}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Nitrogen Cycling in APSIM}{30}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Soil N Pools}{30}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Daily N Processes}{30}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}N Response Curves}{31}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Typical Response}{31}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Exercise B: N Response Factorial}{31}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Agronomic Efficiency of Nitrogen}{32}{section.5.4}%
+\contentsline {section}{\numberline {5.5}N Stress and Crop Responses}{32}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Cost-Benefit Analysis}{33}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Profit Formula}{33}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Worked Example}{33}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}Regional Variability and AEN Interpretation}{33}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Summary}{34}{section.5.8}%
+\contentsline {section}{\numberline {5.9}What's Next?}{34}{section.5.9}%
+\contentsline {chapter}{\numberline {6}Module 5: Phenology \& Thermal Time}{35}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Learning Objectives}{35}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Thermal Time: Concept and Calculation}{35}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Growing Degree Days (GDD)}{35}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Why GDD Instead of Calendar Days?}{35}{subsection.6.2.2}%
+\contentsline {section}{\numberline {6.3}Zadok Stages}{36}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Standardized Scale (0--90+)}{36}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.4}Critical Periods}{37}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Sowing Date Effects}{38}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Why Sowing Date Changes Everything}{38}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Exercise C: Sowing Date Factorial}{39}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Temperature Stress}{39}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Heat Stress ($T > 30$°C)}{39}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Cold Stress ($T < T_\text {base}$)}{40}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Vernalization (Winter Wheat)}{40}{subsection.6.6.3}%
+\contentsline {section}{\numberline {6.7}Connecting Phenology to Management}{40}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Summary}{41}{section.6.8}%
+\contentsline {section}{\numberline {6.9}What's Next?}{41}{section.6.9}%
+\contentsline {chapter}{\numberline {7}Module 6: Long-Term Variability}{42}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Learning Objectives}{42}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Rainfall Variability}{42}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Inter-Annual Variability in Queensland}{42}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Why This Matters for Farming Decisions}{42}{subsection.7.2.2}%
+\contentsline {section}{\numberline {7.3}Yield Variability}{43}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}The APSIM Experiment Node}{43}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Exercise D: 20-Year Variability Analysis}{43}{subsection.7.3.2}%
+\contentsline {section}{\numberline {7.4}Risk Metrics}{44}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Coefficient of Variation}{44}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Probability of Failure}{44}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Exceedance Probability (Cumulative Distribution)}{44}{subsection.7.4.3}%
+\contentsline {section}{\numberline {7.5}Robust Decision Rules}{45}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Example: N Rate Decision}{45}{subsection.7.5.1}%
+\contentsline {section}{\numberline {7.6}Climate Change and Yield Risk}{45}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Summary}{46}{section.7.7}%
+\contentsline {section}{\numberline {7.8}What's Next?}{46}{section.7.8}%
+\contentsline {chapter}{\numberline {8}Module 7: Climate Scenarios \& Future Outlook}{47}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Learning Objectives}{47}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Climate Change and Agriculture}{47}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Global Context}{47}{subsection.8.2.1}%
+\contentsline {section}{\numberline {8.3}Constructing Climate Scenarios}{47}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}GCM (Global Climate Model) Outputs}{47}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Downscaling to Farm Scale}{48}{subsection.8.3.2}%
+\contentsline {section}{\numberline {8.4}Adaptation Strategies}{48}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Genetic (Variety Selection)}{48}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Management (Practice Changes)}{48}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Infrastructure (Structural Adaptation)}{49}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}APSIM-Based Adaptation Assessment}{49}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}Step-by-Step: Constructing a Climate Scenario in APSIM}{49}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}Illustrative Results}{50}{subsection.8.5.2}%
+\contentsline {section}{\numberline {8.6}Communicating Uncertainty}{51}{section.8.6}%
+\contentsline {section}{\numberline {8.7}Decision Frameworks}{51}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}Robust Decision Making}{51}{subsection.8.7.1}%
+\contentsline {section}{\numberline {8.8}Sustainability Considerations}{51}{section.8.8}%
+\contentsline {section}{\numberline {8.9}Summary}{52}{section.8.9}%
+\contentsline {section}{\numberline {8.10}Synthesis: APSIM in Your Career}{52}{section.8.10}%
+\contentsline {section}{\numberline {8.11}Continuing Your Learning}{53}{section.8.11}%
+\contentsline {part}{Integrated Exercises}{55}{part*.22}%
+\contentsline {chapter}{\numberline {A}Exercise A: Fallow Water Balance}{55}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Overview}{55}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Simulation Setup}{55}{section.A.2}%
+\contentsline {subsection}{\numberline {A.2.1}Configuration}{55}{subsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.2.2}Key Parameters}{55}{subsection.A.2.2}%
+\contentsline {section}{\numberline {A.3}Task 1: Run Simulation}{56}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Task 2: Data Exploration}{56}{section.A.4}%
+\contentsline {subsection}{\numberline {A.4.1}Examination Checklist}{56}{subsection.A.4.1}%
+\contentsline {subsection}{\numberline {A.4.2}Quick Statistics}{56}{subsection.A.4.2}%
+\contentsline {section}{\numberline {A.5}Task 3: Identify Sowing Opportunities}{57}{section.A.5}%
+\contentsline {subsection}{\numberline {A.5.1}Criteria}{57}{subsection.A.5.1}%
+\contentsline {subsection}{\numberline {A.5.2}Excel Implementation}{57}{subsection.A.5.2}%
+\contentsline {section}{\numberline {A.6}Task 4: Visualization}{57}{section.A.6}%
+\contentsline {subsection}{\numberline {A.6.1}Plot 1: ESW Time Series}{57}{subsection.A.6.1}%
+\contentsline {subsection}{\numberline {A.6.2}Plot 2: Annual ESW Pattern}{57}{subsection.A.6.2}%
+\contentsline {subsection}{\numberline {A.6.3}Plot 3: Rainfall vs. ESW Change}{58}{subsection.A.6.3}%
+\contentsline {section}{\numberline {A.7}Task 5: Analysis Questions}{58}{section.A.7}%
+\contentsline {section}{\numberline {A.8}Task 6: Comparison Scenario (Extension)}{59}{section.A.8}%
+\contentsline {subsection}{\numberline {A.8.1}Scenario A: Shallow Soil}{59}{subsection.A.8.1}%
+\contentsline {subsection}{\numberline {A.8.2}Scenario B: Different Climate}{59}{subsection.A.8.2}%
+\contentsline {section}{\numberline {A.9}Deliverable}{59}{section.A.9}%
+\contentsline {section}{\numberline {A.10}Grading Rubric}{59}{section.A.10}%
+\contentsline {chapter}{\numberline {B}Exercise B: Nitrogen Response Factorial}{60}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Overview}{60}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Simulation Setup}{61}{section.B.2}%
+\contentsline {subsection}{\numberline {B.2.1}Configuration}{61}{subsection.B.2.1}%
+\contentsline {section}{\numberline {B.3}Task 1: Run All Four Simulations}{61}{section.B.3}%
+\contentsline {section}{\numberline {B.4}Task 2: Extract Grain Yield}{61}{section.B.4}%
+\contentsline {subsection}{\numberline {B.4.1}Approach}{61}{subsection.B.4.1}%
+\contentsline {section}{\numberline {B.5}Task 3: Calculate Agronomic Efficiency of N (AEN)}{62}{section.B.5}%
+\contentsline {section}{\numberline {B.6}Task 4: Plot N Response Curve}{62}{section.B.6}%
+\contentsline {section}{\numberline {B.7}Task 5: Cost-Benefit Analysis}{63}{section.B.7}%
+\contentsline {subsection}{\numberline {B.7.1}Profit Calculation}{63}{subsection.B.7.1}%
+\contentsline {subsection}{\numberline {B.7.2}Assumptions}{63}{subsection.B.7.2}%
+\contentsline {subsection}{\numberline {B.7.3}Example Calculation}{63}{subsection.B.7.3}%
+\contentsline {subsection}{\numberline {B.7.4}Create Profit Table}{63}{subsection.B.7.4}%
+\contentsline {section}{\numberline {B.8}Task 6: Analysis Questions}{63}{section.B.8}%
+\contentsline {section}{\numberline {B.9}Task 7: Grain Quality}{64}{section.B.9}%
+\contentsline {subsection}{\numberline {B.9.1}Protein Analysis}{64}{subsection.B.9.1}%
+\contentsline {section}{\numberline {B.10}Deliverable}{64}{section.B.10}%
+\contentsline {chapter}{\numberline {C}Exercise C: Sowing Date Factorial}{65}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Overview}{65}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Background}{65}{section.C.2}%
+\contentsline {section}{\numberline {C.3}Task 1: Open and Review the Simulation Files}{65}{section.C.3}%
+\contentsline {section}{\numberline {C.4}Task 2: Run All Three Simulations and Export Results}{66}{section.C.4}%
+\contentsline {section}{\numberline {C.5}Task 3: Phenological Comparison}{67}{section.C.5}%
+\contentsline {subsection}{\numberline {C.5.1}Extract Key Dates}{67}{subsection.C.5.1}%
+\contentsline {subsection}{\numberline {C.5.2}Thermal Time Accumulation}{67}{subsection.C.5.2}%
+\contentsline {section}{\numberline {C.6}Task 3: Phenological Comparison}{67}{section.C.6}%
+\contentsline {subsection}{\numberline {C.6.1}Key Dates}{67}{subsection.C.6.1}%
+\contentsline {subsection}{\numberline {C.6.2}Thermal Time Accumulation}{68}{subsection.C.6.2}%
+\contentsline {section}{\numberline {C.7}Task 4: Yield and Quality Comparison}{68}{section.C.7}%
+\contentsline {subsection}{\numberline {C.7.1}Harvest Results Table}{68}{subsection.C.7.1}%
+\contentsline {subsection}{\numberline {C.7.2}Expected Sowing Date Effects}{69}{subsection.C.7.2}%
+\contentsline {section}{\numberline {C.8}Task 5: Analysis Questions}{69}{section.C.8}%
+\contentsline {section}{\numberline {C.9}Task 6: Visualisation}{70}{section.C.9}%
+\contentsline {subsection}{\numberline {C.9.1}Crop Development Comparison (Line Plot)}{70}{subsection.C.9.1}%
+\contentsline {subsection}{\numberline {C.9.2}Yield and Harvest Index Comparison (Bar Chart)}{71}{subsection.C.9.2}%
+\contentsline {section}{\numberline {C.10}Deliverable}{71}{section.C.10}%
+\contentsline {chapter}{\numberline {D}Exercise D: 20-Year Variability Analysis}{72}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Overview}{72}{section.D.1}%
+\contentsline {section}{\numberline {D.2}Simulation Setup}{72}{section.D.2}%
+\contentsline {subsection}{\numberline {D.2.1}Configuration}{72}{subsection.D.2.1}%
+\contentsline {section}{\numberline {D.3}Task 1: Run Simulation}{72}{section.D.3}%
+\contentsline {section}{\numberline {D.4}Task 2: Extract Annual Yields}{73}{section.D.4}%
+\contentsline {subsection}{\numberline {D.4.1}Approach}{73}{subsection.D.4.1}%
+\contentsline {subsection}{\numberline {D.4.2}Result Example}{73}{subsection.D.4.2}%
+\contentsline {section}{\numberline {D.5}Task 3: Calculate Risk Metrics}{73}{section.D.5}%
+\contentsline {subsection}{\numberline {D.5.1}Basic Statistics}{73}{subsection.D.5.1}%
+\contentsline {subsection}{\numberline {D.5.2}Risk Metrics}{73}{subsection.D.5.2}%
+\contentsline {section}{\numberline {D.6}Task 4: Visualize Yield Distribution}{74}{section.D.6}%
+\contentsline {subsection}{\numberline {D.6.1}Plot 1: Annual Yield Time Series}{74}{subsection.D.6.1}%
+\contentsline {subsection}{\numberline {D.6.2}Plot 2: Histogram of Yields}{74}{subsection.D.6.2}%
+\contentsline {subsection}{\numberline {D.6.3}Plot 3: Rainfall vs. Yield Scatter}{74}{subsection.D.6.3}%
+\contentsline {section}{\numberline {D.7}Task 5: Identify Dry and Wet Years}{74}{section.D.7}%
+\contentsline {subsection}{\numberline {D.7.1}Classification}{74}{subsection.D.7.1}%
+\contentsline {subsection}{\numberline {D.7.2}Analysis}{75}{subsection.D.7.2}%
+\contentsline {section}{\numberline {D.8}Task 6: Analysis Questions}{75}{section.D.8}%
+\contentsline {section}{\numberline {D.9}Task 7: Scenario Analysis (Extension)}{75}{section.D.9}%
+\contentsline {subsection}{\numberline {D.9.1}Scenario A: Increased N (240 kg/ha)}{75}{subsection.D.9.1}%
+\contentsline {subsection}{\numberline {D.9.2}Scenario B: Earlier Sowing}{75}{subsection.D.9.2}%
+\contentsline {subsection}{\numberline {D.9.3}Scenario C: Climate Change}{76}{subsection.D.9.3}%
+\contentsline {section}{\numberline {D.10}Deliverable}{76}{section.D.10}%
+\contentsline {chapter}{\numberline {E}APSIM Components Reference}{77}{appendix.E}%
+\contentsline {section}{\numberline {E.1}Global Components}{77}{section.E.1}%
+\contentsline {subsection}{\numberline {E.1.1}Clock}{77}{subsection.E.1.1}%
+\contentsline {subsection}{\numberline {E.1.2}Weather}{77}{subsection.E.1.2}%
+\contentsline {subsection}{\numberline {E.1.3}SoilArbitrator}{77}{subsection.E.1.3}%
+\contentsline {subsection}{\numberline {E.1.4}MicroClimate}{77}{subsection.E.1.4}%
+\contentsline {section}{\numberline {E.2}Zone Components}{78}{section.E.2}%
+\contentsline {subsection}{\numberline {E.2.1}Soil}{78}{subsection.E.2.1}%
+\contentsline {subsubsection}{Sub-components}{78}{subsection.E.2.1}%
+\contentsline {subsection}{\numberline {E.2.2}Crop (e.g., Wheat)}{78}{subsection.E.2.2}%
+\contentsline {subsection}{\numberline {E.2.3}Manager}{78}{subsection.E.2.3}%
+\contentsline {subsection}{\numberline {E.2.4}Report}{79}{subsection.E.2.4}%
+\contentsline {subsection}{\numberline {E.2.5}DataStore}{79}{subsection.E.2.5}%
+\contentsline {section}{\numberline {E.3}Variable Naming Convention}{79}{section.E.3}%
+\contentsline {section}{\numberline {E.4}Variable Quick Reference}{79}{section.E.4}%
+\contentsline {chapter}{\numberline {F}Troubleshooting Common Errors}{81}{appendix.F}%
+\contentsline {section}{\numberline {F.1}Crop Won't Sow}{81}{section.F.1}%
+\contentsline {subsection}{\numberline {F.1.1}Diagnostic Flowchart}{81}{subsection.F.1.1}%
+\contentsline {section}{\numberline {F.2}Unrealistic Yield}{82}{section.F.2}%
+\contentsline {subsection}{\numberline {F.2.1}Yield Too Low}{82}{subsection.F.2.1}%
+\contentsline {subsection}{\numberline {F.2.2}Yield Too High}{82}{subsection.F.2.2}%
+\contentsline {section}{\numberline {F.3}No Output or Empty Report}{83}{section.F.3}%
+\contentsline {subsection}{\numberline {F.3.1}DataStore Empty}{83}{subsection.F.3.1}%
+\contentsline {subsection}{\numberline {F.3.2}Report Variables Have Missing Values}{83}{subsection.F.3.2}%
+\contentsline {section}{\numberline {F.4}File Path Errors}{83}{section.F.4}%
+\contentsline {section}{\numberline {F.5}JSON Parsing Errors}{84}{section.F.5}%
+\contentsline {section}{\numberline {F.6}Simulation Hangs or Crashes}{84}{section.F.6}%
+\contentsline {section}{\numberline {F.7}Getting Help}{85}{section.F.7}%
+\contentsline {chapter}{References}{86}{appendix*.34}%
+\contentsline {chapter}{LLM Wiki Resources}{88}{appendix*.36}%
+\contentsline {chapter}{Further Resources}{89}{appendix*.37}%
+\contentsline {chapter}{Instructor Notes}{90}{appendix*.38}%

@@ -122,6 +122,40 @@ Examples:
 
 \textbf{Note:} Component names are enclosed in square brackets when used in Report variable lists.
 
+\section{Variable Quick Reference}
+
+Table~\ref{tab:varquickref} lists the most commonly used APSIM report variables for wheat simulations at Dalby.
+
+\begin{table}[H]
+\centering
+\caption{Commonly used APSIM Report variables for wheat simulations.}
+\label{tab:varquickref}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\ttfamily\small}p{7.8cm} X}
+\toprule
+\normalfont\textbf{Variable} & \textbf{Description} \\
+\midrule
+{[Clock].Today}                              & Simulation date \\
+{[Wheat].Grain.Total.Wt*10 as Yield}         & Grain yield (kg/ha) \\
+{[Wheat].Grain.Protein}                      & Grain protein (\%) \\
+{[Wheat].Phenology.Zadok.Stage}              & Zadok growth stage (decimal) \\
+{[Wheat].Phenology.CurrentStageName}         & Stage name as text \\
+{[Wheat].Phenology.DaysAfterSowing}          & Days since sowing \\
+{[Wheat].LAI}                                & Leaf area index (m$^2$/m$^2$) \\
+{[Wheat].AboveGround.Wt}                     & Above-ground biomass (g/m$^2$) \\
+{[Wheat].AboveGround.N}                      & Above-ground N content (g N/m$^2$) \\
+{sum([Soil].SoilWater.ESW)}                  & Total extractable soil water (mm) \\
+{[Soil].SoilWater.Runoff}                    & Daily runoff (mm) \\
+{[Soil].SoilWater.Drainage}                  & Daily drainage below root zone (mm) \\
+{[Soil].SoilWater.Es}                        & Soil surface evaporation (mm) \\
+{sum([Soil].NO3.kgha) as NO3Total}           & Total soil nitrate (kg N/ha) \\
+{sum([Soil].NH4.kgha) as NH4Total}           & Total soil ammonium (kg N/ha) \\
+{[Weather].Rain}                             & Daily rainfall (mm) \\
+{[Weather].MaxT}                             & Daily maximum temperature ($^\circ$C) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 % ============================================================================
 % END APPENDIX A
 % ============================================================================
