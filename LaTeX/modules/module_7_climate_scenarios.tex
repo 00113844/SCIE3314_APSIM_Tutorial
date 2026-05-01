@@ -1,0 +1,232 @@
+% ============================================================================
+% MODULE 7: CLIMATE SCENARIOS & FUTURE OUTLOOK
+% ============================================================================
+% Duration: 60 minutes (adaptation, climate change, decision frameworks)
+% Learning Goals: Apply APSIM to future climate; identify adaptation strategies
+% Prerequisites: All previous modules
+
+\chapter{Module 7: Climate Scenarios \& Future Outlook}
+\label{ch:module7}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Understand how to construct future climate scenarios
+  \item Apply APSIM under baseline vs. climate change weather
+  \item Identify crop varieties and management options that maintain yield
+  \item Assess adaptation feasibility and economics
+  \item Communicate uncertainty to farmers/policymakers
+\end{itemize}
+
+\section{Climate Change and Agriculture}
+
+\subsection{Global Context}
+
+\begin{itemize}
+  \item Temperature rising: ~1.1°C above pre-industrial (as of 2024)
+  \item Rainfall patterns shifting: Some regions wetter, others drier
+  \item Extreme events increasing: Droughts, floods, heat waves
+  \item Crop modeling crucial for adaptation planning
+\end{itemize}
+
+\section{Constructing Climate Scenarios}
+
+\subsection{GCM (Global Climate Model) Outputs}
+
+Climate models (e.g., IPCC scenarios) provide future temperature and rainfall projections:
+\begin{itemize}
+  \item \textbf{RCP / SSP scenarios:} Different emission pathways (low, medium, high)
+  \item \textbf{Spatial resolution:} Typically 1--50 km grid cells
+  \item \textbf{Uncertainty:} Multiple GCMs, ensemble averages
+\end{itemize}
+
+\subsection{Downscaling to Farm Scale}
+
+Global Climate Models (GCMs) operate at coarse spatial resolution (50--200 km grids). Before using GCM outputs in APSIM, projections must be \emph{downscaled} to the local scale. Common approaches:
+
+\begin{enumerate}
+  \item \textbf{Delta method (simplest)}: Add a monthly temperature offset and multiply rainfall by a scaling factor derived from GCM projections.
+    \begin{itemize}
+      \item Example: GCM predicts +1.5\textdegree C warming by 2050 $\to$ add 1.5 to all T$_{max}$ and T$_{min}$ values in the historical weather file
+      \item For rainfall: GCM predicts $-$10\% winter rainfall $\to$ multiply monthly rainfall by 0.90
+    \end{itemize}
+  \item \textbf{Bias correction}: Statistical adjustment so the modelled baseline matches observed historical data (removes systematic GCM biases)
+  \item \textbf{Statistical downscaling}: Relate large-scale atmospheric patterns to local precipitation using regression or weather generators
+\end{enumerate}
+
+\begin{tipbox}
+\textbf{For this tutorial}, if you construct a climate scenario, use the delta method: it is transparent, easy to interpret, and sufficient for exploring sensitivity. Open the \filename{.met} weather file in a text editor and modify the temperature columns.
+\end{tipbox}
+
+\section{Adaptation Strategies}
+
+\subsection{Genetic (Variety Selection)}
+
+\begin{itemize}
+  \item Shift to heat-tolerant varieties
+  \item Shift to drought-tolerant varieties (deep roots, higher transpiration efficiency)
+  \item Shift to earlier-maturing varieties (escape late-season drought)
+\end{itemize}
+
+\subsection{Management (Practice Changes)}
+
+\begin{itemize}
+  \item Earlier sowing (cooler temperatures pre-anthesis)
+  \item Increased N to maintain protein in warmer years
+  \item Soil water conservation (mulch, reduced tillage)
+  \item Diversification (intercropping, rotation)
+\end{itemize}
+
+\subsection{Infrastructure (Structural Adaptation)}
+
+\begin{itemize}
+  \item Irrigation (if water available)
+  \item Soil improvement (increase water-holding capacity)
+  \item Crop insurance (financial risk transfer)
+\end{itemize}
+
+\section{APSIM-Based Adaptation Assessment}
+
+\subsection{Step-by-Step: Constructing a Climate Scenario in APSIM}
+
+\begin{enumerate}
+  \item \textbf{Establish a baseline}: Run your 20-year simulation with historical weather (already done in Exercise D). Record mean yield, CV, and P(failure).
+
+  \item \textbf{Create a modified weather file}: Make a copy of the \filename{.met} file. Apply the delta method:
+    \begin{itemize}
+      \item Add +1.5\textdegree C to all T$_{max}$ and T$_{min}$ values (approximate 2050 projection for subtropical QLD)
+      \item Reduce in-season (May--September) rainfall by 10\%
+    \end{itemize}
+
+  \item \textbf{Update the Weather component}: In APSIM, click the \apsimterm{Weather} component $\to$ change \variable{FileName} to your modified weather file.
+
+  \item \textbf{Re-run the simulation}: Keep all other settings identical.
+
+  \item \textbf{Compare results}: In Excel, place baseline and scenario yields side by side. Calculate:
+    \begin{itemize}
+      \item Change in mean yield (kg/ha and \%)
+      \item Change in yield CV
+      \item Change in P(failure)
+    \end{itemize}
+\end{enumerate}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Side-by-side bar chart comparing annual yields under Baseline vs. +1.5\textdegree C scenario.}\\
+    \textit{Annotate: mean yield for each scenario as a horizontal dashed line; label years where scenario is notably lower.]}
+  \vspace{1.5cm}}}
+  \caption{Comparison of simulated wheat yields under historical baseline and a +1.5\textdegree C warming scenario. Increased temperature accelerates development and shortens grain fill duration.}
+  \label{fig:climate-scenario}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\subsection{Illustrative Results}
+
+Indicative outcomes for a +1.5\textdegree C / $-$10\% rainfall scenario at Dalby:
+
+\begin{center}
+\begin{tabular}{l|r|r|r}
+\textbf{Metric} & \textbf{Baseline} & \textbf{+1.5\textdegree C / $-$10\% rain} & \textbf{Change} \\
+\hline
+Mean yield (kg/ha) & 2800 & 2350 & $-$16\% \\
+Yield CV (\%) & 28 & 36 & +8 points \\
+P(yield $<$ 1500 kg/ha) & 15\% & 28\% & +13 points \\
+Season length (days) & 195 & 180 & $-$15 days \\
+\end{tabular}
+\end{center}
+
+(Indicative values for illustration only.)
+
+\begin{keyconceptbox}
+\textbf{Two effects of warming in APSIM:}
+\begin{enumerate}
+  \item \textbf{Shorter season}: More GDD/day means the crop reaches maturity faster, reducing grain fill duration
+  \item \textbf{Increased water demand}: Higher temperature raises PET, depleting ESW faster during grain fill
+\end{enumerate}
+Both effects reduce yield in most scenarios. Adaptation strategies target both.
+\end{keyconceptbox}
+
+\section{Communicating Uncertainty}
+
+\begin{warningbox}
+\textbf{Challenge:} APSIM forecasts have multiple sources of uncertainty:
+\begin{itemize}
+  \item Climate model uncertainty (different GCMs give different projections)
+  \item Downscaling uncertainty (statistical method choices)
+  \item Crop model parameter uncertainty (calibration, regional differences)
+  \item Natural variability (internal climate noise; chaotic system)
+\end{itemize}
+
+\textit{Solution:} Present ranges (percentiles), not point estimates. Use ensemble approaches (multiple models, multiple years).
+\end{warningbox}
+
+\section{Decision Frameworks}
+
+\subsection{Robust Decision Making}
+
+Choose strategies that perform reasonably well across multiple scenarios (not optimized for one scenario only).
+
+Example: N rate of 120 kg/ha may not be optimal in any single year, but performs well across dry, normal, and wet years.
+
+\section{Sustainability Considerations}
+
+Climate adaptation must also be sustainable:
+
+\begin{itemize}
+  \item \textbf{N leaching}: Higher rainfall intensity under some climate scenarios increases drainage and N leaching. APSIM's NO$_3^-$ output tracks this; excess leaching is both an economic loss and an environmental risk.
+  \item \textbf{Water use}: Irrigation as an adaptation strategy requires water availability, which may also be declining in some regions.
+  \item \textbf{Soil carbon}: Management changes (tillage, residue) affect soil organic matter, which feeds back to mineralisation rates and water-holding capacity --- both captured in APSIM's SoilOrganicMatter component.
+  \item \textbf{Social acceptance}: Variety changes and new practices require knowledge transfer, seed supply chains, and economic support for adoption.
+\end{itemize}
+
+\begin{tipbox}
+\textbf{Triple bottom line:} The best adaptation strategies improve or maintain yield (economic), reduce environmental impact (ecological), and are feasible for farmers to adopt (social). Use APSIM to assess the first two; consult socioeconomic literature for the third.
+\end{tipbox}
+
+\section{Summary}
+
+\begin{keyconceptbox}
+\textbf{Module 7 key points:}
+\begin{enumerate}
+  \item GCM outputs must be downscaled to farm scale before use in APSIM; the delta method (add T offset, multiply rainfall) is the simplest approach
+  \item Warming shortens season length (faster GDD accumulation) and increases water demand (higher PET)
+  \item Multiple RCP/SSP scenarios produce a range of projections --- present as ranges, not single values
+  \item Adaptation strategies: genetic (heat-tolerant varieties), management (earlier sowing, split N), infrastructure (irrigation)
+  \item Robust decision making: choose strategies that perform acceptably across multiple scenarios
+  \item Climate adaptation must also be sustainable --- consider N leaching, water use, and social feasibility
+\end{enumerate}
+\end{keyconceptbox}
+
+\section{Synthesis: APSIM in Your Career}
+
+This tutorial has covered:
+\begin{itemize}
+  \item Simulation mechanics (Module 1)
+  \item Hands-on practice (Modules 2--3, Exercises A--D)
+  \item Agronomic applications (Modules 4--5)
+  \item Risk and adaptation (Modules 6--7)
+\end{itemize}
+
+APSIM is now a tool in your toolkit for:
+\begin{itemize}
+  \item Research questions (hypothesis testing via simulation)
+  \item Extension advice (quantifying management options)
+  \item Operational decisions (sowing timing, N optimization)
+  \item Policy analysis (climate impact, food security)
+\end{itemize}
+
+\section{Continuing Your Learning}
+
+\begin{itemize}
+  \item APSIM documentation: \url{https://www.apsim.info}
+  \item Community forum: APSIM Next Gen GitHub discussions
+  \item Advanced training: APSIM workshops (CIMMYT, ICRISAT, regional centers)
+  \item Job opportunities: APSIM skills highly valued in ag tech, research, extension
+\end{itemize}
+
+% ============================================================================
+% END MODULE 7
+% ============================================================================

@@ -1,0 +1,93 @@
+% Quick Build Instructions
+
+## Quick LaTeX Build Guide
+
+### One-Line Build (Windows Command Prompt/PowerShell)
+
+```
+cd C:\Users\00113844\Documents\SCIE3314_APSIM_Tutorial\LaTeX && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+```
+
+### One-Line Build (Linux/macOS Terminal)
+
+```
+cd ~/Documents/SCIE3314_APSIM_Tutorial/LaTeX && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+```
+
+### Using latexmk (Recommended - Automatic Rebuilds)
+
+```
+latexmk -pdf main.tex
+```
+
+To clean auxiliary files afterward:
+```
+latexmk -c main.tex
+```
+
+## Output Files
+
+After successful compilation:
+- **main.pdf** — Complete tutorial (ready to distribute)
+- **main.log** — Compilation log (check for warnings)
+
+## Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| "File not found" error | Verify relative paths in \input{} commands; check working directory is LaTeX/ |
+| PDF not updating | Delete main.aux, main.toc, main.log; recompile |
+| References broken | Run bibtex; recompile 3 times total |
+| Very slow compilation | Check for large images (>5 MB); reduce if needed |
+
+## File Tree (Quick Reference)
+
+```
+LaTeX/
+├─ main.tex              ← START HERE
+├─ preamble.tex          ← Formatting
+├─ modules/              ← 8 module files (0--7)
+├─ exercises/            ← 4 exercise files (A--D)
+├─ appendix/             ← 2 appendix files
+└─ figures/              ← Image directory (for future)
+```
+
+## Module/Exercise Workflow
+
+1. **Edit module** → e.g., `modules/module_3_output_analysis.tex`
+2. **Recompile** → `latexmk -pdf main.tex` or pdflatex cycle
+3. **View PDF** → Open main.pdf to check changes
+4. **Iterate** → Make edits, recompile, view
+
+## Editing Single Module (Quick Test)
+
+Create temp test file:
+```latex
+\input{preamble}
+\begin{document}
+\setcounter{chapter}{2}  % For chapter numbering
+\input{modules/module_3_output_analysis}
+\end{document}
+```
+
+Compile: `pdflatex test.tex` (faster feedback while editing)
+
+## File Size
+
+Each component:
+- Module: ~50--100 KB
+- Exercise: ~100--150 KB
+- Full PDF: ~5--10 MB
+
+## Next: Content Development
+
+Replace placeholders:
+1. Find `\vfill` and `\textit{[To be completed]}` markers
+2. Fill in sections with detailed content
+3. Add figures to `figures/` directory
+4. Test exercises with corresponding .apsimx files
+5. Add citations to `references.bib` as needed
+
+---
+
+For full documentation, see `README.md`

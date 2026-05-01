@@ -1,0 +1,209 @@
+% ============================================================================
+% APPENDIX B: TROUBLESHOOTING COMMON ERRORS
+% ============================================================================
+
+\chapter{Troubleshooting Common Errors}
+\label{app:troubleshooting}
+
+This appendix provides diagnostic decision trees for common APSIM problems.
+
+\section{Crop Won't Sow}
+
+\subsection{Diagnostic Flowchart}
+
+\begin{enumerate}
+  \item \textbf{Q: Does simulation run without errors?}
+    \begin{itemize}
+      \item YES $\to$ Go to 2
+      \item NO $\to$ Check file format, component structure; see APSIM documentation
+    \end{itemize}
+  
+  \item \textbf{Q: Check final output: Is Zadok stage always 0 (not sown)?}
+    \begin{itemize}
+      \item YES $\to$ Crop is not sowing; go to 3
+      \item NO $\to$ Crop did sow at some point; issue is different
+    \end{itemize}
+  
+  \item \textbf{Q: Is there a Manager rule for sowing?}
+    \begin{itemize}
+      \item YES $\to$ Go to 4
+      \item NO $\to$ Add Manager rule (see Module 1); crop won't sow without rule
+    \end{itemize}
+  
+  \item \textbf{Q: Check Manager parameters: Is ESW threshold too high?}
+    \begin{itemize}
+      \item Check: \variable{MinESW} parameter. If MaxESW in simulation $<$ MinESW, crop never meets threshold
+      \item Solution: Reduce MinESW or increase initial soil water
+    \end{itemize}
+  
+  \item \textbf{Q: Check Manager parameters: Is sowing window correct?}
+    \begin{itemize}
+      \item Check: \variable{StartDate}, \variable{EndDate}. Are they in correct format (d-mmm)?
+      \item Example: ``1-may'' (correct), ``May 1'' (incorrect)
+      \item Solution: Use d-mmm format
+    \end{itemize}
+  
+  \item \textbf{Q: Is rainfall threshold met?}
+    \begin{itemize}
+      \item Check: Weather file data. Is there a 7-day period with rainfall $>$ 25 mm during sowing window?
+      \item Solution: If region is always dry, reduce rainfall threshold or choose wetter year from weather file
+    \end{itemize}
+\end{enumerate}
+
+\section{Unrealistic Yield}
+
+\subsection{Yield Too Low}
+
+\begin{warningbox}
+\textbf{Possible causes:}
+\begin{enumerate}
+  \item Crop sown too late (short season, incomplete grain fill)
+  \item Insufficient N (N stress throughout season)
+  \item Water stress (low rainfall or high drainage)
+  \item Crop encounters frost during booting/anthesis
+\end{enumerate}
+\end{warningbox}
+
+\textbf{Diagnostic:}
+\begin{itemize}
+  \item Plot Zadok stage vs. date; check if crop reaches grain fill (stages 70--89)
+  \item Plot [Soil].ESW vs. date; check for critical stress periods (booting, grain fill)
+  \item Check Manager: Is sowing happening at right time?
+  \item Check N rate: Is it sufficient (compare N=0 vs. N=160)?
+\end{itemize}
+
+\subsection{Yield Too High}
+
+\begin{warningbox}
+\textbf{Possible causes:}
+\begin{enumerate}
+  \item Initial conditions unrealistic (soil too wet, too much initial N)
+  \item Weather file synthetic or biased (unrealistically favorable)
+  \item Report variables wrong (grain mass not realistic for cultivar/location)
+\end{enumerate}
+\end{warningbox}
+
+\textbf{Diagnostic:}
+\begin{itemize}
+  \item Compare simulated yield to local farm data / research records
+  \item Check initial soil water (\variable{InitialPAWmm}) and initial N pools
+  \item Verify weather file source and quality
+\end{itemize}
+
+\section{No Output or Empty Report}
+
+\subsection{DataStore Empty}
+
+\begin{warningbox}
+\textbf{Possible causes:}
+\begin{enumerate}
+  \item Report component missing or disabled
+  \item Report variables list is empty
+  \item Simulation didn't run (errors in setup)
+\end{enumerate}
+\end{warningbox}
+
+\textbf{Diagnostic:}
+\begin{itemize}
+  \item In APSIM GUI, click Report in tree; check Properties panel
+  \item Verify: VariableNames array is not empty
+  \item Verify: Report is Enabled (checkbox ticked)
+  \item Re-run simulation; check output window for errors
+\end{itemize}
+
+\subsection{Report Variables Have Missing Values}
+
+\begin{warningbox}
+\textbf{Possible causes:}
+\begin{enumerate}
+  \item Variable path is incorrect (typo in [Component].Variable naming)
+  \item Component not initialized when Report tries to access it (e.g., [Wheat].LAI before crop sown)
+  \item Component is disabled
+\end{enumerate}
+\end{warningbox}
+
+\textbf{Diagnostic:}
+\begin{itemize}
+  \item Verify variable names match APSIM conventions (\cref{sec:var-naming})
+  \item Use APSIM GUI to auto-generate variable names (reduces typos)
+  \item Check if missing values coincide with off-season (e.g., wheat LAI=0 when crop not alive)
+\end{itemize}
+
+\section{File Path Errors}
+
+\begin{warningbox}
+\textbf{Error message:} ``Cannot find weather file AU\_Dalby.met''
+\end{warningbox}
+
+\textbf{Diagnosis:}
+\begin{itemize}
+  \item Check Weather component: FileName property uses \variable{\%root\%} variable
+  \item \variable{\%root\%} = APSIM installation directory
+  \item Example: \texttt{C:/Program Files/APSIM2025/Examples/WeatherFiles/AU\_Dalby.met}
+\end{itemize}
+
+\textbf{Solution:}
+\begin{itemize}
+  \item Verify weather file exists in APSIM Examples folder
+  \item If not, download from APSIM repository or use a different weather file
+  \item Alternatively, use absolute path (if sharing files, portability is lost)
+\end{itemize}
+
+\section{JSON Parsing Errors}
+
+\begin{warningbox}
+\textbf{Error message:} ``Error parsing .apsimx file: JSON format invalid''
+\end{warningbox}
+
+\textbf{Cause:} Manually edited .apsimx file has JSON syntax error (mismatched braces, quotes, etc.)
+
+\textbf{Solution:}
+\begin{itemize}
+  \item Use JSON validator (paste file contents at jsonlint.com)
+  \item Use APSIM GUI to edit instead of text editor
+  \item If editing manually, use code editor with JSON highlighting (VS Code, Sublime, etc.)
+\end{itemize}
+
+\section{Simulation Hangs or Crashes}
+
+\begin{warningbox}
+\textbf{Symptom:} Simulation starts but doesn't complete; runs for hours.
+\end{warningbox}
+
+\textbf{Possible causes:}
+\begin{enumerate}
+  \item Very long time period (e.g., 1000 years) or complex soil model
+  \item Infinite loop in Manager code
+  \item Numerical instability (rare)
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{itemize}
+  \item Start with short simulations (1--5 years) to test setup
+  \item Check Manager JavaScript for logical errors
+  \item If simulation is legitimately long, be patient or increase hardware
+\end{itemize}
+
+\section{Getting Help}
+
+If you encounter an error not listed above:
+
+\begin{enumerate}
+  \item Check \textbf{APSIM Documentation}: \url{https://www.apsim.info}
+  
+  \item Post on \textbf{APSIM Forum}: \url{https://github.com/APSIMInitiative/ApsimX/discussions}
+  
+  \item Consult \textbf{Wiki Resources}: [[FAQ_Crop_Won't_Emerge]], [[FAQ_Yield_Unrealistic]], [[FAQ_Report_Variables_Empty]]
+  
+  \item Email instructor with:
+    \begin{itemize}
+      \item .apsimx file (or key excerpts)
+      \item Error message (screenshot)
+      \item What you were trying to do (steps)
+      \item Expected vs. observed behavior
+    \end{itemize}
+\end{enumerate}
+
+% ============================================================================
+% END APPENDIX B
+% ============================================================================

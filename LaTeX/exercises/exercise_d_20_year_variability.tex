@@ -1,0 +1,201 @@
+% ============================================================================
+% EXERCISE D: 20-YEAR VARIABILITY ANALYSIS
+% ============================================================================
+% Duration: 120 minutes (hands-on; Module 6 support)
+% Learning Goals: Multi-year yield variability; risk assessment; robust decisions
+% Prerequisites: Module 3, Module 6
+
+\chapter{Exercise D: 20-Year Variability Analysis}
+\label{ch:exercise-d}
+
+\section{Overview}
+
+\textbf{Objective:} Run a 20-year continuous simulation and analyze yield distribution, identify dry/wet years, assess management robustness.
+
+\textbf{File:} \filename{Exercise\_D\_20Year\_Variability.apsimx}
+
+\textbf{Time:} 120 minutes (includes data processing and visualization)
+
+\textbf{Deliverable:} Comprehensive analysis of yield variability and risk metrics.
+
+\section{Simulation Setup}
+
+\subsection{Configuration}
+
+\begin{table}[H]
+\centering
+\caption{Exercise D Simulation Parameters}
+\label{tab:exercise-d-setup}
+\begin{tabularx}{\textwidth}{l|X}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Location & Dalby, Queensland \\
+Climate & 20 consecutive years (e.g., 1950--1969) \\
+Weather file & AU\_Dalby.met \\
+Soil & Norwin Vertosol \\
+Crop & Wheat (Hartog cultivar) \\
+Management & Fixed: Sow May 1--July 10 (ESW $>$ 100 mm); N = 160 kg/ha \\
+Report variables & Clock.Today, Wheat.Grain.Total.Wt, Weather.Rainfall, Soil.ESW \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Task 1: Run Simulation}
+
+\begin{enumerate}
+  \item Open \filename{Exercise\_D\_20Year\_Variability.apsimx}
+  \item Verify Clock: start 1950-01-01, end 1969-12-31 (20 years)
+  \item Run simulation ($\sim$ 30 seconds)
+  \item Export to \filename{Exercise\_D\_Results.xlsx}
+  \item Verify: $\approx$ 7300 daily records (365 × 20 years)
+\end{enumerate}
+
+\section{Task 2: Extract Annual Yields}
+
+\subsection{Approach}
+
+\begin{enumerate}
+  \item Create helper column: Year (extract from date)
+  \item Create helper column: Season Year (e.g., May 1, 1950 = year 1950 season; previous May 1 thru Apr 30)
+  \item For each season year, find maximum Wheat.Grain.Total.Wt (represents harvest)
+  \item Create summary table: Season Year vs. Final Yield
+\end{enumerate}
+
+\subsection{Result Example}
+
+\begin{table}[H]
+\centering
+\caption{Annual Yield Summary (Illustrative)}
+\label{tab:annual-yield}
+\begin{tabularx}{\textwidth}{r|r|r|r}
+\toprule
+\textbf{Season Year} & \textbf{Annual Rainfall (mm)} & \textbf{Final Yield (kg/ha)} & \textbf{ESW at Sowing (mm)} \\
+\midrule
+1950 & 450 & 3800 & 125 \\
+1951 & 380 & 2100 & 95 \\
+\textit{(wet year)} & \textit{(high)} & \textit{(high)} & -- \\
+\textit{(dry year)} & \textit{(low)} & \textit{(low)} & -- \\
+... & ... & ... & ... \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Task 3: Calculate Risk Metrics}
+
+\subsection{Basic Statistics}
+
+\begin{itemize}
+  \item Mean yield: $\bar{Y} = \frac{1}{n} \sum Y_i$
+  \item Std dev: $\sigma = \sqrt{\frac{1}{n-1} \sum (Y_i - \bar{Y})^2}$
+  \item Min/Max: Identify driest and wettest years
+  \item Coefficient of variation: $\text{CV} = \sigma / \bar{Y}$
+\end{itemize}
+
+\subsection{Risk Metrics}
+
+\[
+P(\text{Yield} < 1500 \text{ kg/ha}) = \frac{\text{\# years with Yield} < 1500}{20 \text{ years}}
+\]
+
+\textit{Interpretation:} If P = 0.25, then 1 in 4 years (25\%) has yield below 1500 kg/ha; risky threshold.
+
+\begin{keyconceptbox}
+\textbf{Robustness Definition:} A management practice is ``robust'' if it maintains yield above a threshold (e.g., 2000 kg/ha) in at least 80\% of years. High-risk scenarios fail in $>$ 20\% of years.
+\end{keyconceptbox}
+
+\section{Task 4: Visualize Yield Distribution}
+
+\subsection{Plot 1: Annual Yield Time Series}
+
+\begin{itemize}
+  \item X-axis: Year (1950--1969)
+  \item Y-axis: Yield (kg/ha)
+  \item Add horizontal lines: Mean, Mean±1SD (shaded band)
+  \item Title: ``Annual Wheat Yield: 20-Year Variability''
+\end{itemize}
+
+\subsection{Plot 2: Histogram of Yields}
+
+\begin{itemize}
+  \item X-axis: Yield classes (e.g., 1000--1500, 1500--2000, etc.)
+  \item Y-axis: Frequency (number of years)
+  \item Overlay: Normal distribution curve
+  \item Title: ``Yield Distribution''
+\end{itemize}
+
+\subsection{Plot 3: Rainfall vs. Yield Scatter}
+
+\begin{itemize}
+  \item X-axis: Annual rainfall
+  \item Y-axis: Annual yield
+  \item Add regression line
+  \item Title: ``Rainfall vs. Yield Relationship''
+\end{itemize}
+
+\section{Task 5: Identify Dry and Wet Years}
+
+\subsection{Classification}
+
+Define dry/wet years using rainfall or yield:
+\begin{itemize}
+  \item Dry: Yield $<$ (Mean -- 1 SD) or Rainfall $<$ 25th percentile
+  \item Average: (Mean -- 0.5 SD) to (Mean + 0.5 SD)
+  \item Wet: Yield $>$ (Mean + 1 SD) or Rainfall $>$ 75th percentile
+\end{itemize}
+
+\subsection{Analysis}
+
+\begin{enumerate}
+  \item Identify specific dry years (e.g., 1952, 1957)
+  \item Identify specific wet years (e.g., 1955, 1960)
+  \item Compare phenology, grain number, protein for dry vs. wet years
+  \item Hypothesize: Why does 1952 fail while 1951 doesn't?
+\end{enumerate}
+
+\section{Task 6: Analysis Questions}
+
+\begin{enumerate}
+  \item What is the average yield? Coefficient of variation? Interpretation in terms of farmer risk?
+  
+  \item In how many years does yield exceed 3000 kg/ha? (Probability of good harvest)
+  
+  \item In how many years does yield fall below 1500 kg/ha? (Risk threshold)
+  
+  \item Which weather variable (rainfall, temperature, solar radiation) most affects yield in this region?
+  
+  \item If a farmer needs minimum 2000 kg/ha to be profitable, what is their risk of failure? Acceptable?
+  
+  \item Propose an adaptation: Should farmers shift sowing date (earlier? later?) to reduce risk? Or increase N? Or plant a different variety? Justify using your data.
+\end{enumerate}
+
+\section{Task 7: Scenario Analysis (Extension)}
+
+\subsection{Scenario A: Increased N (240 kg/ha)}
+
+Re-run simulation with higher N. Does it reduce year-to-year variability? Why or why not?
+
+\subsection{Scenario B: Earlier Sowing}
+
+Shift sowing window to April--June. How does yield variability change?
+
+\subsection{Scenario C: Climate Change}
+
+Modify weather data (e.g., +2°C, --10\% rainfall). Run 20-year simulation. Compare yield distribution.
+
+\section{Deliverable}
+
+Submit \filename{Exercise\_D\_Report.xlsx} or \filename{Exercise\_D\_Report.docx}:
+
+\begin{itemize}
+  \item ✓ Annual yield summary table (20 years)
+  \item ✓ Risk metrics (mean, SD, CV, P(Yield $<$ threshold))
+  \item ✓ 3+ visualizations (time series, histogram, scatter)
+  \item ✓ Dry vs. wet year comparison (phenology, yields)
+  \item ✓ Written answers to 7 analysis questions
+  \item ✓ Recommendation: Is the current management robust? What adaptation would you propose?
+\end{itemize}
+
+% ============================================================================
+% END EXERCISE D
+% ============================================================================

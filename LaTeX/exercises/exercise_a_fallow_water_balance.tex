@@ -1,0 +1,214 @@
+% ============================================================================
+% EXERCISE A: FALLOW WATER BALANCE
+% ============================================================================
+% Duration: 90 minutes (hands-on; Module 2 support)
+% Learning Goals: Understand daily water accounting; sowing readiness criteria
+% Prerequisites: Module 1, Module 2
+
+\chapter{Exercise A: Fallow Water Balance}
+\label{ch:exercise-a}
+
+\section{Overview}
+
+\textbf{Objective:} Analyze 7 years of fallow (no crop) simulation to understand water dynamics and identify sowing opportunities.
+
+\textbf{File:} \filename{Exercise\_A\_Fallow\_Water\_Balance.apsimx}
+
+\textbf{Time:} 90 minutes
+
+\textbf{Deliverable:} Excel workbook with analysis, plots, and written interpretation.
+
+\section{Simulation Setup}
+
+\subsection{Configuration}
+
+\begin{table}[H]
+\centering
+\caption{Exercise A Simulation Parameters}
+\label{tab:exercise-a-setup}
+\begin{tabularx}{\textwidth}{l|X}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Location & Dalby, Queensland (representative site) \\
+Climate & 1950--1957 (7-year subset of 101-year record) \\
+Weather file & AU\_Dalby.met \\
+Soil & Norwin Vertosol (Black Clay) \\
+Crop & None (fallow) \\
+Management & None \\
+Reported variables & Clock.Today, Soil.ESW, Weather.Rainfall, Soil.Evaporation, Soil.Drainage \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Key Parameters}
+
+\begin{description}
+  \item[\textbf{ESW threshold}] 100 mm (typical sowing readiness limit)
+  \item[\textbf{Rainfall threshold}] 25 mm in last 7 days (recent moisture indicator)
+  \item[\textbf{Sowing window}] May 1 -- July 10 (typical Queensland wheat season)
+\end{description}
+
+\section{Task 1: Run Simulation}
+
+\begin{enumerate}
+  \item Open APSIM
+  \item File $\to$ Open $\to$ \filename{Exercise\_A\_Fallow\_Water\_Balance.apsimx}
+  \item Verify Clock is set to 1950-01-01 to 1957-12-31 (7 years)
+  \item Click Simulation in tree
+  \item Press Run (or Ctrl+R)
+  \item Wait for completion (should be fast; $<$ 10 seconds)
+  \item Right-click DataStore $\to$ Export $\to$ To Excel
+  \item Save as \filename{Exercise\_A\_Results.xlsx}
+\end{enumerate}
+
+\section{Task 2: Data Exploration}
+
+\subsection{Examination Checklist}
+
+\begin{itemize}
+  \item How many rows in the output? (Should be $\approx$ 2555 daily records for 7 years)
+  \item What are the column names? (Should match Report variables: Date, ESW, Rainfall, Evaporation, Drainage)
+  \item Any missing values? (Should be none; every day should have data)
+  \item Date range correct? (1950-01-01 to 1957-12-31)
+\end{itemize}
+
+\subsection{Quick Statistics}
+
+In Excel, calculate:
+\begin{itemize}
+  \item Average ESW across all days
+  \item Maximum ESW per year
+  \item Minimum ESW per year
+  \item Total annual rainfall by year
+\end{itemize}
+
+\section{Task 3: Identify Sowing Opportunities}
+
+\subsection{Criteria}
+
+Sowing is possible when BOTH conditions are met:
+\begin{itemize}
+  \item ESW $>$ 100 mm
+  \item Rainfall in last 7 days $>$ 25 mm
+  \item Date between May 1 and July 10
+\end{itemize}
+
+\subsection{Excel Implementation}
+
+\begin{enumerate}
+  \item Create helper columns:
+    \begin{itemize}
+      \item Column F: 7-day cumulative rainfall (sum of Rainfall over current + previous 6 days)
+      \item Column G: Date in sowing window? (IF(AND(Date$\geq$May1, Date$\leq$July10), 1, 0))
+      \item Column H: ESW sufficient? (IF(ESW$>$100, 1, 0))
+      \item Column I: Rainfall sufficient? (IF(F$>$25, 1, 0))
+      \item Column J: Sowing ready? (IF(AND(G, H, I), 1, 0))
+    \end{itemize}
+  
+  \item Count: How many days are sowing-ready? (COUNTIF(J, 1))
+\end{enumerate}
+
+\section{Task 4: Visualization}
+
+\subsection{Plot 1: ESW Time Series}
+
+\begin{itemize}
+  \item X-axis: Date (all 7 years)
+  \item Y-axis: ESW (mm)
+  \item Add reference line: ESW = 100 mm (sowing threshold)
+  \item Title: ``Extractable Soil Water: 7-Year Fallow''
+\end{itemize}
+
+\textbf{Interpretation:} When does ESW peak? When is it lowest? Pattern seasonality?
+
+\subsection{Plot 2: Annual ESW Pattern}
+
+\begin{itemize}
+  \item Calculate monthly average ESW (group by year-month)
+  \item Plot 7 overlaid lines, one per year (different colors)
+  \item X-axis: Month (1--12)
+  \item Y-axis: Average ESW (mm)
+  \item Title: ``Monthly ESW Pattern: 7 Years''
+\end{itemize}
+
+\textbf{Interpretation:} Is seasonal pattern consistent across years? When does ESW typically peak?
+
+\subsection{Plot 3: Rainfall vs. ESW Change}
+
+\begin{itemize}
+  \item Create column: Daily ESW change = ESW(today) - ESW(yesterday)
+  \item Scatter plot: X = Daily Rainfall, Y = Daily ESW change
+  \item Add trend line
+  \item Title: ``Daily Rainfall vs. ESW Change''
+\end{itemize}
+
+\textbf{Interpretation:} How much does ESW change per mm of rainfall? Any threshold effects?
+
+\section{Task 5: Analysis Questions}
+
+Answer the following using your data:
+
+\begin{enumerate}
+  \item \textbf{Seasonal Pattern:} ESW is typically highest in [season?] and lowest in [season?]. Why?
+  
+  \item \textbf{Sowing Ready:} In how many days per year (on average) are conditions suitable for sowing (ESW $>$ 100 mm, rain threshold, date window)? What is the range across the 7 years?
+  
+  \item \textbf{Dry Year vs. Wet Year:} Identify the driest and wettest year in your data (by total rainfall). Compare their ESW profiles. What are the implications for management?
+  
+  \item \textbf{Water Loss Processes:} For a typical year, calculate total water loss to:
+    \begin{itemize}
+      \item Evaporation (sum of daily Evaporation values)
+      \item Drainage (sum of daily Drainage values)
+    \end{itemize}
+    Which process dominates? How does it vary seasonally?
+  
+  \item \textbf{Sowing Decision Rule:} Propose a sowing rule for farmers in this region. Should they wait for ESW $>$ 100 mm? What rainfall accumulation period is most predictive (7 days? 14 days)? What date window makes sense?
+\end{enumerate}
+
+\section{Task 6: Comparison Scenario (Extension)}
+
+\textit{Optional:} Modify the simulation to explore:
+
+\subsection{Scenario A: Shallow Soil}
+
+Create a variant with half the soil depth (lower water-holding capacity). How does ESW pattern change? Sowing opportunities more or less frequent?
+
+\subsection{Scenario B: Different Climate}
+
+Substitute a wetter region's weather file (or a drier region). Repeat analysis. Compare.
+
+\section{Deliverable}
+
+Submit a single \filename{Exercise\_A\_Report.xlsx} or \filename{Exercise\_A\_Report.docx} containing:
+
+\begin{itemize}
+  \item ✓ Analyzed data (with helper columns for sowing readiness)
+  \item ✓ 3+ visualizations (plots as described above)
+  \item ✓ Written answers to Analysis Questions (5 items)
+  \item ✓ Brief reflection (100--150 words): What surprised you? How would you use this in a real farming decision?
+\end{itemize}
+
+\section{Grading Rubric}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{l|r|X}
+\toprule
+\textbf{Criterion} & \textbf{Points} & \textbf{Description} \\
+\midrule
+Simulation setup & 10 & File opened, run successfully, data exported \\
+Data exploration & 10 & Correct record count, column names, date range verified \\
+Sowing identification & 15 & Correct criteria applied; counts accurate \\
+Visualization (3 plots) & 30 & Clear labels, interpretable scales, titles \\
+Analysis answers & 25 & Thoughtful interpretation of data; connections to concepts \\
+Reflection & 10 & Personalized insights; practical relevance \\
+\midrule
+\textbf{Total} & \textbf{100} & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+% END EXERCISE A
+% ============================================================================

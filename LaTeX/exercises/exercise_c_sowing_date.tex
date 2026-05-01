@@ -1,0 +1,249 @@
+% ============================================================================
+% EXERCISE C: SOWING DATE FACTORIAL
+% ============================================================================
+% Duration: 90 minutes (hands-on; Module 5 support)
+% Learning Goals: Phenology effects; sowing date optimization; yield/quality trade-offs
+% Prerequisites: Module 3, Module 5
+
+\chapter{Exercise C: Sowing Date Factorial}
+\label{ch:exercise-c}
+
+\section{Overview}
+
+\textbf{Objective:} Run three near-solved simulations with different sowing date windows and compare the effects on crop development, yield, and grain quality.
+
+\begin{center}
+\begin{tabular}{l|l|l|l}
+\textbf{} & \textbf{Early May} & \textbf{Mid June} & \textbf{Late July} \\
+\hline
+File & \filename{Exercise\_C\_EarlyMay.apsimx} & \filename{Exercise\_C\_MidJun.apsimx} & \filename{Exercise\_C\_LateJul.apsimx} \\
+Sowing window & 1 May -- 31 May & 15 Jun -- 15 Jul & 1 Aug -- 31 Aug \\
+Duration & 90 minutes & & \\
+\end{tabular}
+\end{center}
+
+\textbf{Simulated season:} 1949-07-01 to 1950-12-31 (one full growing season)
+
+\textbf{Location:} Dalby, Queensland
+
+\textbf{Deliverables:} Summary table, phenology comparison chart, yield table, written analysis
+
+\section{Background}
+
+Sowing date is one of the most powerful management levers available to a wheat farmer. Because wheat development is driven by thermal time (GDD), shifting the sowing date by 4--6 weeks moves the entire crop calendar, including the most stress-sensitive stages (anthesis, grain fill), into different temperature and rainfall conditions.
+
+\begin{keyconceptbox}
+\textbf{The core question:} For a given location and season, which sowing date best aligns the critical period (booting to grain fill) with favorable temperatures and soil water availability?
+\end{keyconceptbox}
+
+\section{Task 1: Open and Review the Simulation Files}
+
+\begin{enumerate}
+  \item Open \filename{Exercise\_C\_EarlyMay.apsimx} in APSIM
+  \item Click the \apsimterm{Manager} component in the simulation tree
+  \item Locate the sowing rule. You will see two parameters:
+    \begin{itemize}
+      \item \variable{StartDate}: ``1-may''
+      \item \variable{EndDate}: ``31-may''
+    \end{itemize}
+  \item Note the sowing conditions: ESW $>$ 100 mm AND 7-day rainfall $>$ 25 mm
+  \item Open \filename{Exercise\_C\_MidJun.apsimx} and \filename{Exercise\_C\_LateJul.apsimx}; verify that all other parameters (soil, variety, N rate, weather file) are identical --- only the sowing window differs
+\end{enumerate}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: APSIM screenshot showing the Manager component properties panel for one of the Exercise C files.}\\
+    \textit{Annotate: StartDate and EndDate parameters highlighted in the sowing rule.]}
+  \vspace{1.5cm}}}
+  \caption{Manager component in Exercise C showing the sowing window parameters. Only StartDate and EndDate differ between the three files.}
+  \label{fig:exercise-c-manager}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\section{Task 2: Run All Three Simulations and Export Results}
+
+\begin{enumerate}
+  \item Open \filename{Exercise\_C\_EarlyMay.apsimx}; press \textbf{Run} (F5)
+  \item Wait for completion (progress bar at bottom)
+  \item Export results: Results tab $\to$ right-click $\to$ Export $\to$ Excel
+  \item Save as \filename{C\_EarlyMay\_Results.xlsx}
+  \item Repeat for \filename{Exercise\_C\_MidJun.apsimx} and \filename{Exercise\_C\_LateJul.apsimx}
+\end{enumerate}
+
+\begin{tipbox}
+\textbf{Efficiency tip:} You can run all three simulations in sequence before exporting. APSIM stores results from each run separately in its DataStore.
+\end{tipbox}
+
+\section{Task 3: Phenological Comparison}
+
+\subsection{Extract Key Dates}
+
+For each simulation, find the date when each Zadok stage is first reached. In your exported Excel file:
+
+\begin{enumerate}
+  \item Add a helper column: \texttt{=YEAR(A2)} and \texttt{=MONTH(A2)} for date filtering
+  \item Use \texttt{MINIFS} to find the date when \variable{[Wheat].Stage} first crosses each threshold:
+    \begin{itemize}
+      \item Emergence: Stage $\geq$ 10 (\texttt{=MINIFS(\$A:\$A, \$C:\$C, ">=10")} where column C = Stage)
+      \item Booting: Stage $\geq$ 45
+      \item Anthesis: Stage $\geq$ 60
+      \item Physiological maturity: Stage $\geq$ 90
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Thermal Time Accumulation}
+
+For each scenario, calculate cumulative GDD from sowing date to anthesis:
+\begin{enumerate}
+  \item Identify the sowing date (first row where Stage $>$ 0)
+  \item Identify the anthesis date (first row where Stage $\geq$ 60)
+  \item In a Python or Excel formula, sum the daily GDD column for that date range
+\end{enumerate}
+
+\begin{keyconceptbox}
+\textbf{Expected result:} All three scenarios should accumulate similar GDD from sowing to anthesis ($\sim$850--950 GDD). The differences will be in \emph{how many calendar days} this takes --- cool early-winter sowing takes more calendar days to accumulate the same GDD as a warmer late-winter sowing.
+\end{keyconceptbox}
+
+\section{Task 3: Phenological Comparison}
+
+\subsection{Key Dates}
+
+Track dates for each sowing scenario:
+\begin{itemize}
+  \item Sowing date
+  \item Emergence date (Zadok stage 10)
+  \item Booting date (Zadok stage 40--49)
+  \item Anthesis date (Zadok stage 60--69)
+  \item Physiological maturity / Harvest date (Zadok stage 90)
+\end{itemize}
+
+\subsection{Thermal Time Accumulation}
+
+Calculate cumulative GDD from sowing to anthesis. Compare across sowing dates.
+
+\section{Task 4: Yield and Quality Comparison}
+
+\subsection{Harvest Results Table}
+
+For each scenario, extract from the row where Zadok Stage = 90 (harvest):
+
+\begin{center}
+\begin{tabular}{l|r|r|r}
+\textbf{Metric} & \textbf{Early May} & \textbf{Mid June} & \textbf{Late July} \\
+\hline
+Actual sowing date & \textit{record} & \textit{record} & \textit{record} \\
+Emergence date (Stage 10) & \textit{record} & \textit{record} & \textit{record} \\
+Anthesis date (Stage 60) & \textit{record} & \textit{record} & \textit{record} \\
+Maturity date (Stage 90) & \textit{record} & \textit{record} & \textit{record} \\
+Season length (days) & \textit{calculate} & \textit{calculate} & \textit{calculate} \\
+GDD sowing to anthesis & \textit{calculate} & \textit{calculate} & \textit{calculate} \\
+Grain yield (kg/ha) & \textit{record} & \textit{record} & \textit{record} \\
+Biomass at harvest (kg/ha) & \textit{record} & \textit{record} & \textit{record} \\
+Harvest Index & \textit{calculate} & \textit{calculate} & \textit{calculate} \\
+Grain protein (\%) & \textit{record (if available)} & & \\
+\end{tabular}
+\end{center}
+
+\subsection{Expected Sowing Date Effects}
+
+\begin{table}[H]
+\centering
+\caption{Expected outcomes by sowing date (indicative)}
+\label{tab:sowing-date}
+\begin{tabularx}{\textwidth}{l|X|X|X}
+\toprule
+\textbf{Metric} & \textbf{Early May} & \textbf{Mid June} & \textbf{Late July} \\
+\midrule
+Season length & Long ($\sim$230+ days) & Moderate ($\sim$195 days) & Short ($\sim$165 days) \\
+Calendar days, sowing to anthesis & Many (cool autumn/winter) & Moderate & Few (warm spring) \\
+Anthesis temperature & Cool (Aug) & Mild (Sep) & Warm (Oct--Nov) \\
+Frost risk at booting & Higher (July booting) & Lower & Very low (Sep booting) \\
+Heat stress at anthesis & Very low & Low & Moderate \\
+Grain fill duration & Long & Moderate & Short \\
+Grain yield & Moderate--high (frost risk) & Typically highest & Lower (short fill) \\
+Grain protein & Low--moderate & Moderate & Higher (heat stress) \\
+Harvest Index & Moderate--high & High ($\sim$0.45) & Lower ($\sim$0.38) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Task 5: Analysis Questions}
+
+Answer the following questions using your harvest results table and plots. Support each answer with specific numbers from your simulation output.
+
+\begin{enumerate}
+  \item \textbf{Calendar days vs.~thermal time:} Compare the number of calendar days from sowing to anthesis across the three scenarios. Then compare cumulative GDD from sowing to anthesis. Which is more similar across scenarios --- calendar days or GDD? What does this tell you about how APSIM models crop development?
+
+  \item \textbf{Yield response:} Which sowing date produced the highest grain yield in this season? Using the ESW output and T$_{max}$ output, explain \emph{why} that scenario outperformed the others. Was it related to water availability, temperature, or both?
+
+  \item \textbf{Critical period and stress:} For the Late July sowing, identify the date of anthesis in your output. What was the T$_{max}$ on that date? Was ESW above the 100 mm sowing threshold at that time? Does the output suggest water stress or heat stress contributed to any yield reduction?
+
+  \item \textbf{Season length and grain fill:} Calculate season length (sowing to maturity) for each scenario. How does grain fill duration (maturity minus anthesis) change with sowing date? How might a shorter grain fill period explain differences in yield and grain size?
+
+  \item \textbf{Harvest Index:} Calculate Harvest Index for each scenario (Grain mass / Biomass). Which scenario has the highest HI? What does a lower HI indicate about where assimilate ended up (straw vs.~grain)?
+
+  \item \textbf{Practical recommendation:} Based on your simulation results for this one season (1949--1950), which sowing date would you recommend to a Dalby wheat farmer? Acknowledge at least one limitation of making this recommendation from a single-season analysis.
+\end{enumerate}
+
+\section{Task 6: Visualisation}
+
+Create the following two plots:
+
+\subsection{Crop Development Comparison (Line Plot)}
+
+\begin{enumerate}
+  \item In Excel (or Python), plot Zadok Stage (y-axis) vs.~Date (x-axis) for all three scenarios on the same axes
+  \item Use different line colours/styles for each scenario
+  \item Add vertical dashed lines at: frost risk window (Jul 1 -- Jul 31) and heat risk window (Oct 1 -- Nov 30)
+  \item Add horizontal dashed lines at Stage 45 (Booting), Stage 60 (Anthesis), Stage 90 (Maturity)
+  \item Title: ``Phenological Development by Sowing Date''
+\end{enumerate}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Student-generated Zadok stage vs.~date line plot for all three sowing date scenarios.}\\
+    \textit{Annotate: frost risk window shaded in blue; heat risk window shaded in red.]}
+  \vspace{1.5cm}}}
+  \caption{Example student output: Zadok stage trajectory for three sowing dates. The frost and heat risk windows highlight the trade-off between early and late sowing.}
+  \label{fig:exercise-c-phenology-plot}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\subsection{Yield and Harvest Index Comparison (Bar Chart)}
+
+Create a grouped bar chart with:
+\begin{itemize}
+  \item X-axis: three sowing date scenarios
+  \item Two bar groups: Grain yield (left axis, kg/ha) and Harvest Index (right axis, 0--1)
+  \item Title: ``Grain Yield and Harvest Index by Sowing Date''
+\end{itemize}
+
+\section{Deliverable}
+
+Submit a single Excel workbook (or Python notebook + PDF) containing:
+
+\begin{enumerate}
+  \item \textbf{Harvest results table} (Task 4): all metrics for three scenarios
+  \item \textbf{Phenology comparison chart} (Task 6, Plot 1): Zadok stage vs.~date
+  \item \textbf{Yield/HI bar chart} (Task 6, Plot 2): grouped bar chart
+  \item \textbf{Written analysis} (Task 5): six questions, approximately 2--4 sentences each
+  \item \textbf{Recommendation} (Task 5, Q6): one paragraph with supporting evidence
+\end{enumerate}
+
+\textbf{Total time:} 90 minutes
+
+\textbf{Assessment criteria:}
+\begin{itemize}
+  \item Harvest table complete and values are plausible (20\%)
+  \item Plots are correctly labelled with units and titles (20\%)
+  \item Analysis questions answered with specific data values (40\%)
+  \item Recommendation is evidence-based and acknowledges limitations (20\%)
+\end{itemize}
+
+% ============================================================================
+% END EXERCISE C
+% ============================================================================

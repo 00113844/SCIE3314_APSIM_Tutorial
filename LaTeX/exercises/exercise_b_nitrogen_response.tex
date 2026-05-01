@@ -1,0 +1,206 @@
+% ============================================================================
+% EXERCISE B: NITROGEN RESPONSE FACTORIAL
+% ============================================================================
+% Duration: 90 minutes (hands-on; Module 4 support)
+% Learning Goals: N response curves; AEN calculation; cost-benefit analysis
+% Prerequisites: Module 3, Module 4
+
+\chapter{Exercise B: Nitrogen Response Factorial}
+\label{ch:exercise-b}
+
+\section{Overview}
+
+\textbf{Objective:} Run four N rate treatments and analyze yield response to determine optimal N rate and calculate agronomic efficiency.
+
+\textbf{Files:} 
+\begin{itemize}
+  \item \filename{Exercise\_B\_N0.apsimx} (0 kg/ha N)
+  \item \filename{Exercise\_B\_N80.apsimx} (80 kg/ha N)
+  \item \filename{Exercise\_B\_N160.apsimx} (160 kg/ha N)
+  \item \filename{Exercise\_B\_N240.apsimx} (240 kg/ha N)
+\end{itemize}
+
+\textbf{Time:} 90 minutes (run all 4 simulations; ~10 min per run)
+
+\textbf{Deliverable:} Excel workbook with N response curve, AEN calculations, cost-benefit analysis.
+
+\section{Simulation Setup}
+
+\subsection{Configuration}
+
+\begin{table}[H]
+\centering
+\caption{Exercise B Simulation Parameters}
+\label{tab:exercise-b-setup}
+\begin{tabularx}{\textwidth}{l|X}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Location & Dalby, Queensland \\
+Climate & 1949--1950 (single growing season) \\
+Weather file & AU\_Dalby.met \\
+Soil & Norwin Vertosol \\
+Crop & Wheat (Hartog cultivar) \\
+Sowing date & May 15 (variable rule: ESW $>$ 100 mm + rain threshold) \\
+Fertiliser rate & 0, 80, 160, 240 kg/ha NO\textsubscript{3}-N (applied at sowing) \\
+Reported variables & Clock.Today, Wheat.LAI, Wheat.Phenology.Zadok.Stage, Wheat.Grain.Total.Wt, Wheat.Grain.Protein, Wheat.AboveGround.N \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Task 1: Run All Four Simulations}
+
+\begin{enumerate}
+  \item Open Exercise\_B\_N0.apsimx; run (export to \filename{Exercise\_B\_N0\_Results.xlsx})
+  \item Open Exercise\_B\_N80.apsimx; run (export to \filename{Exercise\_B\_N80\_Results.xlsx})
+  \item Open Exercise\_B\_N160.apsimx; run (export to \filename{Exercise\_B\_N160\_Results.xlsx})
+  \item Open Exercise\_B\_N240.apsimx; run (export to \filename{Exercise\_B\_N240\_Results.xlsx})
+  
+  \textit{Note:} Each simulation should take $<$ 5 minutes
+\end{enumerate}
+
+\section{Task 2: Extract Grain Yield}
+
+\subsection{Approach}
+
+\begin{itemize}
+  \item For each .xlsx file, find the row with maximum Wheat.Grain.Total.Wt
+  \item This represents harvest time (physiological maturity)
+  \item Record as final yield for that N rate
+  \item Create summary table: N rate vs. Final Yield
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Expected N Response Pattern}
+\label{tab:n-response}
+\begin{tabularx}{\textwidth}{r|r|r}
+\toprule
+\textbf{N Rate (kg/ha)} & \textbf{Yield (kg/ha)} & \textbf{AEN (kg/kg)} \\
+\midrule
+0 & 2000 & -- \\
+80 & 3500 & (3500--2000)/80 = 18.75 \\
+160 & 4600 & (4600--2000)/160 = 16.25 \\
+240 & 5200 & (5200--2000)/240 = 13.33 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textit{(Exact numbers will vary; this is illustrative)}
+
+\section{Task 3: Calculate Agronomic Efficiency of N (AEN)}
+
+\[
+\text{AEN}_{i} = \frac{\text{Yield}_{i} - \text{Yield}_{0 \text{ kg/ha}}}{N \text{ rate}_{i}} \quad [\text{kg grain / kg N}]
+\]
+
+Example calculation:
+\begin{itemize}
+  \item Yield(N=0) = 2000 kg/ha
+  \item Yield(N=80) = 3500 kg/ha
+  \item AEN(80) = (3500 -- 2000) / 80 = 18.75 kg grain / kg N
+\end{itemize}
+
+\textbf{Observations:}
+\begin{itemize}
+  \item AEN is highest at low N rates (diminishing returns)
+  \item AEN decreases as N rate increases (approaching physiological limit)
+  \item AEN reflects N use efficiency; typical wheat: 10--20 kg/kg
+\end{itemize}
+
+\section{Task 4: Plot N Response Curve}
+
+\begin{itemize}
+  \item X-axis: N rate (0, 80, 160, 240 kg/ha)
+  \item Y-axis: Yield (kg/ha)
+  \item Plot points for each N rate
+  \item Add polynomial trendline (degree 2 is typical)
+  \item Title: ``Nitrogen Response Curve: Wheat''
+\end{itemize}
+
+\textbf{Interpretation:} Where is the curve flat (diminishing returns)? At what N rate does yield plateau?
+
+\section{Task 5: Cost-Benefit Analysis}
+
+\subsection{Profit Calculation}
+
+\[
+\text{Profit} = (\text{Yield} \times P_{\text{grain}}) - (\text{N rate} \times P_{\text{N}})
+\]
+
+\subsection{Assumptions}
+
+\begin{itemize}
+  \item Grain price: \$400/tonne (adjust based on current market)
+  \item N cost: \$1.50/kg (adjust based on fertiliser price)
+\end{itemize}
+
+\subsection{Example Calculation}
+
+For N = 160 kg/ha:
+\begin{itemize}
+  \item Yield = 4600 kg/ha = 4.6 tonnes/ha
+  \item Revenue = 4.6 × \$400 = \$1840/ha
+  \item N cost = 160 × \$1.50 = \$240/ha
+  \item Profit = \$1840 -- \$240 = \$1600/ha
+\end{itemize}
+
+\subsection{Create Profit Table}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{r|r|r|r|r}
+\toprule
+\textbf{N (kg/ha)} & \textbf{Yield (t/ha)} & \textbf{Revenue} & \textbf{N Cost} & \textbf{Profit} \\
+\midrule
+0 & -- & -- & \$0 & -- \\
+80 & -- & -- & \$120 & -- \\
+160 & -- & -- & \$240 & -- \\
+240 & -- & -- & \$360 & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Task 6: Analysis Questions}
+
+\begin{enumerate}
+  \item What is the yield response to N? (How much yield increases per kg N?)
+  
+  \item At what N rate does AEN drop to 10 kg/kg? (Where do diminishing returns become pronounced?)
+  
+  \item What is the profit-maximizing N rate (assuming prices: \$400/tonne grain, \$1.50/kg N)?
+  
+  \item If grain price fell to \$300/tonne, would you increase or decrease N rate? Why?
+  
+  \item If N cost rose to \$2.50/kg, how would profit be affected?
+\end{enumerate}
+
+\section{Task 7: Grain Quality}
+
+\subsection{Protein Analysis}
+
+\begin{itemize}
+  \item Extract Wheat.Grain.Protein from each simulation at harvest
+  \item Plot: N rate vs. Protein content
+  \item Interpretation: Does higher N increase grain protein? By how much?
+\end{itemize}
+
+\textit{Expected finding:} Grain protein increases with N rate (premium prices for high-protein wheat).
+
+\section{Deliverable}
+
+Submit \filename{Exercise\_B\_Report.xlsx} or \filename{Exercise\_B\_Report.docx}:
+
+\begin{itemize}
+  \item ✓ Yield summary table (N rate vs. Yield)
+  \item ✓ AEN calculations (table with AEN for each N rate)
+  \item ✓ N response curve plot
+  \item ✓ Profit analysis table + chart
+  \item ✓ Protein vs. N rate plot
+  \item ✓ Written answers to 7 analysis questions
+  \item ✓ Conclusion: Your recommendation for optimal N rate and justification
+\end{itemize}
+
+% ============================================================================
+% END EXERCISE B
+% ============================================================================

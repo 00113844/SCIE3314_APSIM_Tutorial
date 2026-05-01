@@ -1,0 +1,221 @@
+% ============================================================================
+% MODULE 5: PHENOLOGY & THERMAL TIME
+% ============================================================================
+% Duration: 60 minutes (Zadok stages, GDD, temperature dependence)
+% Learning Goals: Thermal time drives development; Zadok stages; sowing date effects
+% Prerequisites: Module 1
+
+\chapter{Module 5: Phenology \& Thermal Time}
+\label{ch:module5}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Understand thermal time (Growing Degree Days) as driver of crop development
+  \item Recognize Zadok stages (0--90+) as standardized phenological scale
+  \item Explain why temperature, not calendar, matters for development
+  \item Use Zadok stages to identify critical periods (booting, grain fill)
+  \item Apply sowing date effects to grain quality and yield
+\end{itemize}
+
+\section{Thermal Time: Concept and Calculation}
+
+\subsection{Growing Degree Days (GDD)}
+
+\[
+\text{GDD}_{\text{daily}} = \max(0, T_{\text{avg}} - T_{\text{base}})
+\]
+
+where:
+\begin{itemize}
+  \item $T_{\text{avg}}$ = (T$_{\text{max}}$ + T$_{\text{min}}$) / 2
+  \item $T_{\text{base}}$ = base temperature (0°C or 3°C depending on crop stage)
+  \item Cumulative: $\text{GDD}_{\text{total}} = \sum \text{GDD}_{\text{daily}}$
+\end{itemize}
+
+\subsection{Why GDD Instead of Calendar Days?}
+
+\begin{keyconceptbox}
+Calendar-based timing fails across climates:
+\begin{itemize}
+  \item Mediterranean climate: Cool spring (slow development)
+  \item Subtropical climate: Warm spring (fast development)
+  \item Same calendar date $\ne$ same crop stage across locations
+\end{itemize}
+
+GDD standardizes: Same GDD accumulation $\approx$ same physiological development.
+\end{keyconceptbox}
+
+\section{Zadok Stages}
+
+\subsection{Standardized Scale (0--90+)}
+
+\begin{table}[H]
+\centering
+\caption{Zadok Stage Groups and Thermal Time (wheat, subtropical conditions)}
+\label{tab:zadok}
+\begin{tabularx}{\textwidth}{r|X|r|r}
+\toprule
+\textbf{Zadok Stage} & \textbf{Description} & \textbf{GDD (cumulative)} & \textbf{Days after sowing} \\
+\midrule
+0--9  & Germination / Imbibition & 0--50   & 0--10 \\
+10--19 & Emergence (seedling leaves) & 50--100  & 10--20 \\
+20--29 & Leaf development, tiller initiation & 100--300 & 20--60 \\
+30--39 & Stem elongation (growing point differentiates) & 300--600 & 60--120 \\
+40--49 & Booting (flag leaf visible, head in boot) & 600--750 & 120--150 \\
+50--59 & Heading / head emergence & 750--900 & 150--180 \\
+60--69 & Anthesis / pollination & 850--950 & 170--195 \\
+70--79 & Grain development (milk to soft dough) & 950--1100 & 195--240 \\
+80--89 & Grain ripening (hard dough to hard grain) & 1100--1200 & 240--280 \\
+90+   & Physiological maturity / harvest-ready & 1200--1300+ & 280--310 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{tipbox}
+\textbf{Check against your simulation:} In your APSIM output, the column \variable{[Wheat].Stage} reports Zadok stage as a decimal (e.g., 45.3). Use this to verify your crop is developing at the expected rate.
+\end{tipbox}
+
+\section{Critical Periods}
+
+Not all growth stages are equally sensitive to stress. Yield loss depends strongly on \emph{when} stress occurs:
+
+\begin{center}
+\begin{tabular}{l|l|l|l}
+\textbf{Stage} & \textbf{Zadok} & \textbf{Stress type} & \textbf{Effect on yield} \\
+\hline
+Emergence     & 0--10  & Water (dry soil) & Crop fails to establish; zero yield \\
+Tillering     & 20--39 & N, water         & Fewer tillers; fewer potential heads \\
+Booting       & 40--49 & N, water         & Reduced floret number; irreversible \\
+Anthesis      & 55--65 & Water, heat      & Pollen sterility; large grain number loss \\
+Grain fill    & 70--85 & Water, heat      & Smaller grain; 30--50\% yield loss if severe \\
+Maturity      & 90+    & Rain (excess)    & Grain sprouting in head; quality loss \\
+\end{tabular}
+\end{center}
+
+\begin{keyconceptbox}
+\textbf{Anthesis is the most sensitive single stage.} A hot dry day (T$_{max}$ $>$ 32°C, ESW declining) at Stage 60--65 can cause widespread pollen sterility and reduce final grain number by 20--50\%, regardless of how good the rest of the season is. In APSIM, this is captured through heat and water stress multipliers applied to grain set.
+\end{keyconceptbox}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Bar chart showing relative yield sensitivity to water stress at each Zadok stage.}\\
+    \textit{X-axis: Zadok stage groups. Y-axis: Relative yield impact (\%). Anthesis bar is tallest.]}
+  \vspace{1.5cm}}}
+  \caption{Relative sensitivity of wheat yield to water stress at different Zadok stages. Anthesis and early grain fill are the highest-risk periods.}
+  \label{fig:stress-sensitivity}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\section{Sowing Date Effects}
+
+\subsection{Why Sowing Date Changes Everything}
+
+Shifting the sowing date by 4--8 weeks shifts the entire crop calendar. Crucially, it shifts \emph{which temperatures} the crop experiences at each critical stage:
+
+\begin{itemize}
+  \item \textbf{Early May sowing} (Dalby): Anthesis falls in August — cool, lower heat stress risk; but risk of frost at booting (July)
+  \item \textbf{Mid-June sowing}: Anthesis falls in September — mild temperatures; lowest overall risk; typically optimal for the region
+  \item \textbf{Late July sowing}: Anthesis falls in October — warming; higher heat stress risk; shorter grain fill before summer heat
+\end{itemize}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Timeline diagram showing three sowing scenarios. Each is a horizontal bar from Sowing to Maturity.}\\
+    \textit{Annotate: anthesis date, frost risk window (Jun--Jul), heat risk window (Oct--Nov) for each scenario.]}
+  \vspace{1.5cm}}}
+  \caption{Effect of sowing date on crop calendar and risk windows. Shifting sowing by 4 weeks moves anthesis into a different temperature regime.}
+  \label{fig:sowing-date-timeline}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\subsection{Exercise C: Sowing Date Factorial}
+
+Three sowing date variants:
+\begin{itemize}
+  \item Early (May 1--30): Cool spring; long season
+  \item Mid (June 15--July 15): Moderate; standard
+  \item Late (August 1--31): Warm spring; short season
+\end{itemize}
+
+Expected outcomes:
+\begin{itemize}
+  \item Early sowing: Higher tiller number, grain number; risk of frost at anthesis
+  \item Mid sowing: Balanced phenology; maximum grain fill
+  \item Late sowing: Short season; less grain per head; risk of terminal drought
+\end{itemize}
+
+\section{Temperature Stress}
+
+\subsection{Heat Stress ($T > 30$°C)}
+
+Heat accelerates GDD accumulation (more degree-days per day) but can also damage pollen at anthesis:
+\begin{itemize}
+  \item Each extra 1°C above T$_\text{base}$ adds 1 extra GDD per day
+  \item At T$_{max}$ $>$ 32°C during anthesis, pollen viability drops sharply
+  \item Result: Crop matures faster but may set fewer grains
+\end{itemize}
+
+\subsection{Cold Stress ($T < T_\text{base}$)}
+
+On days where T$_{avg}$ $<$ T$_\text{base}$ (0--3°C for wheat), GDD does not accumulate:
+\begin{itemize}
+  \item Development pauses; the crop's timeline extends
+  \item If T$_{min}$ $<$ $-$2°C during booting or heading, frost can damage florets irreversibly
+  \item In APSIM, frost damage is applied if temperature falls below a crop-specific threshold during vulnerable stages
+\end{itemize}
+
+\subsection{Vernalization (Winter Wheat)}
+
+Some wheat varieties require a cold period (vernalization) to trigger flowering. APSIM tracks a vernalization state: the crop will not advance to reproductive stages until sufficient chilling has accumulated. This is primarily relevant for winter wheat in cooler climates; spring wheat varieties (common in subtropical Queensland) have no or minimal vernalization requirement.
+
+\begin{tipbox}
+\textbf{Dalby context:} In subtropical Queensland, frost events occur in June--August (particularly in July). An early May sowing means booting occurs in July, creating frost risk at a vulnerable stage. A late July sowing avoids this but shortens the growing season.
+\end{tipbox}
+
+\section{Connecting Phenology to Management}
+
+Understanding phenology helps time key management actions:
+
+\begin{center}
+\begin{tabular}{l|l|l}
+\textbf{Management action} & \textbf{Target Zadok stage} & \textbf{Reason} \\
+\hline
+Sowing & Stage 0 & Starting point; everything follows from here \\
+N fertiliser application & Stage 30--40 & N demand rising; soil moisture often present \\
+Late N (topdress) & Stage 40--50 & Just before booting; directly supports grain protein \\
+Insecticide/fungicide & Stage 50--65 & Head/flag leaf protection; avoid anthesis disruption \\
+Harvest decision & Stage 90--92 & Grain at maximum dry weight; avoid over-drying \\
+\end{tabular}
+\end{center}
+
+\begin{warningbox}
+\textbf{In APSIM, the Manager component applies N at sowing} (Stage 0). In reality, split applications often give better results. For this tutorial, we use a single sowing-time application for simplicity.
+\end{warningbox}
+
+\section{Summary}
+
+\begin{keyconceptbox}
+\textbf{Module 5 key points:}
+\begin{enumerate}
+  \item GDD = $\max(0, T_{avg} - T_{base})$ accumulated daily; drives all phenological development
+  \item Zadok scale (0--90+) is the universal language for describing wheat stages
+  \item Key milestones: Emergence (Stage 10, $\sim$50 GDD), Anthesis (Stage 60, $\sim$900 GDD), Maturity (Stage 90, $\sim$1200 GDD)
+  \item Anthesis is the most stress-sensitive stage; N and water stress here cause the largest yield losses
+  \item Sowing date shifts the entire crop calendar: early sowing risks frost at booting; late sowing risks heat at anthesis
+  \item Time N applications and management actions using Zadok stage, not calendar date
+\end{enumerate}
+\end{keyconceptbox}
+
+\section{What's Next?}
+
+Module 6 explores long-term climate variability and risk assessment.
+
+% ============================================================================
+% END MODULE 5
+% ============================================================================

@@ -1,0 +1,234 @@
+% ============================================================================
+% MAIN.TEX: SCIE3314 APSIM Tutorial
+% ============================================================================
+% Root document that compiles all modules, exercises, and appendices
+% 
+% COMPILATION:
+%   pdflatex main.tex
+%   bibtex main
+%   pdflatex main.tex
+%   pdflatex main.tex
+%
+% Or use latexmk: latexmk -pdf main.tex
+
+\input{preamble}
+
+\title{%
+  \textbf{SCIE3314: Agricultural Production Systems Simulator (APSIM)} \\
+  \large Introductory Tutorial \\
+  \normalsize Modular Design for Crop Modelling and Decision Support
+}
+
+\author{
+  School of Agriculture and Food Science \\
+  University of Queensland \\
+  \texttt{s.instructor@uq.edu.au}
+}
+
+\date{May 2026 \\ Version 1.0}
+
+\begin{document}
+
+% ============================================================================
+% FRONT MATTER
+% ============================================================================
+
+\frontmatter
+
+% Title page
+\maketitle
+
+% ============================================================================
+% ACKNOWLEDGMENTS
+% ============================================================================
+
+\chapter*{Acknowledgments}
+
+This tutorial was developed with reference to:
+\begin{itemize}
+  \item APSIM Next Gen 2025.6.7774.0 documentation
+  \item APSOIL soil database (Australian soils)
+  \item Weather files from BOM/SILO networks
+  \item Pedagogic design based on Bloom's taxonomy and constructivist learning principles
+\end{itemize}
+
+We acknowledge the APSIM Initiative (CSIRO, QAAFI, CIMMYT, ICRISAT, Michigan State University) for developing and maintaining APSIM as a public good.
+
+% ============================================================================
+% TABLE OF CONTENTS, FIGURES, TABLES
+% ============================================================================
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% ============================================================================
+% PREFACE
+% ============================================================================
+
+\chapter*{Preface}
+
+This tutorial introduces APSIM (Agricultural Production Systems Simulator), a process-based crop modelling platform widely used in research, extension, and operational decision support.
+
+\begin{keyconceptbox}
+\textbf{Learning Outcomes:}
+After completing this tutorial, students will be able to:
+\begin{enumerate}
+  \item Understand the structure and daily sequence of APSIM simulations
+  \item Configure and run crop simulations for decision analysis
+  \item Interpret model outputs and assess crop responses to management
+  \item Apply APSIM to explore agronomic questions (N fertilisation, phenology, variability)
+  \item Troubleshoot common errors and validate simulation logic
+\end{enumerate}
+\end{keyconceptbox}
+
+\section*{How to Use This Tutorial}
+
+\textbf{For Instructors:} Each module (0--7) is designed as a 30--90 minute class session or self-study unit. Four integrated exercises (A--D) scaffold hands-on simulation work, progressing from simple water balance to multi-year variability analysis. All exercises use near-solved .apsimx files (components pre-configured; students modify parameters).
+
+\textbf{For Students:} Start with Module 0 (Why APSIM?), then progress sequentially through Modules 1--7. Complete Exercises A--D in parallel or after each module block. Each module includes key concepts, worked examples, and links to reference entities in the LLM Wiki (\textit{see \cref{sec:wiki-resources}}).
+
+\textbf{Prerequisites:} Basic agronomy (crop growth stages, soil water, nitrogen cycling). No programming required; JavaScript Manager rules are provided as templates.
+
+% ============================================================================
+% MAIN MATTER
+% ============================================================================
+
+\mainmatter
+
+% ============================================================================
+% MODULE 0: WHY APSIM?
+% ============================================================================
+
+\input{modules/module_0_why_apsim}
+
+% ============================================================================
+% MODULE 1: STRUCTURE
+% ============================================================================
+
+\input{modules/module_1_structure}
+
+% ============================================================================
+% MODULE 2: FIRST SIMULATION
+% ============================================================================
+
+\input{modules/module_2_first_simulation}
+
+% ============================================================================
+% MODULE 3: OUTPUT ANALYSIS
+% ============================================================================
+
+\input{modules/module_3_output_analysis}
+
+% ============================================================================
+% MODULE 4: NITROGEN FERTILISATION
+% ============================================================================
+
+\input{modules/module_4_nitrogen_fertilisation}
+
+% ============================================================================
+% MODULE 5: PHENOLOGY & THERMAL TIME
+% ============================================================================
+
+\input{modules/module_5_phenology_thermal_time}
+
+% ============================================================================
+% MODULE 6: LONG-TERM VARIABILITY
+% ============================================================================
+
+\input{modules/module_6_long_term_variability}
+
+% ============================================================================
+% MODULE 7: CLIMATE SCENARIOS
+% ============================================================================
+
+\input{modules/module_7_climate_scenarios}
+
+% ============================================================================
+% EXERCISES
+% ============================================================================
+
+\appendix
+
+\part*{Integrated Exercises}
+\addcontentsline{toc}{part}{Integrated Exercises}
+
+% Exercise A
+\input{exercises/exercise_a_fallow_water_balance}
+
+% Exercise B
+\input{exercises/exercise_b_nitrogen_response}
+
+% Exercise C
+\input{exercises/exercise_c_sowing_date}
+
+% Exercise D
+\input{exercises/exercise_d_20_year_variability}
+
+% ============================================================================
+% APPENDICES
+% ============================================================================
+
+\input{appendix/appendix_a_components_reference}
+
+\input{appendix/appendix_b_troubleshooting}
+
+% ============================================================================
+% BACK MATTER
+% ============================================================================
+
+\backmatter
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\chapter{References}
+
+\begin{thebibliography}{99}
+
+\bibitem{APSIM2025}
+  APSIM Initiative (2025). \textit{APSIM Next Gen Documentation}. 
+  \url{https://www.apsim.info}
+
+\bibitem{Holzworth2014}
+  Holzworth, D., Huth, N. I., deVoil, P. G., et al. (2014).
+  APSIM -- Evolution towards a new generation of agricultural systems simulation.
+  \textit{Environmental Modelling \& Software}, 62, 327--350.
+
+\bibitem{Keating1998}
+  Keating, B. A., Carberry, P. S., Hammer, G. L., et al. (1998).
+  An overview of APSIM, a model designed for farming systems simulation.
+  \textit{European Journal of Agronomy}, 18, 267--288.
+
+\end{thebibliography}
+
+% ============================================================================
+% WIKI RESOURCES
+% ============================================================================
+
+\chapter{LLM Wiki Resources}
+\label{sec:wiki-resources}
+
+Throughout this tutorial, we reference concepts stored in the SCIE3314 APSIM Wiki:
+
+\begin{description}
+  \item[\apsimterm{Entities}] Definition pages for APSIM components (Clock, Weather, Soil, Manager, Report, DataStore, Wheat, etc.) with misconceptions and troubleshooting.
+  \item[\apsimterm{Concepts}] Pedagogic synthesis pages (Scaffolding, Near-Solved Design, Water Stress, Phenology-Thermal-Time Link, AEN, Module Dependencies).
+  \item[\apsimterm{FAQ}] Diagnostic pages for common errors and decisions.
+  \item[\apsimterm{Exercises}] Step-by-step guides for Exercises A--D with learning objectives and analysis prompts.
+\end{description}
+
+Wiki location: \url{https://github.com/00113844/SCIE3314_APSIM_Tutorial/tree/main/SCIE3314_APSIM_Wiki}
+
+% ============================================================================
+% INDEX
+% ============================================================================
+
+\printindex
+
+\end{document}
+
+% ============================================================================
+% END MAIN.TEX
+% ============================================================================

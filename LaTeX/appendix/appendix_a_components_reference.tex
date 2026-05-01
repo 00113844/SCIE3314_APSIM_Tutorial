@@ -1,0 +1,127 @@
+% ============================================================================
+% APPENDIX A: APSIM COMPONENTS REFERENCE
+% ============================================================================
+
+\chapter{APSIM Components Reference}
+\label{app:components}
+
+\section{Global Components}
+
+\subsection{Clock}
+
+\apsimterm{Clock} advances simulation by 1 day. User specifies:
+\begin{itemize}
+  \item Start date (e.g., 1900-01-01)
+  \item End date (e.g., 2000-12-31)
+  \item Timestep (always 1 day in APSIM)
+\end{itemize}
+
+Role: Synchronizes all other components to daily cycle.
+
+\subsection{Weather}
+
+\apsimterm{Weather} reads external file (\filename{.met} format) with daily:
+\begin{itemize}
+  \item MaxT, MinT (°C)
+  \item Rainfall (mm)
+  \item Radiation (MJ/m²/day)
+  \item RelativeHumidity (\%)
+  \item WindSpeed (m/s)
+\end{itemize}
+
+Role: Provides atmospheric drivers; calculates PET (Potential Evapotranspiration).
+
+\subsection{SoilArbitrator}
+
+\apsimterm{SoilArbitrator} coordinates water and nutrient availability among competing processes.
+
+Role: Ensures consistency when multiple components access soil (plant uptake, evaporation, nitrification).
+
+\subsection{MicroClimate}
+
+\apsimterm{MicroClimate} partitions solar radiation and calculates surface energy balance.
+
+Role: Computes interception, albedo, near-surface temperature; feeds into soil heat flux.
+
+\section{Zone Components}
+
+\subsection{Soil}
+
+\apsimterm{Soil} represents multi-layer soil profile (typically 7--10 layers).
+
+\subsubsection{Sub-components}
+
+\begin{description}
+  \item[\apsimterm{Physical}] Bulk density, water characteristics (LL, DUL, SAT), saturated conductivity for each layer; includes crop-specific (\apsimterm{SoilCrop}) parameters (LL, KL, XF)
+  
+  \item[\apsimterm{SoilWater}] (WaterBalance model) Calculates daily water budget (infiltration, drainage, evaporation, plant uptake); tracks water stress factors
+  
+  \item[\apsimterm{Organic}] Organic matter pools (Fresh Organic Matter, Humic Pool) and C:N ratios; mineralization kinetics
+  
+  \item[\apsimterm{Chemical}] pH, electrical conductivity, exchangeable sodium percentage; available for future expansion (salinity, boron, etc.)
+  
+  \item[\apsimterm{Nutrient}] (or \apsimterm{Organic}) Organic N pool; mineralization-immobilization rates
+  
+  \item[\apsimterm{Solutes}] Individual solute pools: NO\textsubscript{3}, NH\textsubscript{4}, Urea; movement with water; leaching
+  
+  \item[\apsimterm{Temperature}] Soil temperature by depth; heat diffusion; important for mineralization, nitrification rates
+\end{description}
+
+\subsection{Crop (e.g., Wheat)}
+
+\apsimterm{Wheat} (or other crop model) simulates plant processes:
+
+\begin{description}
+  \item[\apsimterm{Phenology}] Thermal time accumulation; Zadok stages; development rate parameters by stage
+  
+  \item[\apsimterm{Leaf}] LAI (Leaf Area Index) progression; specific leaf area (SLA); leaf senescence
+  
+  \item[\apsimterm{Root}] Root depth progression; water and N extraction coefficients; root biomass
+  
+  \item[\apsimterm{Biomass}] Daily photosynthesis (RUE: Radiation Use Efficiency); respiration; senescence; partitioning to organs
+  
+  \item[\apsimterm{Grain}] Grain number determination; grain fill duration; harvest index; grain N content
+\end{description}
+
+\subsection{Manager}
+
+\apsimterm{Manager} user-defined control logic (JavaScript or C\#).
+
+Typical rules:
+\begin{itemize}
+  \item Sowing: IF (date in window AND ESW sufficient AND recent rain) THEN Sow()
+  \item Fertilisation: IF (date or stage trigger) THEN Fertiliser.Apply()
+  \item Harvest: IF (crop physiologically mature) THEN Harvest()
+\end{itemize}
+
+\subsection{Report}
+
+\apsimterm{Report} specifies output variables (acts as filter).
+
+User lists variables to record each day; APSIM records only selected variables (reduces output file size).
+
+\subsection{DataStore}
+
+\apsimterm{DataStore} SQL-like database; receives Report data each day; exports to Excel/CSV at simulation end.
+
+\section{Variable Naming Convention}
+
+APSIM variables use dot notation:
+
+\begin{verbatim}
+[ComponentName].SubComponent.Variable
+
+Examples:
+[Wheat].LAI                            # Leaf Area Index
+[Wheat].Grain.Total.Wt                 # Total grain mass
+[Soil].ESW                             # Extractable soil water
+[Soil].SoilWater.Evaporation           # Daily evaporation
+[Weather].Rainfall                     # Daily rainfall
+[Clock].Today                          # Current date
+\end{verbatim}
+
+\textbf{Note:} Component names are enclosed in square brackets when used in Report variable lists.
+
+% ============================================================================
+% END APPENDIX A
+% ============================================================================

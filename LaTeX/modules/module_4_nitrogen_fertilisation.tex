@@ -1,0 +1,213 @@
+% ============================================================================
+% MODULE 4: NITROGEN FERTILISATION
+% ============================================================================
+% Duration: 60 minutes (N response, AEN, optimization)
+% Learning Goals: N response curves; AEN calculation; cost-benefit analysis
+% Prerequisites: Module 3
+
+\chapter{Module 4: Nitrogen Fertilisation}
+\label{ch:module4}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Understand N cycling in APSIM (soil N pools, uptake, plant demand)
+  \item Generate N response curves (yield vs. N rate)
+  \item Calculate AEN (Agronomic Efficiency of Nitrogen)
+  \item Assess N stress effects on crop development and protein
+  \item Optimize N rate based on cost-benefit analysis
+\end{itemize}
+
+\section{Nitrogen Cycling in APSIM}
+
+\subsection{Soil N Pools}
+
+\begin{itemize}
+  \item \textbf{NO\textsubscript{3} (nitrate):} Mobile; easily leached; available to plant
+  \item \textbf{NH\textsubscript{4} (ammonium):} Less mobile; adsorbed to clay; slowly nitrified
+  \item \textbf{Organic N:} Immobilized in soil organic matter; mineralized slowly
+  \item \textbf{Urea:} Applied as fertiliser; hydrolyzed to NH\textsubscript{4} over days
+\end{itemize}
+
+\subsection{Daily N Processes}
+
+\begin{enumerate}
+  \item \textbf{Mineralization:} Organic N $\to$ NH\textsubscript{4}
+  \item \textbf{Nitrification:} NH\textsubscript{4} $\to$ NO\textsubscript{3}
+  \item \textbf{Plant uptake:} N availability $\times$ plant demand $=$ actual uptake
+  \item \textbf{Leaching:} NO\textsubscript{3} lost with drainage water
+  \item \textbf{Immobilization:} N incorporated into new microbial biomass
+\end{enumerate}
+
+\section{N Response Curves}
+
+\subsection{Typical Response}
+
+When N rate increases from 0 to a high rate, yield follows a diminishing-returns curve:
+
+\begin{enumerate}
+  \item At \textbf{low N} (0--80 kg/ha): yield increases steeply — N is strongly limiting
+  \item At \textbf{moderate N} (80--160 kg/ha): yield still increases but more slowly
+  \item At \textbf{high N} ($>$160 kg/ha): yield approaches a plateau — other factors limit (water, light, genetics)
+\end{enumerate}
+
+Typical wheat N response at Dalby (Vertosol, average rainfall):
+
+\begin{center}
+\begin{tabular}{r|r|r|r}
+\textbf{N Rate (kg/ha)} & \textbf{Yield (kg/ha)} & \textbf{Yield gain (kg/ha)} & \textbf{AEN (kg/kg)} \\
+\hline
+0   & 1800 & ---  & --- \\
+80  & 2960 & 1160 & 14.5 \\
+160 & 3780 & 820  & 12.4 \\
+240 & 4060 & 280  & 9.4 \\
+\end{tabular}
+\end{center}
+
+\begin{tipbox}
+\textbf{Note:} The values above are indicative. Your simulated values will differ depending on the season's rainfall and initial soil N. In Exercise B you will calculate these numbers from your own simulation output.
+\end{tipbox}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: N response curve plot. X-axis: N rate (0, 80, 160, 240 kg/ha). Y-axis: Grain yield (kg/ha).}\\
+    \textit{Show diminishing returns shape. Mark optimal economic N rate with vertical dashed line.]}
+  \vspace{1.5cm}}}
+  \caption{Typical wheat N response curve showing diminishing returns at high N rates. The optimal N rate depends on grain price and fertiliser cost.}
+  \label{fig:n-response-curve}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\subsection{Exercise B: N Response Factorial}
+
+Four N rate variants:
+\begin{itemize}
+  \item 0 kg/ha (control)
+  \item 80 kg/ha
+  \item 160 kg/ha (standard)
+  \item 240 kg/ha (high)
+\end{itemize}
+
+Run all four; compare yields, grain protein, and AEN.
+
+\section{Agronomic Efficiency of Nitrogen}
+
+\[
+\text{AEN} = \frac{\text{Yield}_{N \text{ treatment}} - \text{Yield}_{0 \text{ N}}}{\text{N rate}} \quad [\text{kg grain / kg N}]
+\]
+
+\begin{keyconceptbox}
+\textbf{Interpretation:}
+\begin{itemize}
+  \item AEN = 15 kg/kg: Every kg of N produces 15 kg of grain
+  \item AEN is typically highest at low N rates (diminishing returns)
+  \item AEN decreases as N rate increases (physiological limit)
+\end{itemize}
+\end{keyconceptbox}
+
+\section{N Stress and Crop Responses}
+
+When soil N supply cannot meet crop demand, APSIM applies an N stress factor that reduces growth:
+
+\begin{center}
+\begin{tabular}{l|l|l}
+\textbf{Stressed component} & \textbf{Effect} & \textbf{Visible in output} \\
+\hline
+Leaf area (LAI) & Reduced leaf expansion & Lower LAI peak \\
+Biomass accumulation & Slower carbon fixation & Lower biomass at anthesis \\
+Grain number & Fewer florets set & Lower grain count at Stage 65 \\
+Grain protein & Higher protein if grain N $>$ carbohydrate & \variable{[Wheat].GrainProtein} rises \\
+Harvest Index & Grain fill incomplete & HI $<$ 0.40 \\
+\end{tabular}
+\end{center}
+
+\begin{keyconceptbox}
+\textbf{N stress vs water stress:} Both reduce yield, but through different mechanisms.
+\begin{itemize}
+  \item \textbf{N stress}: Reduces leaf area and biomass accumulation (fewer sources of carbon)
+  \item \textbf{Water stress}: Reduces stomatal conductance and transpiration (fewer sinks fulfilled)
+  \item In APSIM, the more limiting stress dominates on any given day
+\end{itemize}
+\end{keyconceptbox}
+
+\section{Cost-Benefit Analysis}
+
+\subsection{Profit Formula}
+
+\[
+\text{Net Profit (\$/ha)} = (\text{Yield (kg/ha)} \times \text{Grain price (\$/kg)}) - (\text{N rate (kg/ha)} \times \text{N cost (\$/kg N)})
+\]
+
+Typical values for Queensland dryland wheat (indicative only):
+\begin{itemize}
+  \item Grain price: \$0.28--0.35 per kg (\$280--350 per tonne)
+  \item Urea (46\% N): \$\approx 1.20--1.60 per kg N (varies with market)
+  \item Application cost: \$\approx 15--25 per ha
+\end{itemize}
+
+\subsection{Worked Example}
+
+Using the indicative N response values from Section 4.3:
+
+\begin{center}
+\begin{tabular}{r|r|r|r|r}
+\textbf{N Rate} & \textbf{Yield} & \textbf{Revenue} & \textbf{N Cost} & \textbf{Net Profit} \\
+(kg/ha) & (kg/ha) & @ \$0.30/kg & @ \$1.40/kg N & (\$/ha) \\
+\hline
+0   & 1800 & 540  & 0   & 540 \\
+80  & 2960 & 888  & 112 & 776 \\
+160 & 3780 & 1134 & 224 & 910 \\
+240 & 4060 & 1218 & 336 & 882 \\
+\end{tabular}
+\end{center}
+
+In this example, 160 kg/ha gives the highest net profit. At 240 kg/ha, the additional yield does not justify the extra fertiliser cost.
+
+\begin{warningbox}
+\textbf{Year-to-year variability matters.} In a dry year, yield potential is lower, so the optimal N rate is lower. In Exercise B you will compare profit across a single season. Exercise D extends this to 20 years to reveal how profit varies with climate.
+\end{warningbox}
+
+\section{Regional Variability and AEN Interpretation}
+
+AEN varies significantly across regions because it depends on soil N mineralisation, rainfall, and variety:
+
+\begin{center}
+\begin{tabular}{l|l|l}
+\textbf{Region type} & \textbf{Typical AEN (kg grain/kg N)} & \textbf{Key driver} \\
+\hline
+High-rainfall, leaching soil & 8--12 & N lost to drainage; moderate response \\
+Subtropical clay soil (Dalby) & 12--16 & Good N retention; moderate response \\
+Drought-prone, low rainfall & 6--10 & Water limits yield regardless of N \\
+High-mineralising soil & 8--12 & Soil supplies some N; crop less responsive \\
+\end{tabular}
+\end{center}
+
+\begin{keyconceptbox}
+\textbf{Why Dalby Vertosols respond well to N:}
+The black clay (Vertosol) at Dalby has high cation-exchange capacity, which adsorbs NH$_4^+$ and slows leaching. This means applied N stays in the root zone longer, increasing the likelihood of plant uptake rather than loss. AEN on Vertosols is typically higher than on sandy or light-textured soils.
+\end{keyconceptbox}
+
+\section{Summary}
+
+\begin{keyconceptbox}
+\textbf{Module 4 key points:}
+\begin{enumerate}
+  \item Soil N exists in four pools: NO$_3^-$, NH$_4^+$, organic N, and urea; only NO$_3^-$ and NH$_4^+$ are immediately plant-available
+  \item Daily N processes: mineralisation $\to$ nitrification $\to$ plant uptake $\to$ leaching
+  \item N response curves follow diminishing returns: large yield gains at low N, small gains at high N
+  \item AEN = (Yield$_{N}$ $-$ Yield$_0$) / N rate; typical range 10--16 kg grain/kg N for dryland wheat
+  \item N stress reduces LAI, biomass, grain number, and Harvest Index; raises grain protein
+  \item Optimal N rate depends on grain price, fertiliser cost, and seasonal rainfall --- use cost-benefit analysis
+\end{enumerate}
+\end{keyconceptbox}
+
+\section{What's Next?}
+
+Module 5 covers phenology and thermal time (how development depends on temperature).
+
+% ============================================================================
+% END MODULE 4
+% ============================================================================

@@ -1,0 +1,270 @@
+% ============================================================================
+% MODULE 1: STRUCTURE
+% ============================================================================
+% Duration: 60–90 minutes (foundational; reference the wheat_example.apsimx)
+% Learning Goals: Understand APSIM architecture; .apsimx JSON format; daily sequence
+% Prerequisites: Module 0
+
+\chapter{Module 1: APSIM Structure}
+\label{ch:module1}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Understand APSIM's component hierarchy (Simulations $\to$ Simulation $\to$ Zone $\to$ Components)
+  \item Recognize the daily execution sequence (Clock $\to$ Weather $\to$ Manager $\to$ Soil $\to$ Crop $\to$ Report)
+  \item Interpret a \filename{.apsimx} JSON file structure
+  \item Understand the role of each component (Clock, Weather, Soil, Wheat, Manager, Report, DataStore)
+  \item Navigate APSIM's GUI to view and modify simulation structure
+\end{itemize}
+
+\section{APSIM's Component Architecture}
+
+\subsection{Hierarchy}
+
+APSIM organizes all simulation information in a nested hierarchy:
+
+\begin{center}
+\begin{verbatim}
+Simulations (root)
+  └─ Simulation 1
+      ├─ Global Components
+      │   ├─ Clock
+      │   ├─ Weather
+      │   ├─ SoilArbitrator
+      │   └─ MicroClimate
+      └─ Zone (Field)
+          ├─ Report
+          ├─ Fertiliser
+          └─ Soil (with layers)
+          ├─ Wheat (crop model)
+          ├─ Manager (rule 1: sow)
+          ├─ Manager (rule 2: fertilise)
+          └─ Manager (rule 3: harvest)
+\end{verbatim}
+\end{center}
+
+\begin{keyconceptbox}
+\textbf{Key Principle:} Components are pluggable. You can swap components (different crop model, different soil model) without changing the overall structure.
+\end{keyconceptbox}
+
+\subsection{Global Components}
+
+\begin{description}
+  \item[\apsimterm{Clock}] Advances simulation by one day. Sets start date, end date, timestep (always 1 day in APSIM). Synchronizes all other components to daily updates.
+  
+  \item[\apsimterm{Weather}] Reads external weather file (\filename{.met} format). Provides daily maximum temperature, minimum temperature, rainfall, radiation, humidity, wind speed to all other components.
+  
+  \item[\apsimterm{SoilArbitrator}] Coordinates soil water and nutrient availability. When multiple processes access soil (e.g., plant root uptake, soil evaporation), arbitrator ensures consistency.
+  
+  \item[\apsimterm{MicroClimate}] Calculates energy balance at soil surface. Partitions radiation (direct vs. diffuse), interception, albedo, reference height effects.
+\end{description}
+
+\subsection{Zone Components}
+
+A Zone represents a spatial patch (typically 1 hectare for field simulations). Multiple zones allow side-by-side comparisons (e.g., different management, different soil).
+
+\begin{description}
+  \item[\apsimterm{Soil}] Multi-layer soil profile. Contains physical properties (bulk density, water characteristics), organic matter, chemical properties (pH, nutrients), and initial conditions. Sub-components: Physical, SoilWater, Organic, Chemical, Nutrient (N cycle), solutes (NO\textsubscript{3}, NH\textsubscript{4}, Urea), Temperature.
+  
+  \item[\apsimterm{Wheat (or other Crop)}] Process-based crop model. Simulates phenology (thermal time, Zadok stages), biomass accumulation (photosynthesis, respiration), grain development, nutrient uptake, and stress responses.
+  
+  \item[\apsimterm{Manager}] User-defined management rules. Written in JavaScript or C\#; evaluated daily. Typical rules: sow when conditions met, apply fertiliser on date, harvest when physiologically mature.
+  
+  \item[\apsimterm{Fertiliser}] Component that applies nutrient inputs. Manager calls \variable{Fertiliser.Apply()} to add N, P, K at specified times.
+  
+  \item[\apsimterm{Report}] Output filter. Specifies which variables APSIM saves to the database. Reduces output file size by excluding irrelevant variables.
+  
+  \item[\apsimterm{DataStore}] Database (SQL-like) that receives daily reports and exports to Excel/CSV at simulation end.
+\end{description}
+
+\section{Daily Execution Sequence}
+
+Each day, APSIM follows a strict sequence:
+
+\begin{enumerate}
+  \item \textbf{Clock.Today} advances by 1 day
+  \item \textbf{Weather} reads data for today
+  \item \textbf{Manager} evaluates and executes all rules
+  \item \textbf{Soil} calculates water balance (infiltration, drainage, evaporation)
+  \item \textbf{Wheat} calculates phenology, photosynthesis, N uptake, growth
+  \item \textbf{Report} outputs selected variables to database
+  \item \textbf{DataStore} receives report data
+  \item Repeat (next day)
+\end{enumerate}
+
+\begin{warningbox}
+\textbf{Important:} Order matters! Manager runs before Soil/Crop, so today's sowing decision uses yesterday's soil state. Soil runs before Crop, so water and N availability affect today's crop growth. This sequence is fundamental to APSIM.
+\end{warningbox}
+
+\section{The .apsimx File Format}
+
+APSIM simulations are stored as JSON files (\filename{.apsimx}). Example structure:
+
+\begin{lstlisting}[language=json, caption=Simplified .apsimx structure]
+{
+  "$type": "Models.Core.Simulations",
+  "Name": "Simulations",
+  "Children": [
+    {
+      "$type": "Models.Core.Simulation",
+      "Name": "Simulation1",
+      "Children": [
+        {
+          "$type": "Models.Clock",
+          "Start": "1900-01-01",
+          "End": "2000-12-31",
+          "Name": "Clock"
+        },
+        {
+          "$type": "Models.Climate.Weather",
+          "FileName": "%root%/Examples/WeatherFiles/AU_Dalby.met",
+          "Name": "Weather"
+        },
+        { ... more components ... }
+      ]
+    },
+    {
+      "$type": "Models.Storage.DataStore",
+      "Name": "DataStore"
+    }
+  ]
+}
+\end{lstlisting}
+
+\begin{keyconceptbox}
+\textbf{Key Observation:} The JSON structure mirrors the component hierarchy. APSIM reads this file at startup, instantiates components, and establishes linkages. You can edit \filename{.apsimx} files directly in a text editor, but APSIM's GUI is more user-friendly.
+\end{keyconceptbox}
+
+\section{Component Reference Table}
+
+\begin{table}[H]
+\centering
+\caption{APSIM Components: Role and Typical Configuration}
+\label{tab:components}
+\begin{tabularx}{\textwidth}{p{2cm}|p{3cm}|p{5cm}|p{2cm}}
+\toprule
+\textbf{Component} & \textbf{Type} & \textbf{Configuration} & \textbf{Ref} \\
+\midrule
+Clock & Input & Dates (start, end), timestep & \cref{sec:clock} \\
+Weather & Input & File path (\filename{.met}), variables & \cref{sec:weather} \\
+Soil & State & Layers, properties, initial water/N & \cref{sec:soil} \\
+Wheat & Process & Phenology, LAI, grain fill & \cref{sec:wheat} \\
+Manager & Control & Rules (JavaScript or C\#) & \cref{sec:manager} \\
+Report & Output & Variable list & \cref{sec:report} \\
+DataStore & Output & Database (auto-populated) & \cref{sec:datastore} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Interpreting a Real Simulation: wheat\_example.apsimx}
+
+We'll use \filename{wheat\_example.apsimx} (provided in \filename{Apsim\_examples/}) as a reference model.
+
+\subsection{Key Configuration}
+
+\begin{description}
+  \item[\textbf{Location}] Dalby, Queensland (Black Vertosol soil)
+  \item[\textbf{Climate}] 101 years (1900--2000) from SILO/BOM weather file
+  \item[\textbf{Crop}] Wheat (Hartog cultivar), 120 plants/m\textsuperscript{2}
+  \item[\textbf{Soil}] 7-layer profile, plant-available water = 361 mm
+  \item[\textbf{Management}] 3 rules: sow (ESW > 100 mm + rain), fertilise (160 kg/ha N at sowing), harvest (at maturity)
+\end{description}
+
+\subsection{Output Variables}
+
+Report tracks 13 daily variables:
+\begin{itemize}
+  \item Phenology: Zadok stage, stage name
+  \item Growth: LAI, total biomass, grain mass
+  \item Grain quality: Grain number, size, protein, N content
+  \item Yield: Grain total weight
+\end{itemize}
+
+\section{Common Misconceptions}
+
+\begin{warningbox}
+\textbf{Misconception 1:} ``I can change timestep from daily to hourly.''
+
+\textit{Reality:} APSIM is designed for daily timestep only. Many processes (phenology, root growth) are not parameterized for sub-daily resolution. If you need hourly resolution, consider alternative models (e.g., DSSAT in hourly mode, though rare).
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Misconception 2:} ``Manager runs continuously, not daily.''
+
+\textit{Reality:} Manager evaluates once per day (during the daily sequence). If you want multiple decisions per day (e.g., separate sowing and fertiliser decisions), both should be Manager rules that fire on the same day (order determined by rule sequence).
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Misconception 3:} ``I can edit \filename{.apsimx} files without understanding JSON.''
+
+\textit{Reality:} JSON is strict. Mismatched braces, quotes, or commas will cause APSIM to fail. Use APSIM's GUI to create files; edit manually only if you understand JSON syntax or use a JSON validator.
+\end{warningbox}
+
+\section{Navigating APSIM's GUI}
+
+\subsection{Opening a Simulation}
+
+\begin{enumerate}
+  \item Launch APSIM
+  \item File $\to$ Open $\to$ select \filename{.apsimx} file
+  \item You should see a tree structure on the left (Components), properties panel on the right
+\end{enumerate}
+
+\subsection{Viewing Components}
+
+\begin{itemize}
+  \item Click on a component in the tree to view its properties
+  \item Properties show all configurable parameters (dates, N rate, etc.)
+  \item Some properties have dropdown menus (e.g., cultivar names, soil names)
+\end{itemize}
+
+\subsection{Running a Simulation}
+
+\begin{enumerate}
+  \item Select the Simulation in the tree
+  \item Click the ``Run'' button (or Ctrl+R)
+  \item APSIM displays progress in the output window
+  \item When complete, click ``Generated Outputs'' or ``DataStore'' to view results
+\end{enumerate}
+
+\subsection{Exporting Results}
+
+\begin{enumerate}
+  \item Right-click the DataStore in the tree
+  \item Select ``Export'' $\to$ ``To Excel'' or ``To CSV''
+  \item Choose filename and location
+  \item Results are now ready for analysis in Excel or Python
+\end{enumerate}
+
+\section{Summary}
+
+\begin{itemize}
+  \item APSIM structure: Hierarchy of components (Clock, Weather, Soil, Crop, Manager, Report, DataStore)
+  \item Daily sequence: Clock $\to$ Weather $\to$ Manager $\to$ Soil $\to$ Crop $\to$ Report
+  \item .apsimx file is JSON; mirrors component hierarchy
+  \item Each component has specific role and configuration
+  \item APSIM GUI provides user-friendly interface for viewing and modifying simulations
+\end{itemize}
+
+\section{Key Resources}
+
+See the LLM Wiki for detailed reference pages:
+\begin{itemize}
+  \item [[Clock]] — Simulation timing
+  \item [[Weather]] — Climate input
+  \item [[Soil]] — Soil profile setup
+  \item [[Wheat]] — Crop model
+  \item [[Manager]] — Management rules
+  \item [[Report]] — Output variables
+  \item [[DataStore]] — Results database
+\end{itemize}
+
+\section{What's Next?}
+
+In Module 2, you'll set up and run your first APSIM simulation: a simple fallow water balance.
+
+% ============================================================================
+% END MODULE 1
+% ============================================================================

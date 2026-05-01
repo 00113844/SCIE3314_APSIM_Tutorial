@@ -1,0 +1,182 @@
+% ============================================================================
+% MODULE 6: LONG-TERM VARIABILITY
+% ============================================================================
+% Duration: 60 minutes (climate risk, yield variability, decision rules)
+% Learning Goals: Assess yield risk over multi-year timescales; make robust decisions
+% Prerequisites: Module 3, Module 5
+
+\chapter{Module 6: Long-Term Variability}
+\label{ch:module6}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Analyze yield distribution over 20--50 year climate records
+  \item Calculate risk metrics (coefficient of variation, probability of failure)
+  \item Understand the role of rainfall variability in yield
+  \item Design robust management strategies (that work in most years)
+  \item Use multi-year simulations to assess profit variability
+\end{itemize}
+
+\section{Rainfall Variability}
+
+\subsection{Inter-Annual Variability in Queensland}
+
+Dalby (subtropical Queensland) experiences high year-to-year rainfall variability:
+
+\begin{itemize}
+  \item \textbf{Annual rainfall range}: Roughly 400--900 mm/year (long-term mean $\approx$ 600 mm)
+  \item \textbf{Coefficient of Variation (CV) of rainfall}: 25--35\% --- meaning a ``typical'' year can be 250 mm above or below average
+  \item \textbf{ENSO influence}: El Ni\~{n}o years tend to be drier; La Ni\~{n}a years wetter
+  \item \textbf{In-season variability}: Drought can occur in any month, including during grain fill
+\end{itemize}
+
+\subsection{Why This Matters for Farming Decisions}
+
+If a farmer optimises their management for the average year, they will:
+\begin{itemize}
+  \item Over-invest in N in drought years (money wasted; yield limited by water, not N)
+  \item Under-invest in N in wet years (yield potential not reached)
+\end{itemize}
+
+The solution is \emph{risk-aware} management: choose strategies that are profitable across a range of seasons, not just the average.
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Bar chart of annual rainfall at Dalby, 1950--1969 from the weather file.}\\
+    \textit{Annotate: long-term mean as horizontal dashed line; highlight 3 driest and 3 wettest years.]}
+  \vspace{1.5cm}}}
+  \caption{Annual rainfall variability at Dalby, 1950--1969 (from Exercise D weather data). Note the high year-to-year variation.}
+  \label{fig:rainfall-variability}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\section{Yield Variability}
+
+\subsection{Exercise D: 20-Year Variability Analysis}
+
+Run simulation using 20 consecutive years from climate record (e.g., 1950--1969).
+
+Expected outcomes:
+\begin{itemize}
+  \item Wet years: High rainfall during sowing window and grain fill $\to$ high ESW $\to$ high yield
+  \item Dry years: Low or poorly-timed rainfall $\to$ water stress during grain fill $\to$ low yield
+  \item Yield CV: 20--40\% is typical for rainfed wheat in subtropical Queensland
+\end{itemize}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Time series bar chart of annual wheat yield 1950--1969 from Exercise D.}\\
+    \textit{Annotate: mean yield as dashed horizontal line; label the 3 lowest-yield years.]}
+  \vspace{1.5cm}}}
+  \caption{Annual wheat yield variability from the 20-year simulation (Exercise D). The dashed line shows the mean yield.}
+  \label{fig:yield-variability}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\section{Risk Metrics}
+
+\subsection{Coefficient of Variation}
+
+\[
+\text{CV} = \frac{\text{Std Dev}(\text{Yield})}{\text{Mean}(\text{Yield})}
+\]
+
+Higher CV = greater uncertainty; farmers prefer lower CV.
+
+\subsection{Probability of Failure}
+
+\[
+P(\text{Yield} < Y_{\text{threshold}}) = \frac{\text{Number of years with Yield} < Y_{\text{threshold}}}{n \text{ total years}}
+\]
+
+Example: If 5 out of 20 years had yield $<$ 1500 kg/ha, then P(failure) = 5/20 = 25\%.
+
+\subsection{Exceedance Probability (Cumulative Distribution)}
+
+An exceedance curve shows the probability of exceeding a given yield value. It is constructed by:
+
+\begin{enumerate}
+  \item Sorting all 20 annual yields from lowest to highest
+  \item Calculating rank: each yield gets a rank $r$ from 1 (lowest) to 20 (highest)
+  \item Exceedance probability = $(n - r + 1) / n \times 100$
+\end{enumerate}
+
+\begin{keyconceptbox}
+\textbf{Reading the exceedance curve:}
+\begin{itemize}
+  \item \textbf{P50} (50\% exceedance): The yield exceeded in 50\% of years --- the median. A better measure of typical performance than the mean.
+  \item \textbf{P80} (80\% exceedance): The yield exceeded in 80\% of years --- the ``reliable'' yield.
+  \item \textbf{P20} (20\% exceedance): The yield exceeded only 20\% of years --- the high-yield potential.
+\end{itemize}
+When advising farmers, P80 is the most practically useful: ``In 4 out of 5 years, you can expect at least X kg/ha.''
+\end{keyconceptbox}
+
+\section{Robust Decision Rules}
+
+A \emph{robust} management strategy is one that performs reasonably well across the full range of likely seasons --- not just the average or best case.
+
+\subsection{Example: N Rate Decision}
+
+\begin{center}
+\begin{tabular}{l|r|r|r|r}
+\textbf{N rate (kg/ha)} & \textbf{Mean profit} & \textbf{Worst-year profit} & \textbf{CV (profit)} & \textbf{P(loss)} \\
+\hline
+0   & \$540 & \$120 & 45\% & 5\% \\
+80  & \$730 & \$200 & 40\% & 10\% \\
+160 & \$880 & \$180 & 48\% & 15\% \\
+240 & \$850 & \$30  & 60\% & 25\% \\
+\end{tabular}
+\end{center}
+
+(Indicative values; your Exercise D results will vary.)
+
+\begin{itemize}
+  \item 160 kg/ha maximises mean profit but has higher variability
+  \item 80 kg/ha offers lower mean profit but more reliable income (lower CV)
+  \item 240 kg/ha has the worst risk profile (high N cost, low payoff in dry years)
+\end{itemize}
+
+\begin{keyconceptbox}
+\textbf{The risk aversion principle:} For subsistence or small-scale farmers, minimising catastrophic loss (P(loss)) is often more important than maximising mean profit. Use APSIM multi-year simulations to reveal these trade-offs explicitly before recommending a management strategy.
+\end{keyconceptbox}
+
+\section{Climate Change and Yield Risk}
+
+A brief introduction (expanded in Module 7):
+
+\begin{itemize}
+  \item If mean temperature rises by 1--2\textdegree C, GDD accumulation speeds up --- crop matures faster, potentially shortening grain fill
+  \item If rainfall declines (likely in some regions under SSP projections), yield CV will increase and P(failure) rises
+  \item APSIM allows direct testing: modify the weather file (increase T$_{max}$, decrease rainfall) and re-run 20-year simulations to quantify impact
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Climate change increases variability, not just means.} Even if average rainfall stays the same, more extreme droughts and floods can increase yield CV and push P(failure) higher. This is why long-term simulations are essential --- single-season models miss this risk.
+\end{warningbox}
+
+\section{Summary}
+
+\begin{keyconceptbox}
+\textbf{Module 6 key points:}
+\begin{enumerate}
+  \item Dalby rainfall CV is 25--35\%; single-season analysis is insufficient for reliable management recommendations
+  \item Run 20+ year simulations to capture the full range of climate outcomes
+  \item Key risk metrics: CV (relative variability), P(failure) = probability yield falls below threshold, P50/P80 from exceedance curve
+  \item Robust strategies have lower CV and P(failure), even if mean profit is slightly lower
+  \item Climate change increases variability in addition to shifting mean conditions
+\end{enumerate}
+\end{keyconceptbox}
+
+\section{What's Next?}
+
+Module 7 concludes with climate scenarios and future outlook.
+
+% ============================================================================
+% END MODULE 6
+% ============================================================================

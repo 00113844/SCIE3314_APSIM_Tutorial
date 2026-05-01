@@ -1,0 +1,330 @@
+% ============================================================================
+% MODULE 3: OUTPUT ANALYSIS
+% ============================================================================
+% Duration: 60 minutes (data analysis, visualization)
+% Learning Goals: Extract insights from simulation output; plotting; Excel skills
+% Prerequisites: Module 2
+
+\chapter{Module 3: Output Analysis}
+\label{ch:module3}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Locate and export simulation results from the APSIM \apsimterm{DataStore}
+  \item Import APSIM output into Excel and Python
+  \item Create summary statistics (mean, min, max, standard deviation)
+  \item Generate time-series and bar plots from daily output
+  \item Interpret crop growth curves (LAI, biomass, grain mass phases)
+  \item Calculate key agronomic metrics: yield, AEN, and Harvest Index
+\end{itemize}
+
+\section{APSIM Output Structure}
+
+Each row in an APSIM output table represents one simulated day. Columns correspond to the variables you selected in the \apsimterm{Report} component.
+
+\begin{center}
+\begin{tabular}{l|r|r|r|r}
+\textbf{Date} & \textbf{ESW (mm)} & \textbf{Rainfall (mm)} & \textbf{Drainage (mm)} & \textbf{Evaporation (mm)} \\
+\hline
+1950-01-01 & 250 & 0 & 0 & 3.5 \\
+1950-01-02 & 246 & 0 & 0 & 4.1 \\
+1950-01-03 & 257 & 15 & 0 & 2.1 \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+\end{tabular}
+\end{center}
+
+\begin{keyconceptbox}
+\textbf{Output = daily snapshot.} Every column is a state variable recorded at the end of that day's calculation cycle. If a variable is missing from your output, check the \apsimterm{Report} component's variable list and re-run the simulation.
+\end{keyconceptbox}
+
+\subsection{Variable Naming Convention}
+
+APSIM uses dot notation to identify variables:
+
+\begin{verbatim}
+[ComponentName].[SubComponent].[Variable]
+
+Example:  [Soil].SoilWater.ESW
+Example:  [Wheat].GrainMass
+Example:  [Weather].Rainfall
+\end{verbatim}
+
+The square brackets identify the component name; the dot separates levels of the hierarchy. These names appear as column headers in exported data.
+
+\section{Exporting Data from APSIM}
+
+\subsection{Step-by-Step: Export to Excel}
+
+\begin{enumerate}
+  \item Run your simulation (press \textbf{Run} or F5)
+  \item In the \apsimterm{Simulations} tree on the left, click your simulation node
+  \item In the right-hand panel, click the \textbf{Results} tab at the bottom of the screen
+  \item Right-click anywhere in the results table
+  \item Select \textbf{Export} $\to$ \textbf{Excel (.xlsx)}
+  \item Save the file to your working folder
+\end{enumerate}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Screenshot of APSIM with the Results tab selected and the right-click Export menu visible.}\\
+    \textit{Annotate: (1) Simulation tree, (2) Results tab at bottom, (3) Right-click Export option]}
+  \vspace{1.5cm}}}
+  \caption{Exporting simulation output from the APSIM DataStore. Select the Results tab, right-click the table, and choose Export.}
+  \label{fig:datastore-export}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\begin{tipbox}
+\textbf{CSV alternative:} If Excel is not available, select \textbf{CSV (.csv)} instead. CSV files open in any text editor and import cleanly into Python, R, or Jupyter without modification.
+\end{tipbox}
+
+\section{Excel Analysis}
+
+\subsection{Opening the Exported File}
+
+\begin{enumerate}
+  \item Open the exported \filename{.xlsx} file in Excel
+  \item Confirm the sheet name matches your simulation name
+  \item Check the first and last rows for date range (should match your Clock start/end dates)
+  \item Scan the column headers --- they should match the variable names from your \apsimterm{Report}
+\end{enumerate}
+
+\begin{warningbox}
+\textbf{Common issue:} The Date column may import as plain text rather than a date.\\
+\textit{Fix:} Select the Date column $\to$ Data $\to$ Text to Columns $\to$ select Date (YMD) $\to$ Finish.
+\end{warningbox}
+
+\subsection{Summary Statistics with Excel Formulas}
+
+Once your data is loaded, calculate basic statistics for any numeric column. For a column in cells B2:B2558 (seven years of daily data):
+
+\begin{center}
+\begin{tabular}{l|l}
+\textbf{Statistic} & \textbf{Excel Formula} \\
+\hline
+Mean & \texttt{=AVERAGE(B2:B2558)} \\
+Minimum & \texttt{=MIN(B2:B2558)} \\
+Maximum & \texttt{=MAX(B2:B2558)} \\
+Std Deviation & \texttt{=STDEV(B2:B2558)} \\
+Days with Rainfall $>$ 0 & \texttt{=COUNTIF(B2:B2558,">0")} \\
+Days with ESW $>$ 100 mm & \texttt{=COUNTIF(C2:C2558,">100")} \\
+\end{tabular}
+\end{center}
+
+\begin{tipbox}
+\textbf{Tip:} Create a separate summary sheet. Reference raw data in that sheet (e.g., \texttt{=Sheet1!B2:B2558}) so your original data stays unchanged and the summary is easy to update when you switch simulations.
+\end{tipbox}
+
+\subsection{Monthly Averages Using a PivotTable}
+
+\begin{enumerate}
+  \item Click anywhere in your data table
+  \item Select \textbf{Insert} $\to$ \textbf{PivotTable} $\to$ \textbf{New Worksheet}
+  \item In the PivotTable field list:
+    \begin{itemize}
+      \item Drag \textbf{Date} to the \textbf{Rows} area
+      \item Right-click any date cell in the table $\to$ \textbf{Group} $\to$ tick \textbf{Months} and \textbf{Years} $\to$ OK
+      \item Drag \textbf{ESW} (or your variable of interest) to the \textbf{Values} area
+      \item In the Values area, click the drop-down arrow $\to$ \textbf{Value Field Settings} $\to$ choose \textbf{Average}
+    \end{itemize}
+  \item You now have average ESW for each month-year combination
+\end{enumerate}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Excel screenshot showing a PivotTable with Date (grouped by Month/Year) in rows and ``Average of ESW'' in values.}\\
+    \textit{Annotate: (1) Field list panel, (2) Date grouping dialog, (3) Resulting summary table]}
+  \vspace{1.5cm}}}
+  \caption{Excel PivotTable for monthly average ESW. Group the Date field by Month and Year to produce seasonal summaries without writing formulas.}
+  \label{fig:excel-pivot}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\subsection{Visualisation in Excel}
+
+\subsubsection{Time-Series Line Chart (ESW Over 7 Years)}
+
+\begin{enumerate}
+  \item Select the Date column, then hold Ctrl and select the ESW column
+  \item Select \textbf{Insert} $\to$ \textbf{Charts} $\to$ \textbf{Line} $\to$ \textbf{Line}
+  \item Add a title: ``Fallow Water Balance: ESW 1950--1956''
+  \item Label axes: X = ``Date'', Y = ``ESW (mm)''
+  \item Add a reference line at ESW = 100 mm (sowing threshold):
+    \begin{itemize}
+      \item In a spare column, enter 100 for every row
+      \item Right-click the chart $\to$ \textbf{Select Data} $\to$ \textbf{Add Series}
+      \item Select the column of 100s; set series name to ``Sowing threshold''
+      \item Format this series as a dashed red line with no markers
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Annual Rainfall Bar Chart}
+
+\begin{enumerate}
+  \item In a spare area, create a table with years (1950, 1951, \ldots, 1956) in column A
+  \item In column B, calculate annual rainfall using:\\
+    \texttt{=SUMPRODUCT((YEAR(\$A\$2:\$A\$2558)=D2)*\$B\$2:\$B\$2558)}\\
+    where D2 contains the year value
+  \item Select the year and rainfall columns $\to$ Insert $\to$ Column Chart
+\end{enumerate}
+
+\begin{tipbox}
+\textbf{Conditional formatting:} Highlight sowing-opportunity rows automatically.\\
+Select the ESW column $\to$ Home $\to$ Conditional Formatting $\to$ Highlight Cell Rules $\to$ Greater Than $\to$ enter 100 $\to$ choose green fill.
+\end{tipbox}
+
+\section{Python Analysis}
+
+\subsection{Reading Data}
+
+\begin{lstlisting}[language=Python, caption=Read APSIM output in pandas]
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read exported CSV
+df = pd.read_csv('Exercise_A_Results.csv')
+
+# Convert date column
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Examine first few rows
+print(df.head())
+\end{lstlisting}
+
+\subsection{Summary Statistics}
+
+\begin{lstlisting}[language=Python, caption=Calculate monthly averages]
+# Extract year and month
+df['YearMonth'] = df['Date'].dt.to_period('M')
+
+# Monthly average ESW
+monthly_esw = df.groupby('YearMonth')['ESW'].mean()
+print(monthly_esw)
+\end{lstlisting}
+
+\subsection{Visualization}
+
+\begin{lstlisting}[language=Python, caption=Plot ESW time series]
+plt.figure(figsize=(12, 5))
+plt.plot(df['Date'], df['ESW'], linewidth=1)
+plt.axhline(y=100, color='r', linestyle='--', label='Sowing threshold')
+plt.xlabel('Date')
+plt.ylabel('ESW (mm)')
+plt.title('Fallow Water Balance: 7-Year ESW Trend')
+plt.legend()
+plt.grid()
+plt.show()
+\end{lstlisting}
+
+
+
+\section{Agronomic Metrics}
+\label{sec:agronomic-metrics}
+
+\subsection{Yield}
+
+APSIM reports \variable{[Wheat].GrainMass} in kg/ha at harvest. Use this value directly. Typical dryland wheat yields in subtropical Queensland: 1500--4500 kg/ha depending on rainfall.
+
+\begin{tipbox}
+\textbf{Note:} Some APSIM versions report grain mass in g/m$^2$. To convert to kg/ha: multiply by 10. Always check the Report variable description if yield values seem unexpectedly high or low.
+\end{tipbox}
+
+\subsection{Agronomic Efficiency of Nitrogen (AEN)}
+
+\[
+\text{AEN} = \frac{\text{Yield}_{N \text{ treatment}} - \text{Yield}_{\text{0 N}}}{\text{N rate}}
+\]
+
+Typical range: 10--20 kg grain per kg N applied
+
+\subsection{Harvest Index}
+
+\[
+\text{HI} = \frac{\text{Grain mass}}{\text{Total aboveground biomass}}
+\]
+
+Typical wheat: 0.4--0.5 (40--50\% of biomass is grain)
+
+\section{Interpreting Crop Growth Curves}
+
+When you plot daily crop variables against date, four distinct phases become visible:
+
+\begin{center}
+\begin{tabular}{l|l|l}
+\textbf{Phase} & \textbf{Zadok stages} & \textbf{What you see in output} \\
+\hline
+Establishment & 0--19 & LAI rises from 0; Biomass near zero \\
+Vegetative & 20--49 & LAI increases rapidly; Biomass growing \\
+Reproductive & 50--69 & LAI at maximum; Biomass growth peaks \\
+Grain fill & 70--89 & LAI declining; GrainMass increases sharply \\
+Maturity & 90+ & LAI = 0; GrainMass plateaus (harvest triggered) \\
+\end{tabular}
+\end{center}
+
+% ---- IMAGE PLACEHOLDER ----
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
+    \textit{[IMAGE: Dual-axis plot of APSIM output: Biomass (kg/ha, left axis) and LAI (m$^2$/m$^2$, right axis) vs Date.}\\
+    \textit{Annotate key phases with vertical dashed lines: Emergence, Anthesis, Grain fill start, Maturity]}
+  \vspace{1.5cm}}}
+  \caption{Typical wheat crop growth curve from APSIM. Biomass grows continuously until maturity; LAI peaks around anthesis then declines as leaves senesce.}
+  \label{fig:growth-curve}
+\end{figure}
+% ---- END PLACEHOLDER ----
+
+\begin{keyconceptbox}
+\textbf{Use the Zadok stage column as a guide.} In your exported data, find rows where \variable{[Wheat].Stage} $\approx$ 60 (anthesis) and \variable{[Wheat].Stage} $\approx$ 70 (grain fill start). Check that LAI is near its peak at anthesis and that GrainMass is essentially zero until grain fill begins. If either is missing, re-check your Manager harvest rules and Report variables.
+\end{keyconceptbox}
+
+\section{Common Analysis Mistakes}
+
+\begin{warningbox}
+\textbf{Mistake 1:} Comparing simulations with different date ranges
+
+\textit{Solution:} Normalize to common period or use per-season metrics (e.g., cumulative rainfall in growing season, not absolute date ranges)
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Mistake 2: Not accounting for missing values before sowing}
+
+APSIM reports \texttt{NaN} or blank for crop variables (e.g., \variable{[Wheat].GrainMass}) during the fallow period before the crop is sown. Averaging a column that includes these blanks will underestimate the true mean.
+
+\textit{Fix:} In Excel, use \texttt{AVERAGEIF} to exclude blanks. In Python, use \texttt{df['col'].dropna().mean()}.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Mistake 3: Interpreting daily output as seasonal totals}
+
+The \variable{Rainfall} column is the rainfall on that day (mm/day), not cumulative. Similarly, ESW is the soil water on that day, not total water added.
+
+\textit{Fix:} To get seasonal totals, use \texttt{SUM} (or \texttt{groupby().sum()} in Python) on the relevant date range.
+\end{warningbox}
+
+\section{Summary}
+
+\begin{keyconceptbox}
+\textbf{Module 3 key points:}
+\begin{enumerate}
+  \item APSIM output = one row per simulated day; columns = \apsimterm{Report} variables
+  \item Export from \apsimterm{DataStore}: Results tab $\to$ right-click $\to$ Export $\to$ Excel or CSV
+  \item Excel: verify date format $\to$ PivotTable for monthly averages $\to$ line chart for time series
+  \item Python: \texttt{pd.read\_csv()} $\to$ \texttt{groupby()} $\to$ \texttt{matplotlib}
+  \item Core metrics: Yield (kg/ha), AEN (kg grain / kg N), Harvest Index (0.4--0.5 for wheat)
+  \item Plot crop growth curves and use Zadok stage to verify all phases are present
+\end{enumerate}
+\end{keyconceptbox}
+
+\section{What's Next?}
+
+Module 4 explores nitrogen fertilisation and N response curves.
+
+% ============================================================================
+% END MODULE 3
+% ============================================================================

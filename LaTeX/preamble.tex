@@ -1,0 +1,191 @@
+% ============================================================================
+% PREAMBLE: SCIE3314 APSIM Tutorial
+% ============================================================================
+% Packages, formatting, custom commands, and styling
+
+\documentclass[12pt, a4paper, oneside]{book}
+
+% ============================================================================
+% CORE PACKAGES
+% ============================================================================
+\usepackage[utf-8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\onehalfspacing  % 1.5 line spacing for readability
+
+% ============================================================================
+% TYPOGRAPHY & COLORS
+% ============================================================================
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{lmodern}
+
+% Color definitions
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.5}
+\definecolor{codegreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{codered}{rgb}{0.8, 0.0, 0.0}
+\definecolor{codegray}{rgb}{0.5, 0.5, 0.5}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+
+% ============================================================================
+% MATHEMATICS & SCIENCE
+% ============================================================================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{physics}
+
+% ============================================================================
+% FIGURES & TABLES
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Figure placement
+\captionsetup{labelfont=bf, textfont=normalfont}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+% ============================================================================
+% HYPERLINKS & REFERENCES
+% ============================================================================
+\usepackage[colorlinks=true, linkcolor=darkblue, citecolor=darkblue, urlcolor=darkblue]{hyperref}
+\usepackage[noabbrev]{cleveref}
+
+% ============================================================================
+% CODE LISTINGS (for APSIM JSON, JavaScript, etc.)
+% ============================================================================
+\lstset{
+  language=json,
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  showstringspaces=false,
+  commentstyle=\color{codegray},
+  keywordstyle=\color{darkblue},
+  stringstyle=\color{codegreen},
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{codegray},
+  rulecolor=\color{codegray},
+  captionpos=b
+}
+
+% ============================================================================
+% CUSTOM COMMANDS & ENVIRONMENTS
+% ============================================================================
+
+% Box for key concepts
+\usepackage{tcolorbox}
+\newtcolorbox{keyconceptbox}{
+  colback=blue!5!white,
+  colframe=darkblue,
+  boxsep=5pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt,
+  arc=2mm
+}
+
+% Box for warnings/important notes
+\newtcolorbox{warningbox}{
+  colback=red!5!white,
+  colframe=red,
+  boxsep=5pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt,
+  arc=2mm
+}
+
+% Box for tips
+\newtcolorbox{tipbox}{
+  colback=green!5!white,
+  colframe=codegreen,
+  boxsep=5pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt,
+  arc=2mm
+}
+
+% Command for APSIM terms (monospace, styled)
+\newcommand{\apsimterm}[1]{\texttt{\color{darkblue}#1}}
+
+% Command for file names
+\newcommand{\filename}[1]{\texttt{#1}}
+
+% Command for variable names
+\newcommand{\variable}[1]{\texttt{\color{codegreen}#1}}
+
+% Command for parameter descriptions
+\newcommand{\param}[2]{\textbf{#1:} \textit{#2}}
+
+% ============================================================================
+% HEADERS & FOOTERS
+% ============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{SCIE3314 APSIM Tutorial}}
+\fancyhead[R]{\textit{\nouppercase{\leftmark}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ============================================================================
+% CHAPTER & SECTION FORMATTING
+% ============================================================================
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\LARGE\bfseries\color{darkblue}}
+  {\chaptertitlename\ \thechapter}{20pt}{\LARGE}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{darkblue}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {\thesubsection}{1em}{}
+
+\titlespacing*{\chapter}{0pt}{-50pt}{30pt}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% ============================================================================
+% TABLE OF CONTENTS FORMATTING
+% ============================================================================
+\usepackage{tocloft}
+\setcounter{tocdepth}{2}
+
+% ============================================================================
+% BIBLIOGRAPHY & REFERENCES
+% ============================================================================
+\usepackage[style=authoryear, backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+
+% ============================================================================
+% MISCELLANEOUS
+% ============================================================================
+\usepackage{enumitem}
+\setlist[itemize]{topsep=4pt, itemsep=2pt}
+\setlist[enumerate]{topsep=4pt, itemsep=2pt}
+
+% Reduce spacing around equations
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+
+% ============================================================================
+% END PREAMBLE
+% ============================================================================

@@ -1,0 +1,226 @@
+% ============================================================================
+% MODULE 0: WHY APSIM?
+% ============================================================================
+% Duration: 30 minutes (standalone or intro)
+% Learning Goals: Motivation; overview; career relevance
+% Prerequisites: None
+
+\chapter{Module 0: Why APSIM?}
+\label{ch:module0}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Understand what crop modelling is and why it matters
+  \item Identify key applications of APSIM in research, extension, and industry
+  \item See APSIM in context alongside other simulation tools
+  \item Recognize how APSIM connects to agronomic decision-making
+\end{itemize}
+
+\section{What is Crop Modelling?}
+
+\begin{keyconceptbox}
+\textbf{Crop Modelling} is the use of mathematical equations and computational models to simulate crop growth, development, and yield in response to weather, soil, and management decisions.
+\end{keyconceptbox}
+
+\subsection{Why Not Just Experiment?}
+
+Field experiments are essential but have limitations:
+\begin{itemize}
+  \item \textbf{Time:} Experiments take seasons or years; models run in seconds
+  \item \textbf{Cost:} Field trials are expensive; simulations are cheap
+  \item \textbf{Scope:} Can't test every scenario; models explore hypotheticals
+  \item \textbf{Climate:} Can't control weather; models test under different climates
+  \item \textbf{Generalization:} Results from one site may not apply elsewhere; models extrapolate
+\end{itemize}
+
+Example: To test 5 sowing dates × 6 N rates × 3 varieties across 10 locations and 20 years of weather = 18,000 simulated scenarios. Field trials would take decades and millions of dollars.
+
+\subsection{What Can Models Do?}
+
+\begin{tipbox}
+Crop models allow farmers, agronomists, and researchers to:
+\begin{itemize}
+  \item \textbf{Predict yield} under different management and climate scenarios
+  \item \textbf{Optimize decisions} (N rate, sowing date, variety choice)
+  \item \textbf{Assess risk} (variability across seasons; climate change impacts)
+  \item \textbf{Understand mechanisms} (why does N affect grain protein?)
+  \item \textbf{Train decisions support systems} (operational use in farms/regions)
+\end{itemize}
+\end{tipbox}
+
+\section{APSIM: Overview}
+
+APSIM (Agricultural Production Systems Simulator) is a process-based crop modelling platform developed by:
+\begin{itemize}
+  \item CSIRO (Australia)
+  \item QAAFI (University of Queensland)
+  \item CIMMYT (Mexico)
+  \item ICRISAT (India)
+  \item Michigan State University (USA)
+\end{itemize}
+
+\subsection{Key Features}
+
+\begin{description}
+  \item[\textbf{Process-based}] Models mechanistic interactions (photosynthesis, phenology, nutrient cycling), not just empirical curves
+  \item[\textbf{Multi-component}] Soil water, nitrogen, phosphorus, organic matter, crops, weather, management all coupled
+  \item[\textbf{Daily timestep}] High resolution for capturing short-term processes (daily rain, daily stress)
+  \item[\textbf{Modular}] Can mix-and-match components; run in research mode or farmer decision-support mode
+  \item[\textbf{Open-source}] Free; community-maintained; thousands of users worldwide
+  \item[\textbf{Validated}] Decades of testing against field data across 100+ crop types and locations
+\end{description}
+
+\section{APSIM in Action: Real-World Applications}
+
+\subsection{Research Example: Climate Change Impact on Wheat Yield}
+
+A researcher wants to know: \textit{How will wheat yields change if rainfall decreases by 20\% and temperatures increase by 2°C?}
+
+\begin{enumerate}
+  \item Set up APSIM with current weather and soils for a wheat-growing region
+  \item Run baseline simulation (100 years of current climate)
+  \item Run scenario simulation (same 100 years but weather modified)
+  \item Compare yield distributions: baseline vs. scenario
+  \item Identify adaptation strategies (earlier sowing? different variety? more irrigation?)
+\end{enumerate}
+
+\subsection{Extension Example: Nitrogen Rate Optimization}
+
+An extension officer works with 50 wheat farmers in a district. Question: \textit{What N rate maximizes profit for different soil types and seasons?}
+
+\begin{enumerate}
+  \item Map farmer soils; input into APSIM
+  \item Run 5 N rates (0, 50, 100, 150, 200 kg/ha) × 20 years of regional weather
+  \item Calculate yield response and AEN (Agronomic Efficiency of N)
+  \item Assess profit = Yield × Grain Price − N Cost
+  \item Recommend N rate based on soil, season outlook, grain price
+\end{enumerate}
+
+\subsection{Operational Example: Sowing Decision Support}
+
+A farmer has a sowing window (May 1–July 10) and wants to know: \textit{When should I sow to maximize yield?}
+
+\begin{enumerate}
+  \item Set up APSIM with farm soil, local weather data (or forecast)
+  \item Sow on different dates; track emergence, phenology, water availability, final yield
+  \item Provide decision rule: ``Sow when ESW > 100 mm AND recent rain > 25 mm''
+  \item Embed this rule in farm decision-support app; farmer checks conditions daily
+\end{enumerate}
+
+\section{APSIM Compared to Other Tools}
+
+\begin{table}[H]
+\centering
+\caption{Comparison of Crop Modelling Platforms}
+\label{tab:model-comparison}
+\begin{tabularx}{\textwidth}{l|X|X|X|X}
+\toprule
+\textbf{Feature} & \textbf{APSIM} & \textbf{DSSAT} & \textbf{RZWQM} & \textbf{AquaCrop} \\
+\midrule
+Process-based & Yes & Yes & Yes & Simplified \\
+Multi-crop & 100+ & 40+ & 10+ & 30+ \\
+N cycling & Yes & Yes & Yes & Limited \\
+Climate datasets & Global & Global & Limited & Global \\
+User interface & GUI + scripting & DOS/Web & Command-line & GUI \\
+Cost & Free & Free & Free & Free \\
+Learning curve & Steep & Moderate & Steep & Gentle \\
+Active community & Large & Moderate & Small & Moderate \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{warningbox}
+\textbf{Note:} APSIM has a steeper learning curve but offers more flexibility and detail. AquaCrop is simpler but less mechanistic. DSSAT is similar to APSIM but different design philosophy. Choose based on your research question and available data.
+\end{warningbox}
+
+\section{Key Concepts in APSIM}
+
+\subsection{Daily Simulation Loop}
+
+APSIM runs a daily timestep cycle:
+
+\begin{enumerate}
+  \item \textbf{Clock advances} by one day
+  \item \textbf{Weather data} is read (temperature, rainfall, radiation)
+  \item \textbf{Manager evaluates rules} (is it time to sow? fertilise? harvest?)
+  \item \textbf{Soil processes} calculate water, N availability
+  \item \textbf{Crop model} calculates growth, N uptake, phenology
+  \item \textbf{Report} outputs selected variables
+  \item Repeat
+\end{enumerate}
+
+\subsection{Three-Layer Problem Representation}
+
+APSIM separates concerns:
+
+\begin{description}
+  \item[\textbf{State layer}] What is the current soil water, N pool, crop biomass, stage?
+  \item[\textbf{Process layer}] How do these states change? (PET, infiltration, phenology equations)
+  \item[\textbf{Driver layer}] What drives change? (Weather, management decisions)
+\end{description}
+
+This allows researchers to:
+\begin{itemize}
+  \item Test process implementations in isolation
+  \item Swap components (use different crop model, different soil model)
+  \item Understand cause-effect pathways
+\end{itemize}
+
+\section{Career Relevance}
+
+Crop modelling skills are in demand:
+
+\begin{itemize}
+  \item \textbf{Research}: Universities, CSIRO, international agricultural research centers
+  \item \textbf{Extension}: Government agencies, agricultural services, extension providers
+  \item \textbf{Private sector}: Agribusiness, fertiliser companies, crop input providers
+  \item \textbf{Policy}: Climate adaptation; food security; natural resource management
+  \item \textbf{Operations}: Farm management software companies; decision support platforms
+\end{itemize}
+
+\begin{keyconceptbox}
+\textbf{Key Takeaway:} APSIM is a professional tool used globally in research, extension, and operations. Learning APSIM opens careers in agricultural science and decision support.
+\end{keyconceptbox}
+
+\section{Roadmap for This Tutorial}
+
+This tutorial is structured in 8 modules:
+
+\begin{description}
+  \item[\textbf{Module 0}] Why APSIM? (this module) — motivation and overview
+  \item[\textbf{Module 1}] Structure — APSIM's component architecture
+  \item[\textbf{Module 2}] First Simulation — run a simple fallow water balance
+  \item[\textbf{Module 3}] Output Analysis — interpret simulation results
+  \item[\textbf{Module 4}] Nitrogen Fertilisation — explore N response curves
+  \item[\textbf{Module 5}] Phenology \& Thermal Time — understand crop development
+  \item[\textbf{Module 6}] Long-Term Variability — assess climate risk
+  \item[\textbf{Module 7}] Climate Scenarios — explore adaptation strategies
+\end{description}
+
+Plus four hands-on exercises:
+\begin{itemize}
+  \item \textbf{Exercise A}: Fallow water balance (7 years)
+  \item \textbf{Exercise B}: N response factorial (4 rates)
+  \item \textbf{Exercise C}: Sowing date factorial (3 scenarios)
+  \item \textbf{Exercise D}: 20-year variability analysis
+\end{itemize}
+
+\section{Summary}
+
+\begin{itemize}
+  \item Crop models simulate crop-soil-weather-management interactions
+  \item APSIM is a powerful, process-based platform with global adoption
+  \item Applications span research, extension, and operational decision support
+  \item This tutorial teaches APSIM through progressive modules + hands-on exercises
+  \item Career pathways exist in research, extension, agribusiness, and policy
+\end{itemize}
+
+\section{What's Next?}
+
+In Module 1, we dive into APSIM's structure: components, daily sequence, .apsimx file format, and how to interpret a simulation setup.
+
+% ============================================================================
+% END MODULE 0
+% ============================================================================

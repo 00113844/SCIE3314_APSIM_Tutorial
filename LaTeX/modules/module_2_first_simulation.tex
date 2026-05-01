@@ -1,0 +1,223 @@
+% ============================================================================
+% MODULE 2: FIRST SIMULATION
+% ============================================================================
+% Duration: 60 minutes (hands-on; near-solved file provided)
+% Learning Goals: Set up, run, and interpret a fallow water balance simulation
+% Prerequisites: Module 0, Module 1
+
+\chapter{Module 2: First Simulation}
+\label{ch:module2}
+
+\section{Learning Objectives}
+
+By the end of this module, you will:
+\begin{itemize}
+  \item Set up a simple APSIM simulation from scratch
+  \item Understand fallow water balance: rainfall, runoff, drainage, evaporation
+  \item Interpret daily ESW (extractable soil water) as an indicator of sowing readiness
+  \item Run simulation and export results to Excel
+  \item Troubleshoot common startup errors (file not found, missing dates, etc.)
+\end{itemize}
+
+\section{Conceptual Framework: Fallow Water Balance}
+
+\subsection{What is a Fallow?}
+
+A fallow is a season where the field is left without a crop. Soil water accumulates (useful before sowing) or is lost to drainage/evaporation.
+
+\begin{keyconceptbox}
+\textbf{Daily Water Balance Equation:}
+\[
+\text{ESW}_{t} = \text{ESW}_{t-1} + \text{Rainfall} - \text{Runoff} - \text{Drainage} - \text{Evaporation}
+\]
+
+where ESW = extractable soil water (mm), available for plant growth.
+\end{keyconceptbox}
+
+\subsection{When Are Soils Ready for Sowing?}
+
+Farmers typically wait for:
+\begin{itemize}
+  \item ESW $>$ 100 mm (soil has adequate water to support germination and early growth)
+  \item Rainfall $>$ 25 mm in last 7 days (recent rain indicates favorable conditions)
+  \item Date within sowing window (e.g., May 1 – July 10 for winter wheat in Queensland)
+\end{itemize}
+
+Exercise A explores these thresholds using a 7-year fallow simulation.
+
+\section{Getting Started: Open Exercise A}
+
+\subsection{File Location}
+
+\filename{Exercise\_A\_Fallow\_Water\_Balance.apsimx} (provided in course materials)
+
+\subsection{Simulation Setup}
+
+\textbf{Clock:} 7 years of a representative site (e.g., 1950–1957)
+
+\textbf{Weather:} Dalby, Queensland (real BOM/SILO data)
+
+\textbf{Soil:} Norwin Vertosol (black clay; realistic for wheat region)
+
+\textbf{Management:} None (fallow = no crop, no fertiliser)
+
+\textbf{Report Variables:} 
+\begin{itemize}
+  \item [Clock].Today (date)
+  \item [Soil].ESW (extractable soil water)
+  \item [Weather].Rainfall (daily rain)
+  \item [Soil].SoilWater.Evaporation (simulated evaporation)
+  \item [Soil].SoilWater.Drainage (deep percolation)
+\end{itemize}
+
+\section{Running the Simulation}
+
+\subsection{Step 1: Open APSIM}
+
+\begin{enumerate}
+  \item Launch APSIM Next Gen
+  \item File $\to$ Open $\to$ select \filename{Exercise\_A\_Fallow\_Water\_Balance.apsimx}
+\end{enumerate}
+
+\subsection{Step 2: View Structure}
+
+\begin{itemize}
+  \item Expand the tree on the left
+  \item Verify components: Clock, Weather, Soil, Report, DataStore
+  \item Click each component to check configuration (dates, file paths, variables)
+\end{itemize}
+
+\subsection{Step 3: Run Simulation}
+
+\begin{enumerate}
+  \item Click the Simulation in the tree
+  \item Press Run button (or Ctrl+R)
+  \item Watch the output window for progress
+  \item Simulation should complete without errors
+\end{enumerate}
+
+\subsection{Step 4: View Results}
+
+\begin{enumerate}
+  \item Click DataStore in the tree
+  \item Right-click $\to$ Export $\to$ To Excel
+  \item Name file: \filename{Exercise\_A\_Results.xlsx}
+  \item Open in Excel; examine data
+\end{enumerate}
+
+\section{Analyzing the Data}
+
+\subsection{Key Columns}
+
+\begin{table}[H]
+\centering
+\caption{Output Variables in Exercise A}
+\label{tab:exercise-a-vars}
+\begin{tabularx}{\textwidth}{l|X|X}
+\toprule
+\textbf{Column} & \textbf{Units} & \textbf{Interpretation} \\
+\midrule
+Clock.Today & Date & Calendar date \\
+Soil.ESW & mm & Plant-available water; sowing threshold is ESW $>$ 100 mm \\
+Weather.Rainfall & mm & Daily precipitation \\
+Soil.SoilWater.Evaporation & mm & Soil water lost to atmosphere (PET if no crop) \\
+Soil.SoilWater.Drainage & mm & Water percolating below root zone \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Analysis Prompts}
+
+\begin{enumerate}
+  \item \textbf{Seasonal Pattern:} Plot ESW vs. date across all 7 years. When does ESW peak? When is it lowest?
+  
+  \item \textbf{Sowing Window:} Identify dates when ESW $>$ 100 mm AND rainfall in last 7 days $>$ 25 mm. How many sowing opportunities per year?
+  
+  \item \textbf{Dry Year vs. Wet Year:} Compare ESW profiles for a dry year vs. wet year. What drives the difference?
+  
+  \item \textbf{Evaporation vs. Drainage:} Which process removes more water? Does it vary seasonally?
+\end{enumerate}
+
+\section{Common Errors and Troubleshooting}
+
+\begin{warningbox}
+\textbf{Error 1: ``File not found'' for weather file}
+
+\textit{Solution:} Weather file path uses \texttt{\%root\%} variable (APSIM's installation directory). Verify weather file exists at: \texttt{\%APSIM\_Installation\%/Examples/WeatherFiles/AU\_Dalby.met}. If not found, check APSIM installation or download file separately.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Error 2: ``Soil profile empty'' or ``missing layers''
+
+\textit{Solution:} Ensure Soil component has Physical, SoilWater, and Nutrient sub-components. These are auto-created if you load a predefined soil from APSOIL database. If manually editing \filename{.apsimx}, verify JSON structure is correct.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Error 3: ``Report variables not found''
+
+\textit{Solution:} Verify variable names match APSIM's internal paths. Example: \texttt{[Soil].ESW} not \texttt{Soil.ESW}; \texttt{[Weather].Rainfall} not \texttt{Weather.Rain}. Consult APSIM GUI (right-click Report) to auto-generate valid variable names.
+\end{warningbox}
+
+\section{Extending the Analysis}
+
+\subsection{Comparison: Different Soils}
+
+Create two variants of Exercise A:
+\begin{enumerate}
+  \item Same as above (black clay)
+  \item Shallow sandy soil (low water-holding capacity)
+\end{enumerate}
+
+Run both; compare ESW profiles. Which soil reaches sowing threshold more often?
+
+\subsection{Comparison: Different Weather}
+
+Use a different weather file (e.g., wetter/drier region). How does ESW dynamics change?
+
+\subsection{Multi-Year Statistics}
+
+Calculate for all 7 years:
+\begin{itemize}
+  \item Average ESW by month
+  \item Frequency of sowing-ready days
+  \item Coefficient of variation (year-to-year variability)
+\end{itemize}
+
+\section{Conceptual Questions}
+
+\begin{enumerate}
+  \item Why is ESW in the fallow higher in spring than summer, even if rainfall is similar?
+  
+  \item If you sow wheat on day X when ESW = 110 mm, does ESW stay above 100 mm? Why or why not?
+  
+  \item How would deep drainage change if the soil were twice as thick (double the LL and DUL)?
+  
+  \item Could a rainy day during grain fill harm wheat yield? How would APSIM capture this?
+\end{enumerate}
+
+\section{Summary}
+
+\begin{itemize}
+  \item Fallow water balance is foundational: daily rain/runoff/drainage/evaporation
+  \item Sowing readiness depends on ESW and recent rain (decision threshold)
+  \item Exercise A provides 7-year dataset for analyzing water availability
+  \item Results can be exported to Excel for custom analysis and visualization
+  \item Comparing soil types and weather regions reveals biophysical constraints
+\end{itemize}
+
+\section{Key Resources}
+
+\begin{itemize}
+  \item [[ESW\_Extractable\_Soil\_Water]] — Definition and role in sowing
+  \item [[Water\_Balance]] — Daily water accounting
+  \item [[Soil]] — Soil profile configuration
+  \item [[Manager]] — Sowing logic (for future reference)
+\end{itemize}
+
+\section{What's Next?}
+
+In Module 3, you'll learn to interpret simulation outputs: calculating averages, plotting trends, and extracting agronomic insights from data tables.
+
+% ============================================================================
+% END MODULE 2
+% ============================================================================
